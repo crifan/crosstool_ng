@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE preface>
+
+<preface    xml:id="preface"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xl="http://www.w3.org/1999/xlink"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:ns5="http://www.w3.org/1998/Math/MathML"
+    xmlns:ns4="http://www.w3.org/1999/xhtml"
+    xmlns:ns3="http://www.w3.org/2000/svg"
+    xmlns:ns="http://docbook.org/ns/docbook">
+<title>前言</title>
+
+<sect1 xml:id="purpose"><title>本文目的</title>
+    <para>本文目的在于，介绍关于crosstool-ng的各种方面，包括如何下载安装和使用，如何配置和编译等等。</para>
+    <para>使得对于crosstool-ng不熟悉的人，都可以很快上手，可以实现自己用crosstool-ng，编译出来一个自己的交叉编译器。</para>
+    <para></para>
+</sect1>
+
+<sect1 xml:id="todo"><title>待完成</title>
+    <para></para>
+    <para></para>
+</sect1>
+
+</preface>

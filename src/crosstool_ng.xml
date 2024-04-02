@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!DOCTYPE book
+[
+
+<!ENTITY cur_book_name      "crosstool_ng" >
+<!ENTITY publish_date       "2013-09-04" >
+<!ENTITY release_version    "2.0" >
+
+<!ENTITY copyrith_year "2013" >
+<!ENTITY entity_common_multi_format     SYSTEM  "../../entity_common_multi_format.xml">
+<!ENTITY entity_common_publish_info     SYSTEM  "../../entity_common_publish_info.xml">
+]>
+
+<book version="5.0"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xl="http://www.w3.org/1999/xlink"
+    
+    xml:lang="zh_CN">
+
+<info>
+    <title>crosstool-ng详解</title>
+    <subtitle></subtitle>
+    <keywordset>
+        <keyword>crosstool-ng</keyword>
+        <keyword>crosstool-NG</keyword>
+        <keyword>详解</keyword>
+        <keyword>ct-ng menuconfig</keyword>
+        <keyword>ct-ng build</keyword>
+    </keywordset>
+
+    <abstract>
+        <para>本文主要介绍了什么是crosstool-ng，crosstool-ng的名字的写法的含义，为何要有crosstool-ng，crosstool-ng的各种特点，crosstool-ng的使用的基本逻辑；</para>
+        <para>下载crosstool-ng，安装crosstool-ng到当前系统环境中；</para>
+        <para>接着介绍了crosstool-ng的常见文件夹的结构组织，关于crosstool-ng本身的一些背景知识和逻辑，比如用ct-ng help查看所拥有的功能，用ct-ng list-steps查看本身的build过程分成哪几步，用ct-ng list-samples查看当前已包含哪些默认的示例配置，用ct-ng show-tuple查看当前配置的是什么交叉编译器，用ct-ng version查看当前crosstool-ng的版本，然后介绍了crosstool-ng本身的配置的使用的基本逻辑，包含使用已有的crosstool-ng的示例配置和根据需要去修改你的crosstool-ng的配置</para>
+        <para>然后极其详细的解释了crosstool-ng中的各种配置参数含义和用法，主要包含几个方面：crosstool-ng工具相关的配置参数，比如多线程编译以节省时间，从之前错误的那一步恢复继续编译，出错时不立刻退出等，再介绍crosstool-ng核心配置详解，包括crosstool-ng本身相关的重要参数，比如源码包下载保存路径，工作路径，目标安装路径，和交叉编译相关的核心参数，包括举例说明Architecture level, Emit assembly for CPU, Tune for CPU如何去配置，以及其他重要参数，比如MMU，大小端Endianness，浮点处理单元FPU，CFLAGS参数，Linux内核版本，binutils版本，gcc版本，C库的选择，线程模型的选择等。</para>
+        <para>接着介绍用ct-ng build编译crosstool-ng的过程，然后总结了crosstool-ng常见问题及解决办法，包括几方面：安装crosstool-ng工具本身的，crosstool-ng在配置阶段的，crosstool-ng在编译阶段的</para>
+        <para>最后介绍了与crosstool-ng相关的一些事项，比如crosstool-ng的作者的主页，linaro对crosstool-ng的支持，Buildroot支持crosstool-ng。</para>
+        &entity_common_multi_format;
+    </abstract>
+
+    <revhistory>
+        <revision>
+            <revnumber>&release_version;</revnumber>
+            <date>&publish_date;</date>
+            <revremark>
+                <orderedlist>
+                    <listitem>将帖子内容整理过来</listitem>
+                    <listitem>添加了关于配置的详细解释</listitem>
+                    <listitem>添加了关于常见错误的总结</listitem>
+                </orderedlist>
+            </revremark>
+            <authorinitials>crl</authorinitials>
+        </revision>
+    </revhistory>
+
+    &entity_common_publish_info;
+</info>
+
+<xi:include href="preface.xml" />
+<xi:include href="ch01_crosstool_ng_intro.xml" />
+<xi:include href="ch02_download_install_crosstool_ng.xml" />
+<xi:include href="ch03_config_crosstool_ng.xml" />
+<xi:include href="ch04_build_crosstool_ng.xml" />
+<xi:include href="ch05_crosstool_ng_common_errors.xml" />
+<xi:include href="ch06_crosstool_ng_related.xml" />
+<xi:include href="reference.xml" />
+
+</book>

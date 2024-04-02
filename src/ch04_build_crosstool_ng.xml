@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!DOCTYPE chapter
+[
+
+<!ENTITY % crl_ent PUBLIC "crl.ent" 'http://www.crifan.com/files/res/docbook/entity/crl.ent'>
+%crl_ent;
+
+]>
+
+<chapter    xml:id="build_crosstool_ng"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xl="http://www.w3.org/1999/xlink"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:ns5="http://www.w3.org/1998/Math/MathML"
+    xmlns:ns4="http://www.w3.org/1999/xhtml"
+    xmlns:ns3="http://www.w3.org/2000/svg"
+    xmlns:ns="http://docbook.org/ns/docbook">
+<title>编译crosstool-ng：ct-ng build</title>
+<para></para>
+<para>相关旧帖：<link xl:href="http://www.crifan.com/summary_crosstool_ng_note/">【总结】crosstool-ng使用心得和注意事项</link></para>
+<para></para>
+<para></para>
+<para>在之前配置完毕crosstool-ng后，就可以去编译了。</para>
+<screen>ct-ng build</screen>
+<para>然后，如果顺利的话，过一定的时间，你就可以编译完成，得到对应的交叉编译器了。</para>
+
+<tip xml:id="build_total_time"><title>ct-ng build总共所耗时间</title>
+    <para>此处crosstool-ng的编译总体花费时间，取决于你的总体配置，机器性能等因素。</para>
+    <para>比较老的一些电脑，估计会在3,4个小时，甚至更多的时间。</para>
+    <para>目前多数电脑的性能，平均在1到2个小时前后。</para>
+    <para>比如，我之前的一次编译：</para>
+    <para><link xl:href="http://www.crifan.com/under_ubuntu_use_crosstool_ng_build_xscale_cross_compiler_toolchain/">【记录】在Ubuntu下用crosstool-ng编译xscale的交叉工具链</link></para>
+    <para>就花费了72分钟。</para>
+</tip>
+
+<tip xml:id="when_build_error"><title>当ct-ng build期间出问题</title>
+    <para>当然，编译期间，一般来说，多少都会出现一些问题。</para>
+    <para>对于一些常见的问题，可以去参考后面所总结的：</para>
+    <para><xref linkend="crosstoool_ng_build_common_errors" /></para>
+    <para></para>
+</tip>
+
+<para></para>
+<example xml:id="successful_build_log"><title>正常输出的log信息</title>
+    <para>此处，贴上，我之前：</para>
+    <para><link xl:href="http://www.crifan.com/under_ubuntu_use_crosstool_ng_build_xscale_cross_compiler_toolchain/">【记录】在Ubuntu下用crosstool-ng编译xscale的交叉工具链</link></para>
+    <para>的成功编译的输出的内容（去除之前错误，合并正常的输出后的结果）：</para>
+    <screen>
+<![CDATA[
+crifan@ubuntu:~/develop/crosstool-ng/crosstool-ng-1.18.0_build$ ct-ng build
+[INFO ]  Performing some trivial sanity checks
+[INFO ]  Build started 20130807.235739
+[INFO ]  Building environment variables
+[EXTRA]  Preparing working directories
+[EXTRA]  Installing user-supplied crosstool-NG configuration
+[EXTRA]  =================================================================
+[EXTRA]  Dumping internal crosstool-NG configuration
+[EXTRA]    Building a toolchain for:
+[EXTRA]      build  = i686-pc-linux-gnu
+[EXTRA]      host   = i686-pc-linux-gnu
+[EXTRA]      target = arm-xscale-linux-gnueabi
+[EXTRA]  Dumping internal crosstool-NG configuration: done in 0.09s (at 00:02)
+[INFO ]  =================================================================
+[INFO ]  Retrieving needed toolchain components' tarballs
+[EXTRA]    Using 'linux-custom' from custom location
+[INFO ]  Retrieving needed toolchain components' tarballs: done in 0.30s (at 00:02)
+[INFO ]  =================================================================
+[INFO ]  Extracting and patching toolchain components
+[EXTRA]    Extracting 'linux-custom'
+[EXTRA]    Extracting 'gmp-5.0.2'
+[EXTRA]    Patching 'gmp-5.0.2'
+[EXTRA]    Extracting 'mpfr-3.1.0'
+[EXTRA]    Patching 'mpfr-3.1.0'
+[EXTRA]    Extracting 'mpc-0.9'
+[EXTRA]    Patching 'mpc-0.9'
+[EXTRA]    Extracting 'libelf-0.8.13'
+[EXTRA]    Patching 'libelf-0.8.13'
+[EXTRA]    Extracting 'binutils-2.22'
+[EXTRA]    Patching 'binutils-2.22'
+[EXTRA]    Extracting 'gcc-4.6.0'
+[EXTRA]    Patching 'gcc-4.6.0'
+[EXTRA]    Extracting 'glibc-2.9'
+[EXTRA]    Patching 'glibc-2.9'
+[EXTRA]    Extracting 'glibc-ports-2.9'
+[EXTRA]    Patching 'glibc-ports-2.9'
+[EXTRA]    Extracting 'dmalloc-5.5.2'
+[EXTRA]    Patching 'dmalloc-5.5.2'
+[EXTRA]    Extracting 'gdb-6.8a'
+[EXTRA]    Patching 'gdb-6.8a'
+[EXTRA]    Extracting 'ncurses-5.9'
+[EXTRA]    Patching 'ncurses-5.9'
+[EXTRA]    Extracting 'expat-2.1.0'
+[EXTRA]    Patching 'expat-2.1.0'
+[EXTRA]    Extracting 'ltrace-0.5.3'
+[EXTRA]    Patching 'ltrace-0.5.3'
+[EXTRA]    Extracting 'strace-4.5.19'
+[EXTRA]    Patching 'strace-4.5.19'
+[INFO ]  Extracting and patching toolchain components: done in 89.30s (at 01:32)
+[EXTRA]  Saving state to restart at step 'libc_check_config'...
+[EXTRA]  Saving state to restart at step 'companion_libs_for_build'...
+[EXTRA]  Saving state to restart at step 'binutils_for_build'...
+[EXTRA]  Saving state to restart at step 'companion_libs_for_host'...
+[INFO ]  =================================================================
+[INFO ]  Installing GMP for host
+[EXTRA]    Configuring GMP
+[EXTRA]    Building GMP
+[EXTRA]    Installing GMP
+[INFO ]  Installing GMP for host: done in 50.61s (at 02:23)
+[INFO ]  =================================================================
+[INFO ]  Installing MPFR for host
+[EXTRA]    Configuring MPFR
+[EXTRA]    Building MPFR
+[EXTRA]    Installing MPFR
+[INFO ]  Installing MPFR for host: done in 21.73s (at 02:45)
+[INFO ]  =================================================================
+[INFO ]  Installing MPC for host
+[EXTRA]    Configuring MPC
+[EXTRA]    Building MPC
+[EXTRA]    Installing MPC
+[INFO ]  Installing MPC for host: done in 8.38s (at 02:53)
+[EXTRA]  Saving state to restart at step 'binutils_for_host'...
+[INFO ]  =================================================================
+[INFO ]  Installing binutils for host
+[EXTRA]    Configuring binutils
+[EXTRA]    Building binutils
+[EXTRA]    Installing binutils
+[INFO ]  Installing binutils for host: done in 71.16s (at 04:05)
+[EXTRA]  Saving state to restart at step 'cc_core_pass_1'...
+[INFO ]  =================================================================
+[INFO ]  Installing pass-1 core C compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+...
+[INFO ]  =================================================================
+[INFO ]  Installing kernel headers
+[EXTRA]    Installing kernel headers
+...
+[INFO ]  Installing kernel headers: done in 972.34s (at 39:34)
+[EXTRA]  Saving state to restart at step 'libc_start_files'...
+[INFO ]  =================================================================
+[INFO ]  Installing C library headers & start files
+[EXTRA]    Configuring C library
+[EXTRA]    Installing C library headers
+[EXTRA]    Installing C library start files
+[INFO ]  Installing C library headers & start files: done in 23.14s (at 40:02)
+[EXTRA]  Saving state to restart at step 'cc_core_pass_2'...
+[INFO ]  =================================================================
+[INFO ]  Installing pass-2 core C compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+[EXTRA]    Installing gcc
+[INFO ]  Installing pass-2 core C compiler: done in 297.35s (at 45:04)
+[EXTRA]  Saving state to restart at step 'libc'...
+[INFO ]  =================================================================
+[INFO ]  Installing C library
+[EXTRA]    Configuring C library
+[EXTRA]    Building C library
+[EXTRA]    Installing C library
+[INFO ]  Installing C library: done in 286.37s (at 49:56)
+[EXTRA]  Saving state to restart at step 'cc_for_build'...
+[EXTRA]  Saving state to restart at step 'cc_for_host'...
+[INFO ]  =================================================================
+[INFO ]  Installing final compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+[EXTRA]    Installing gcc
+[INFO ]  Installing final compiler: done in 377.10s (at 56:25)
+[EXTRA]  Saving state to restart at step 'libelf_for_target'...
+[INFO ]  =================================================================
+[INFO ]  Installing libelf for the target
+[EXTRA]    Configuring libelf
+[EXTRA]    Building libelf
+[EXTRA]    Installing libelf
+[INFO ]  Installing libelf for the target: done in 3.99s (at 56:42)
+[EXTRA]  Saving state to restart at step 'binutils_for_target'...
+[INFO ]  =================================================================
+[INFO ]  Installing binutils for target
+[EXTRA]    Configuring binutils for target
+[EXTRA]    Building binutils' libraries (libiberty bfd) for target
+[EXTRA]    Installing binutils' libraries (libiberty bfd) for target
+[INFO ]  Installing binutils for target: done in 44.91s (at 57:40)
+[EXTRA]  Saving state to restart at step 'debug'...
+[INFO ]  =================================================================
+[INFO ]  Installing dmalloc
+[EXTRA]    Configuring dmalloc
+[EXTRA]    Building dmalloc
+[EXTRA]    Installing dmalloc
+[INFO ]  Installing dmalloc: done in 6.77s (at 57:59)
+[INFO ]  =================================================================
+[INFO ]  Installing cross-gdb
+[EXTRA]    Configuring cross-gdb
+[EXTRA]    Building cross-gdb
+...
+[INFO ]  Installing cross-gdb: done in 687.38s (at 69:26)
+[INFO ]  =================================================================
+[INFO ]  Installing native gdb
+[EXTRA]    Building static target ncurses
+[EXTRA]    Building static target expat
+[EXTRA]    Configuring native gdb
+[EXTRA]    Building native gdb
+[EXTRA]    Installing native gdb
+[INFO ]  Installing native gdb: done in 140.70s (at 71:47)
+[INFO ]  =================================================================
+[INFO ]  Installing gdbserver
+[EXTRA]    Configuring gdbserver
+[EXTRA]    Building gdbserver
+[EXTRA]    Installing gdbserver
+[INFO ]  Installing gdbserver: done in 4.65s (at 71:52)
+[INFO ]  =================================================================
+[INFO ]  Installing ltrace
+[EXTRA]    Copying sources to build dir
+[EXTRA]    Configuring ltrace
+[EXTRA]    Building ltrace
+[EXTRA]    Installing ltrace
+[INFO ]  Installing ltrace: done in 2.37s (at 71:54)
+[INFO ]  =================================================================
+[INFO ]  Installing strace
+[EXTRA]    Configuring strace
+[EXTRA]    Building strace
+[EXTRA]    Installing strace
+[INFO ]  Installing strace: done in 9.33s (at 72:04)
+[EXTRA]  Saving state to restart at step 'test_suite'...
+[EXTRA]  Saving state to restart at step 'finish'...
+[INFO ]  =================================================================
+[INFO ]  Cleaning-up the toolchain's directory
+[INFO ]    Stripping all toolchain executables
+[EXTRA]    Installing the populate helper
+[EXTRA]    Installing a cross-ldd helper
+[EXTRA]    Creating toolchain aliases
+[EXTRA]    Removing access to the build system tools
+[EXTRA]    Removing installed documentation
+[INFO ]  Cleaning-up the toolchain's directory: done in 2.03s (at 72:35)
+[INFO ]  Build completed at 20130808.011013
+[INFO ]  (elapsed: 72:34.05)
+[INFO ]  Finishing installation (may take a few seconds)...
+[72:35] / crifan@ubuntu:~/develop/crosstool-ng/crosstool-ng-1.18.0_build$
+]]>
+    </screen>
+</example>
+<para></para>
+<para></para>
+
+<tip xml:id="output_all_info"><title>想要在编译的时候输出所有的信息</title>
+    <para>根据之前<xref linkend="use_help_check_functions" />中的介绍，通过加上V=2参数，可以实现，即输入，默认就输出的，人类可读的信息，也输出内部执行的那些命令。</para>
+    <para>如果有需求的话，为了编译出错时，可以直接方便的看到所正在执行的命令，是哪个出错了。</para>
+    <para>（就不用去看对应的，当前文件夹下面的build.log了）</para>
+    <para>那么可以自己去试试，加上V=2的效果，即：</para>
+    <screen>ct-ng build V=2</screen>
+    <para>的效果。</para>
+    <para></para>
+</tip>
+
+</chapter>

@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<bibliography
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xl="http://www.w3.org/1999/xlink"
+    
+    xml:id="reference">
+
+<bibliomixed xml:id="ref.kegel_crosstool">
+  <bibliosource><link xl:href="http://kegel.com/crosstool/">crosstool</link></bibliosource>
+  <author>Dan Kegel</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.crosstool_ng_official_homepage">
+  <bibliosource><link xl:href="http://crosstool-ng.org/">crosstool-ng</link></bibliosource>
+  <author>Yann E. MORIN</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.refering_to_crosstool_ng">
+  <bibliosource><link xl:href="http://crosstool-ng.org/#refering_to_crosstool-ng">Refering to crosstool-NG</link></bibliosource>
+  <author>Yann E. MORIN</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.crosstool_ng_use_released_version">
+  <bibliosource><link xl:href="http://crosstool-ng.org/#using_a_released_version">Using a released version</link></bibliosource>
+  <author>Yann E. MORIN</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.download_and_use_crosstool_ng">
+  <bibliosource><link xl:href="http://crosstool-ng.org/#download_and_usage">crosstool-NG: Download and usage</link></bibliosource>
+  <author>Yann E. MORIN</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.ymorin_is_a_geek">
+  <bibliosource><link xl:href="http://ymorin.is-a-geek.org/">http://ymorin.is-a-geek.org/</link></bibliosource>
+  <author>Yann E. MORIN</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.crosstool_ng_linaro">
+  <bibliosource><link xl:href="https://wiki.linaro.org/WorkingGroups/ToolChain/Using/CrosstoolNg">crosstool-NG in Linaro</link></bibliosource>
+  <author>Linaro</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.busybox_net">
+  <bibliosource><link xl:href="http://www.busybox.net/">BusyBox</link></bibliosource>
+  <author>BusyBox</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.under_cygwin_build_xscale_cross_compiler">
+  <bibliosource><link xl:href="http://hi.baidu.com/wanghaishanren/item/22a7976ad8583392c5d24984">Cygwin下用crosstool-ng 编译交叉工具链</link></bibliosource>
+  <author>wanghaishanren</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.summary_crosstool_ng">
+  <bibliosource><link xl:href="http://www.crifan.com/summary_crosstool_ng_note/">【总结】crosstool-ng使用心得和注意事项</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.cross_compile_intro">
+  <bibliosource><link xl:href="http://www.crifan.com/files/doc/docbook/cross_compile/release/html/cross_compile.html">交叉编译详解</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.use_tool_build_crosscompiler">
+  <bibliosource><link xl:href="http://www.crifan.com/files/doc/docbook/cross_compile/release/html/cross_compile.html#use_tool_build_crosscompiler">借助别人的工具去制作交叉编译器</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.crosscompile_tool_crosstool">
+  <bibliosource><link xl:href="http://www.crifan.com/files/doc/docbook/cross_compile/release/html/cross_compile.html#crosscompile_tool_crosstool">crosstool</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.make_kinds_of_config">
+  <bibliosource><link xl:href="http://www.crifan.com/make_config_make_menuconfig_make_oldconfig_make_xconfig_make_defconfig/">【整理】make config，make menuconfig，make oldconfig，make xconfig，make defconfig，make gconfig</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.linux_install_soft">
+  <bibliosource><link xl:href="http://www.crifan.com/soft_dev_basic_linux_install_software/">软件开发基础之linux下安装某个软件的逻辑和过程</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.cygwin_compile_xscale_crosscompiler">
+  <bibliosource><link xl:href="http://www.crifan.com/cygwin_compile_gcc_3-4-5_glibc_2-3-6_arm_xscale_linux_gnu_cross_compiler/">【记录】在Cygwin下编译gcc-3.4.5-glibc-2.3.6的arm-xscale-linux-gnu交叉编译器</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.usr_include_sys_uio_h_error_1">
+  <bibliosource><link xl:href="http://www.crifan.com/crosstool_ng_installing_c_library_headers_sys_root_usr_include_sys_uio_h_error_1/">【未解决】crosstool-ng编译出错：Installing C library headers中的make[3]: xxx/sys-root/usr/include/sys/uio.h] Error 1</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.use_crosstool_ng_1_18_0_build_xscale">
+  <bibliosource><link xl:href="http://www.crifan.com/reuse_latest_version_crosstool_ng_to_config_and_compile_for_xscale/">【记录】重试使用最新版本1.18.0的crosstool-ng去配置和编译xscale的交叉编译器</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.cn_name_can_not_sort">
+  <bibliosource><link xl:href="http://www.crifan.com/total_commander_cn_name_plus_number_can_not_sort/">【已解决】total commander里面的文件名是中文加数字而无法正常排序</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.ubuntu_crosstool_ng_xscale">
+  <bibliosource><link xl:href="http://www.crifan.com/under_ubuntu_use_crosstool_ng_build_xscale_cross_compiler_toolchain/">【记录】在Ubuntu下用crosstool-ng编译xscale的交叉工具链</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.ct_ng_command_not_found">
+  <bibliosource><link xl:href="http://www.crifan.com/cygwin_crosstool_ng_ct_ng_help_bash_ct_ng_command_not_found/">【已解决】Cygwin中安装完crosstool-ng后，运行ct-ng help出错：bash: ct-ng: command not found</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.cygwin_crosstool_ng_arm920t">
+  <bibliosource><link xl:href="http://www.crifan.com/cygwin_crosstool_ng_do_ct_ng_menuconfig_config_for_arm920t/">【记录】Cygwin下为arm920t配置crosstool-ng</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.linux_make_usage">
+  <bibliosource><link xl:href="http://www.crifan.com/summary_usage_about_make_linux_command/">【整理】Linux下的make命令使用心得</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.mixed_implicit_and_normal_rules_stop">
+  <bibliosource><link xl:href="http://www.crifan.com/crosstool_ng_makefile_mixed_implicit_and_normal_rules_stop/">【已解决】crosstool-ng在Installing C library headers &amp; start files期间出错：Makefile:240: *** mixed implicit and normal rules. Stop.</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.crosstool_xscale_ct_ng_build_process">
+  <bibliosource><link xl:href="http://www.crifan.com/crosstool_xscale_ct_ng_build_process/">【记录】crosstool为xscale编译(ct-ng build)过程</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.conflicting_types_for_getline">
+  <bibliosource><link xl:href="http://www.crifan.com/ubuntu_crosstool_ng_ct_ng_build_error_scripts_unifdef_c_error_conflicting_types_for_getline/">【已解决】Ubuntu中crosstool-ng编译出错：scripts/unifdef.c:209:25: error: conflicting types for ‘getline’</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.crosstool_config_for_arm_xscale">
+  <bibliosource><link xl:href="http://www.crifan.com/crosstool_config_for_arm_xscale/">【记录】为arm的xscale配置crosstool-ng</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.march_mcpu_mtune_for_xscale">
+  <bibliosource><link xl:href="http://www.crifan.com/summary_crosstool_march_mcpu_mtune_for_arm_xscale/">【整理】crosstool中的Architecture level(CT_ARCH_ARCH),Emit assembly for CPU(CT_ARCH_CPU),Tune for CPU(CT_ARCH_TUNE)的值，对于arm的xscale应该是填写什么</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.arch_assembly_cpu_for_arm920t">
+  <bibliosource><link xl:href="http://www.crifan.com/crosstool_ng_architecture_level_emit_assembly_for_cpu_tune_for_cpu_for_tq2440_s3c2440_arm920t/">【整理】crosstool-ng中的Architecture level，Emit assembly for CPU，Tune for CPU对于TQ2440的S3C2440的ARM920T填写何值</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.crosstool_ng_crosscompiler_naming_rule">
+  <bibliosource><link xl:href="http://www.crifan.com/files/doc/docbook/cross_compile/release/html/cross_compile.html#crosstool_ng_crosscompiler_naming_rule">crosstool-ng中交叉编译前缀的命名规则</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.big_endian_and_small_endian">
+  <bibliosource><link xl:href="http://www.crifan.com/big_endian_big_endian_and_small_end_little_endian_detailed/">大端(Big Endian)与小端(Little Endian)详解</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.crosstool_ng_gcc_cflags">
+  <bibliosource><link xl:href="http://www.crifan.com/crosstool_gcc_cflags_o/">【整理】crosstool中Target CFLAGS参数的含义和如何设置</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.cygwin_intro">
+  <bibliosource><link xl:href="http://www.crifan.com/files/doc/docbook/cygwin_intro/release/html/cygwin_intro.html">Cygwin详解</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.unable_to_locate_package">
+  <bibliosource><link xl:href="http://www.crifan.com/ubuntu_apt_get_install_e_unable_to_locate_package/">【已解决】Ubuntu中用sudo apt-get install安装某软件，结果出错：E: Unable to locate package makeinfo</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.could_not_find_gnu_libtool">
+  <bibliosource><link xl:href="http://www.crifan.com/ubuntu_crosstool_ng_configure_error_could_not_find_gnu_libtool_large_than_1_5_26/">【已解决】Ubuntu下去配置crosstool-ng时出现：configure: error: could not find GNU libtool >= 1.5.26</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.your_file_system_not_case_sensitive">
+  <bibliosource><link xl:href="http://www.crifan.com/crosstool_cygwin_build_error_your_file_system_not_case_sensitive/">【已解决】cygwin下crosstool去build出错：Performing some trivial sanity checks,Your file system in xxx is *not* case-sensitive!</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.buildroot_intro">
+  <bibliosource><link xl:href="http://www.crifan.com/files/doc/docbook/buildroot_intro/release/html/buildroot_intro.html">Buildroot</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.summary_linaro_intro">
+  <bibliosource><link xl:href="http://www.crifan.com/summary_linaro_intro/">【整理】Linaro简介</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+<bibliomixed xml:id="ref.crosstool_vs_crosstool_ng">
+  <bibliosource><link xl:href="http://www.crifan.com/crosstool_vs_crosstool_ng/">【整理】crosstool和crosstool-ng</link></bibliosource>
+  <author>Crifan Li</author>
+</bibliomixed>
+
+</bibliography>

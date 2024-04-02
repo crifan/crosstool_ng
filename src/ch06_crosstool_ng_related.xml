@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!DOCTYPE chapter
+[
+
+<!ENTITY % crl_ent PUBLIC "crl.ent" 'http://www.crifan.com/files/res/docbook/entity/crl.ent'>
+%crl_ent;
+
+]>
+
+<chapter    xml:id="crosstool_ng_related"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xl="http://www.w3.org/1999/xlink"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:ns5="http://www.w3.org/1998/Math/MathML"
+    xmlns:ns4="http://www.w3.org/1999/xhtml"
+    xmlns:ns3="http://www.w3.org/2000/svg"
+    xmlns:ns="http://docbook.org/ns/docbook">
+<title>与crosstool-ng相关的一些事项</title>
+<para></para>
+<para>相关旧帖：<link xl:href="http://www.crifan.com/summary_crosstool_ng_note/">【总结】crosstool-ng使用心得和注意事项</link></para>
+<para></para>
+<sect1 xml:id="crosstool_ng_author_mainpage"><title>crosstool-ng的作者的主页</title>
+    <para>后来无意间发现，其实crosstool-ng的作者Yann E. MORIN，简称ymorin，其有个主页的：<link xl:href="http://ymorin.is-a-geek.org/">http://ymorin.is-a-geek.org/</link></para>
+    <para>其中，很容易看出：ymorin.is-a-geek，即：ymorin is a geek，翻译为中文即为：ymorin是个极客，即技术上比较能折腾的家伙,^_^</para>
+    <para>然后，对应该主页中，有此crosstool-ng的主页链接：<link xl:href="http://crosstool-ng.org/">http://crosstool-ng.org/</link></para>
+    <para>然后也可以看到，其也参考了别的一些项目的，比如：<link xl:href="http://www.busybox.net/">BusyBox</link>中的modprobe。</para>
+    <para></para>
+</sect1>
+
+<sect1 xml:id="crosstool_ng_support_linaro_gcc"><title>crosstool-ng支持Linaro的gcc</title>
+    <para>Linaro，是一个组织，其维护了一堆的基础库等内容，方便其他人使用。包括Ubuntu等Linux的发行版，Android等等。</para>
+    <para>其所维护的东西，除了基础的gcc库等常见内容之外，还包括此crosstool-ng。</para>
+    <para>关于如何在crosstool-ng中，使用linaro的gcc，可参考：</para>
+    <para><xref linkend="linaro_version_gcc" /></para>
+    <para>和：</para>
+    <para><link xl:href="https://wiki.linaro.org/WorkingGroups/ToolChain/Using/CrosstoolNg">crosstool-NG in Linaro</link></para>
+    <para></para>
+</sect1>
+
+<sect1 xml:id="buildroot_support_crosstool_ng"><title>Buildroot支持crosstool-ng</title>
+    <para>Buildroot，默认是使用自己的交叉编译器，去制作整个Linux系统，包括编译kernel，编译uboot，制作rootfs的。</para>
+    <para>而最新的Buildroot，已经支持，使用第三方的交叉编译器，去制作整个Linux系统。</para>
+    <para>其中，就已经支持了，用crosstool-ng的交叉编译器。</para>
+    <para>详见Buildroot中的配置说明：</para>
+    <para><link xl:href="http://www.crifan.com/files/doc/docbook/buildroot_intro/release/html/buildroot_intro.html">Buildroot</link></para>
+</sect1>
+
+</chapter>

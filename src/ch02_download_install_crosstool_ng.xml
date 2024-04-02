@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!DOCTYPE chapter
+[
+
+<!ENTITY % crl_ent PUBLIC "crl.ent" 'http://www.crifan.com/files/res/docbook/entity/crl.ent'>
+%crl_ent;
+
+]>
+
+<chapter    xml:id="download_install_crosstool_ng"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xl="http://www.w3.org/1999/xlink"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:ns5="http://www.w3.org/1998/Math/MathML"
+    xmlns:ns4="http://www.w3.org/1999/xhtml"
+    xmlns:ns3="http://www.w3.org/2000/svg"
+    xmlns:ns="http://docbook.org/ns/docbook">
+<title>下载和安装crosstool-ng</title>
+<para></para>
+<para>在使用crosstool-ng，为我们制作交叉编译器之前，需要下载crosstool-ng的源码，并且编译安装crosstool-ng，到我们的当前的（Linux或Cygwin等）系统中。</para>
+<para></para>
+
+<sect1 xml:id="download_crosstool_ng"><title>下载crosstool-ng</title>
+    <para>去crosstool-ng的下载页面：</para>
+    <para><link xl:href="http://crosstool-ng.org/download/crosstool-ng/">http://crosstool-ng.org/download/crosstool-ng/</link></para>
+    <para>中，下载最新版的crosstool-ng。</para>
+    <para>截至本文此刻，最新版本是：</para>
+    <para><link xl:href="http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.18.0.tar.bz2">crosstool-ng-1.18.0.tar.bz2</link></para>
+    <para></para>
+    <para></para>
+    <note xml:id="crosstool_ng_latest_version"><title>crosstool-ng的最新版本不是下载页面最下面的那个crosstool-ng-1.9.3的版本</title>
+        <para>之前自己第一次开始去折腾crosstool-ng的时候，从主页</para>
+        <para><link xl:href="http://crosstool-ng.org/">http://crosstool-ng.org/</link></para>
+        <para>中找到了：</para>
+        <para><link xl:href="http://crosstool-ng.org/download/crosstool-ng/">crosstool-ng的下载页面</link></para>
+        <para>然后，按照正常的逻辑，页面一直下拉到最低端，然后去下载那个：</para>
+        <para><link xl:href="http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.9.3.tar.bz2">crosstool-ng-1.9.3.tar.bz2</link></para>
+        <para>以为，理所当然的是最新的版本了，然后接着去折腾：</para>
+        <para><link xl:href="http://www.crifan.com/cygwin_compile_gcc_3-4-5_glibc_2-3-6_arm_xscale_linux_gnu_cross_compiler/">【记录】在Cygwin下编译gcc-3.4.5-glibc-2.3.6的arm-xscale-linux-gnu交叉编译器</link></para>
+        <para>结果弄到后来，很多错误：</para>
+        <para><link xl:href="http://www.crifan.com/crosstool_ng_installing_c_library_headers_sys_root_usr_include_sys_uio_h_error_1/">【未解决】crosstool-ng编译出错：Installing C library headers中的make[3]: xxx/sys-root/usr/include/sys/uio.h] Error 1</link></para>
+        <para>然后最后实在不行了，然后无意间发现，原先最新的版本，不是之前的，crosstool-ng-1.9.3，而是：crosstool-ng-1.18.0</para>
+        <para>对应的，也是在上述所说的下载页面中，下载地址是：</para>
+        <para><link xl:href="http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.18.0.tar.bz2">crosstool-ng-1.18.0.tar.bz2</link></para>
+        <para>然后后来才是用此，真正最新的版本，去折腾的：</para>
+        <para><link xl:href="http://www.crifan.com/reuse_latest_version_crosstool_ng_to_config_and_compile_for_xscale/">【记录】重试使用最新版本1.18.0的crosstool-ng去配置和编译xscale的交叉编译器</link></para>
+        <para></para>
+        <para>然后，本来都想去报告作者的，其此下载页面，搞得文件排序，和一般的，不太一样啊，</para>
+        <para>一般的下载页面，都是保证最下面或最上面是最新版本，方便用户下载的。</para>
+        <para>对应的，文件排序，是要按照数字大小排序，而不是此处的按照ascii字符排序。</para>
+        <para>然后后来发现，作者貌似自己已经意识到此问题了，所以，在下载页面，又多了个空文件，放在下载页面最开始，名字就叫做：</para>
+        <para>00-LATEST-is-1.18.0</para>
+        <para>以此，来通知来下载的人，不要搞错了。</para>
+        <para>而实际上，误把crosstool-ng-1.9.3当做最新版本的人，我之前也在网络上看到有过的。</para>
+        <para>所以，即使是如此的，小问题，实际上，也是需要作者，处理的更好，以更方便用户使用的。</para>
+        <para>否则，就容易出现这类的问题了。</para>
+        <para>在此，实际上，还是建议作者，如果可以，还是去修改服务器，保证文件排序是可以通过先ascii字符排序，对于文件中的数字部分，即各个版本号，按照数字的值去排序</para>
+        <para>注：Total Commander中，是支持此种排序的。感兴趣的去看：</para>
+        <para><link xl:href="http://www.crifan.com/total_commander_cn_name_plus_number_can_not_sort/">【已解决】total commander里面的文件名是中文加数字而无法正常排序</link></para>
+        <para></para>
+    </note>
+</sect1>
+
+<sect1 xml:id="install_crosstool_ng"><title>安装crosstool-ng</title>
+    <para>在介绍将crosstool-ng安装到当前系统之前，先要说一下：</para>
+    <para>目前crosstool-ng，除了支持普通的Linux发行版，比如Ubuntu之外，还支持Cygwin环境的。</para>
+    <para>而我们此处的目标是：把crosstool-ng安装到当前（Linux或Cygwin等）系统中。</para>
+    <para>所以，接下来的步骤，相对其实很简单，还是常见的：</para>
+    <screen>
+./configure --prefix=/opt/crosstool-ng
+make
+make install
+    </screen>
+    <para>步骤而已。</para>
+    <para></para>
+    <para>详细过程，可参考：</para>
+    <para>详见：<link xl:href="http://www.crifan.com/under_ubuntu_use_crosstool_ng_build_xscale_cross_compiler_toolchain/">【记录】在Ubuntu下用crosstool-ng编译xscale的交叉工具链</link></para>
+    <para>详见：<link xl:href="http://www.crifan.com/reuse_latest_version_crosstool_ng_to_config_and_compile_for_xscale/">【记录】重试使用最新版本1.18.0的crosstool-ng去配置和编译xscale的交叉编译器</link></para>
+    <para></para>
+    <para>虽然，安装crosstool-ng本身，这个过程中，相对很简单。</para>
+    <para>但是：</para>
+    <itemizedlist>
+        <listitem>Ubuntu
+            <para>由于在Ubuntu下，默认系统没有安装很多开发工具，导致也还是会遇到一对缺少某工具的情况</para>
+            <para>详见：<xref linkend="install_ctng_lack_dev_tools" /></para>
+        </listitem>
+        <listitem>Cygwin
+            <para>虽然Cygwin只是针对Linux系统的模拟，而不是真正的Linux</para>
+            <para>但是，由于我之前安装了所有的开发工具，所以，此处对于Ubuntu下出现的缺少某工具的问题</para>
+            <para>倒真的还是很少出现的。</para>
+        </listitem>
+    </itemizedlist>
+    <para></para>
+    <para>在上述配置，编译，安装crosstool-ng之后，还要做一个事情，那就是：</para>
+    <para>要把对应的crosstool-ng，这个工具，对应的可执行文件：<command>ct-ng</command>所在的路径，加入到你的环境变量中去。</para>
+    <para>我一般所用的步骤是：修改当前用户的<filename>.bashrc</filename>然后将最后一行的PATH变量中，加上此处对应的路径<filename class="directory">/opt/crosstool-ng/bin</filename>，即可。</para>
+    <para>修改后的<filename>.bashrc</filename>中最后一行，带PATH的值，类似于这样：</para>
+    <screen>PATH=$PATH:/opt/crosstool-ng/bin</screen>
+    <para>具体过程，详见：</para>
+    <para><link xl:href="http://www.crifan.com/under_ubuntu_use_crosstool_ng_build_xscale_cross_compiler_toolchain/">【记录】在Ubuntu下用crosstool-ng编译xscale的交叉工具链</link></para>
+    <para><link xl:href="http://www.crifan.com/cygwin_compile_gcc_3-4-5_glibc_2-3-6_arm_xscale_linux_gnu_cross_compiler/">【记录】在Cygwin下编译gcc-3.4.5-glibc-2.3.6的arm-xscale-linux-gnu交叉编译器</link></para>
+
+    <tip xml:id="when_install_error"><title>当安装crosstool-ng期间出问题</title>
+        <para>当安装crosstool-ng期间出问题</para>
+        <para>就先去看看，后面所总结的，常见的错误总结：</para>
+        <para><xref linkend="crosstoool_ng_install_self_common_errors" /></para>
+        <para></para>
+    </tip>
+</sect1>
+
+</chapter>

@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!DOCTYPE chapter
+[
+
+<!ENTITY % crl_ent PUBLIC "crl.ent" 'http://www.crifan.com/files/res/docbook/entity/crl.ent'>
+%crl_ent;
+
+]>
+<chapter    xml:id="crosstool_ng_intro"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xl="http://www.w3.org/1999/xlink"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:ns5="http://www.w3.org/1998/Math/MathML"
+    xmlns:ns4="http://www.w3.org/1999/xhtml"
+    xmlns:ns3="http://www.w3.org/2000/svg"
+    xmlns:ns="http://docbook.org/ns/docbook">
+<title>crosstool-ng简介</title>
+<para></para>
+<para></para>
+
+<sect1 xml:id="what_is_crosstool_ng"><title>什么是crosstool-ng</title>
+    <para>crosstool-ng，全称是crosstool Next Generation，即下一代crosstool，即crosstool的升级版</para>
+    <para>可能有人会问，什么是crosstool？</para>
+    <para>crosstool，是个交叉编译器的制作工具。</para>
+    <para>可能又有人问，什么是交叉编译器，什么又是交叉编译器的制作工具？</para>
+    <para>那你可以去看我的教程：</para>
+    <para><link xl:href="http://www.crifan.com/files/doc/docbook/cross_compile/release/html/cross_compile.html">交叉编译详解</link></para>
+    <para>中的详细解释：</para>
+    <para><link xl:href="http://www.crifan.com/files/doc/docbook/cross_compile/release/html/cross_compile.html#use_tool_build_crosscompiler">借助别人的工具去制作交叉编译器</link></para>
+    <para>另外，关于crosstool的详细解释，可参见：</para>
+    <para><link xl:href="http://www.crifan.com/files/doc/docbook/cross_compile/release/html/cross_compile.html#crosscompile_tool_crosstool">crosstool</link></para>
+    <para>知道了crosstool-ng是个交叉编译器的制作工具后，再来解释，crosstool-ng的由来：</para>
+    <para>crosstool-ng的官网是：</para>
+    <para><link xl:href="http://crosstool-ng.org/">crosstool-ng</link></para>
+    <para>crosstool-ng是作者Yann E. MORIN，在<link xl:href="http://kegel.com/">Dan Kegel</link>写的<link xl:href="http://kegel.com/crosstool/">crosstool</link>的基础上，做了全新的升级。</para>
+    <para>目标在于，在制作交叉编译器方面，更加容易使用。</para>
+    <para></para>
+</sect1>
+
+<sect1 xml:id="crosstool_ng_name"><title>crosstool-ng的名字的写法</title>
+    <para>其实，crosstool-ng的官网中，都已经专门强调和解释了，关于crosstool-ng，这个名字的，在不同情况下的写法：</para>
+    <para><link xl:href="http://crosstool-ng.org/#refering_to_crosstool-ng">Refering to crosstool-NG</link></para>
+    <para>下面简要翻译一下为：</para>
+    <formalpara xml:id="crosstool_ng_name_meaning"><title>crosstool-ng名称的写法和含义</title>
+        <itemizedlist>
+            <listitem><emphasis>crosstool-NG</emphasis>
+                <para>此项目的标准名称，全名，长名称。</para>
+                <para>crosstool和NG之间用短横线连接</para>
+                <para>crosstool小写</para>
+                <para>NG大写</para>
+            </listitem>
+            <listitem><emphasis>CT-NG</emphasis>
+                <para>全部大写</para>
+                <para>是全称crosstool-NG的缩写</para>
+                <para>CT和NG之间用短横线连接</para>
+            </listitem>
+            <listitem><emphasis>ct-ng</emphasis>
+                <para>全称缩写后的小写版本，全部小写</para>
+                <para>一般是在前端，即使用此crosstool-NG这个工具的时候，其工具名</para>
+                <para>后面你会在<xref linkend="download_install_crosstool_ng" />中看到，安装完毕crosstool-NG后</para>
+                <para>接着去使用此crosstool-NG，都是用的是ct-ng，比如</para>
+                <screen>
+ct-ng help
+ct-ng menuconfig
+ct-ng build
+                </screen>
+                <para>等等</para>
+            </listitem>
+        </itemizedlist>
+        <para>一般来说，建议用长名称crosstool-NG，而不要用短名CT-NG</para>
+        <para>在邮件主题中（为了使标题不要太长），可以使用短名CT-NG</para>
+    </formalpara>
+    <formalpara xml:id="crosstool_ng_version_meaning"><title>crosstool-ng版本的写法和含义</title>
+        <itemizedlist>
+            <listitem><emphasis>crosstool-NG X.Y.Z</emphasis>
+                <para>长名称</para>
+                <para>crosstool-NG和版本号X.Y.Z之间有空格</para>
+                <para></para>
+            </listitem>
+            <listitem><emphasis>crosstool-ng-X.Y.Z</emphasis>
+                <para>长名称的小写版</para>
+                <para>名称和版本之间用短横线连接</para>
+                <para>一般用于发布tar包的时候</para>
+            </listitem>
+            <listitem><emphasis>crosstool-ng-X.Y.Z+hg_id</emphasis>
+                <para>长名称的小写版本，加上短横线，加上版本号，加上加号，再加上Hg的ID（其可以通过ct-ng version而得到）</para>
+                <para>用于区分发行版（releases）和快照版（snapshots）</para>
+                <para></para>
+            </listitem>
+        </itemizedlist>
+    </formalpara>
+    <para></para>
+    <para>下文中，如无特殊说明，为了省事，都还是采用crosstool-ng的写法。</para>
+</sect1>
+
+<sect1 xml:id="why_crosstool_ng"><title>为何要有crosstool-ng</title>
+    <para>简言之就是：</para>
+    <para>之前的crosstool，做的不是足够好，所以才有人（Yann E. MORIN）弄出了个更好这个：crosstool-ng</para>
+    <para>再详细解释一下就是：</para>
+    <para>crosstool，对于之前制作交叉编译器来说，算数属于首选的工具，已经很不错了。</para>
+    <para>但是随着时间的发展，其相对来说，还是没有足够好，足够好用。</para>
+    <para>加上，后者缺乏足够的维护。</para>
+    <para>所以后来Yann E. MORIN就去弄了个next generation的crosstool，叫做crosstool-ng。</para>
+    <para>其宗旨就是：让交叉编译器的制作，更加简单，让制作交叉编译器的工具，更加好用。</para>
+    <para>至于，如何变得简单好用了，就是后面要去介绍的：<xref linkend="crosstool_ng_features" />了。</para>
+    <para></para>
+</sect1>
+
+<sect1 xml:id="crosstool_ng_features"><title>crosstool-ng的特点</title>
+    <para>下面，根据我的了解，整理一下，crosstool-ng，作为一个交叉编译器的制作工具，所具有的优点：</para>
+
+    <sect2 xml:id="ctng_feature_menuconfig"><title>支持（类似于Linux内核配置的那个）menuconfig</title>
+        <para>menuconfig，用的最为广泛，支持度最好，最好用。</para>
+        <para>menuconfig可以称为：即简单，又好用。</para>
+        <para>用过的都知道。</para>
+        <para>关于make menuconfig，不熟悉的可以参考：</para>
+        <para><link xl:href="http://www.crifan.com/make_config_make_menuconfig_make_oldconfig_make_xconfig_make_defconfig/">【整理】make config，make menuconfig，make oldconfig，make xconfig，make defconfig，make gconfig</link></para>
+    </sect2>
+    <sect2 xml:id="ctng_feature_many_arch"><title>支持足够多，且越来越多的架构（architecture）</title>
+        <para>目前已经支持众多了架构了：</para>
+        <para>Alpha, ARM, AVR32 (EXP), Blackfin (EXP), MIPS, OpenRISC/or32(+), PowerPC, s390, SPARC (EXP), SuperH (EXP), x86</para>
+        <para>且以后会支持越来越多。</para>
+        <para>相比较而言，之前的交叉编译器制作工具，支持的架构，比crosstool-ng更多，好像没几个。</para>
+    </sect2>
+    <sect2 xml:id="ctng_feature_multi_c_lib"><title>支持工具链中可选多种不同的C库等模块</title>
+        <para>支持基于uClibc, glibc或eglibc的工具链</para>
+        <para>支持其他类型的，也很容易添加</para>
+        <para>详见：<xref linkend="core_config_c_lib" /></para>
+    </sect2>
+    <sect2 xml:id="ctng_feature_multi_target_os"><title>支持不同目标OS平台</title>
+        <para>支持2种目标运行环境：</para>
+        <para>Linux</para>
+        <para>bare metal</para>
+        <para>详见：<link xl:href="http://www.crifan.com/files/doc/docbook/cross_compile/release/html/cross_compile.html#crosscompiler_kernel_part">交叉编译器名字中的kernel部分</link></para>
+    </sect2>
+    <sect2 xml:id="ctng_feature_patch_repository"><title>补丁仓库</title>
+        <para>为许多种现存的，已知bug的，需要打包的各种模块，提供了一个补丁仓库。</para>
+        <para>如此可以实现：可以自动去帮你打上，已知的，需要打补丁的各种模块</para>
+        <para>从而，避免了各种编译的错误，制作出来的交叉编译器的各种问题</para>
+        <para>极大程度上的节省了你的精力和时间，和降低了制作交叉编译器的难度</para>
+    </sect2>
+    <sect2 xml:id="ctng_feature_multi_thread_model"><title>支持不同的线程模型</title>
+        <para>支持2种线程模型：</para>
+        <para>NPTL</para>
+        <para>linuxthreads</para>
+        <para>详见：<xref linkend="core_config_c_lib_thread_model" /></para>
+    </sect2>
+    <sect2 xml:id="ctng_feature_hard_soft_float"><title>支持软浮点和硬件浮点</title>
+        <para>详见：<xref linkend="core_config_fpu" /></para>
+    </sect2>
+    <sect2 xml:id="ctng_feature_multilib"><title>支持multlib的工具链（暂处于试验阶段）</title>
+        <para></para>
+    </sect2>
+    <sect2 xml:id="ctng_feature_debug_facilities"><title>支持众多调试相关的内容</title>
+        <para>支持很多用来调试（debug）的工具：</para>
+        <para>本地的和跨平台的gdb，gdbserver</para>
+        <para>调试库：dmalloc, duma</para>
+        <para>以及一些其他功能，比如从编译失败的那一步，恢复重新编译，从而节省你的大量的时间和精力</para>
+        <para>详见：<xref linkend="crosstool_ng_tool_related_config" />中的：</para>
+        <para><xref linkend="multi_thread_save_time" /></para>
+        <para><xref linkend="restore_from_fail_step" /></para>
+    </sect2>
+    <sect2 xml:id="ctng_feature_sample_config"><title>提供示例配置</title>
+        <para>背景是：对于交叉编译器的配置，涉及到各个模块的各个版本，自己配置不好的话，很容易出现各种问题，比如版本不兼容</para>
+        <para>而此处提供了，很多个，已经经过验证的配置，针对各个架构（CPU）的各种默认配置</para>
+        <para>如此，你就可以利用已有的配置，从而简化你的配置的复杂度，极大的降低了你制作交叉工具链的难度，时间，精力。</para>
+        <para>详见：<xref linkend="show_samples_config" /></para>
+    </sect2>
+    <sect2 xml:id="ctng_feature_linux_and_cygwin"><title>支持多种主机编译环境：各种Linux发行版，Cygwin等</title>
+        <para>crosstool-ng，不仅支持，普通的各种Linux发行版，比如常见的Ubuntu</para>
+        <para>还支持<link xl:href="http://www.crifan.com/files/doc/docbook/cygwin_intro/release/html/cygwin_intro.html">Cygwin</link></para>
+        <para>这意味着，在纯的Windows环境下</para>
+        <para>（用Cygwin模拟Linux环境，在Cygwin下制作交叉编译器等等，在Cygwin下用交叉编译器去编译uboot，kernel等等）</para>
+        <para>也可以去折腾嵌入式开发了</para>
+    </sect2>
+
+</sect1>
+
+<sect1 xml:id="crosstool_ng_usage_logic"><title>crosstool-ng的使用的基本逻辑</title>
+    <para>在详细介绍，然后下载和安装crosstool-ng，如何配置，如何编译crosstool-ng之前，需要先解释一下，crosstool-ng，这个工具，的使用的基本逻辑。</para>
+    <para>其实，这部分的内容，作者在主页：</para>
+    <para><link xl:href="http://crosstool-ng.org/#download_and_usage">crosstool-NG: Download and usage</link></para>
+    <para>中，已经解释过了，只是相对比较言简意赅，不是足够详细。</para>
+    <para>此处，就来详细的解释一下：</para>
+    <para>在使用crosstool-ng之前，实际上，要明白，有两个概念，不要混淆了：</para>
+    <orderedlist>
+        <listitem>下载，编译，安装crosstool-ng工具本身（到当前的Linux，Cygwin等系统中，供后续使用）
+            <para>crosstool-ng，作为一个工具，尤其是在Linux领域里</para>
+            <para>很明显，也有对应的源码包，即：也需要，通过下载对应的源码，去编译源码，然后再安装到当前的系统中</para>
+            <para>其整体的逻辑，和下载，编译，安装，别的，Linux下的软件包，没有啥特殊区别。</para>
+            <tip xml:id="linux_install_thirdparty_package"><title>Linux下安装第三方工具的基本逻辑</title>
+                <para>Linux的世界中，使用某个工具软件，和Windows下，不太一样</para>
+                <para>更多的时候，是自己从源码中编译并安装</para>
+                <para>所以，需要自己找到自己要的源码包，即下载，然后去配置，再去编译和安装。</para>
+                <para>即：下载，配置，编译，安装</para>
+                <para>对于这方面的逻辑，不是很熟悉的话，可参考我总结的：</para>
+                <para><link xl:href="http://www.crifan.com/soft_dev_basic_linux_install_software/">软件开发基础之linux下安装某个软件的逻辑和过程</link></para>
+            </tip>
+            <para></para>
+        </listitem>
+        <listitem>用crosstool-ng这个工具（即ct-ng）去制作（配置和编译）所需要的交叉编译器
+            <para>在安装了crosstool-ng这个工具后，就可以去使用ct-ng了。</para>
+            <para>然后才是去，配置，和编译，以便制作出对应的相应的交叉编译器</para>
+            <para>即，用crosstool-ng这个，制作交叉编译器的工具，去制作交叉编译器，的基本步骤，包括：</para>
+            <orderedlist>
+                <listitem>配置
+                    <para>即，为了你要制作的交叉编译器，去配置各种参数</para>
+                    <para>比如CPU是arm还是mips还是其他，运行目标平台是Linux还是bare metal，所用的C库是elibc，还是glibc，还是uclibc等，等等的配置。</para>
+                    <para>选用合适的配置，一般的做法，主要有两种：</para>
+                    <itemizedlist>
+                        <listitem>直接利用已有的配置
+                            <para>crosstool-ng，本身已经支持很多种体系结构的配置</para>
+                            <para>很多时候，你可以直接使用已有的配置，而基本无需更改了。</para>
+                            <para>对应的命令一般是：</para>
+                            <screen>ct-ng some_default_config</screen>
+                        </listitem>
+                        <listitem>利用已有的，最接近你的需求的配置，再手动去改改
+                            <para>有时候，你所需要编译的交叉编译器，和已有的各种配置中，都没有合适的，没有满足你的需求的</para>
+                            <para>那么就要你，去找一个，和你的需求最接近的一个配置</para>
+                            <para>利用该配置，然后再去修改一些参数，达到最终你想要的效果</para>
+                            <para>对应的命令一般是：</para>
+                            <screen>
+ct-ng some_default_config
+ct-ng menuconfig
+                            </screen>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+                <listitem>编译
+                    <para>等所有的配置都完毕后，就可以去编译，生成你所需要的交叉编译器了。</para>
+                    <para>对应的命令一般是：</para>
+                    <screen>ct-ng build</screen>
+                </listitem>
+            </orderedlist>
+            <para>当然，在配置和编译之前和过程中，你需要搞懂很多东西，比如：</para>
+            <para>你自己的处理器是什么，所要使用的目标系统是什么，要用什么C库等</para>
+            <para>并且还要，根据这些已有信息，搞清楚如何去配置crosstool-ng等等。</para>
+            <para>这也就是，此文接下来要解释的内容。</para>
+        </listitem>
+    </orderedlist>
+</sect1>
+
+</chapter>

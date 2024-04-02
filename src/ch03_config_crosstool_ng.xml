@@ -1,0 +1,1373 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!DOCTYPE chapter
+[
+
+<!ENTITY % crl_ent PUBLIC "crl.ent" 'http://www.crifan.com/files/res/docbook/entity/crl.ent'>
+%crl_ent;
+
+]>
+
+<chapter    xml:id="config_crosstool_ng"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xl="http://www.w3.org/1999/xlink"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:ns5="http://www.w3.org/1998/Math/MathML"
+    xmlns:ns4="http://www.w3.org/1999/xhtml"
+    xmlns:ns3="http://www.w3.org/2000/svg"
+    xmlns:ns="http://docbook.org/ns/docbook">
+<title>配置crosstool-ng：ct-ng menuconfig</title>
+<para></para>
+<para>相关旧帖：<link xl:href="http://www.crifan.com/summary_crosstool_ng_note/">【总结】crosstool-ng使用心得和注意事项</link></para>
+<para></para>
+<para></para>
+<para>crosstool-ng中关于配置，此处，主要介绍两个大的方面：</para>
+<orderedlist>
+    <listitem>crosstool-ng本身的配置的使用的基本逻辑
+        <para>关于crosstool-ng的配置本身，其实也有一定的使用逻辑和技巧。</para>
+        <para>这些逻辑和技巧，实际上，作者在其主页：</para>
+        <para><link xl:href="http://crosstool-ng.org/#using_a_released_version">Using a released version</link></para>
+        <para>中已经解释过了，此处，是加上自己实际折腾的经验的基础上</para>
+        <para>再次整理出来，解释清楚：<xref linkend="config_usage_logic" /></para>
+    </listitem>
+    <listitem>crosstool-ng的配置期间，各种配置参数的含义，如何去配置
+        <para>很明显，由于配置参数极多，并且，不同版本中，也可能发生细微的变化，所以不可能面面俱到的解释所有的配置参数的详细的含义。</para>
+        <para>但是，又很明显，一些常见的参数，核心的参数，重要的参数，则至始至终，都不会改变的，而且也是必须要搞懂的。</para>
+        <para>所以，此处，主要介绍crosstool-ng中，常见的，核心的那些参数。</para>
+        <para>而这些常见的，核心的参数，根据其相关性，又主要分两方面：</para>
+        <itemizedlist>
+            <listitem>crosstool-ng作为交叉编译器制作工具本身的使用方面的配置参数
+                <para>详见：<xref linkend="crosstool_ng_tool_related_config" /></para>
+            </listitem>
+            <listitem>去用crosstool-ng制作交叉编译器，和交叉编译器所相关的配置参数
+                <para>详见：<xref linkend="crosstool_ng_core_config" /></para>
+            </listitem>
+        </itemizedlist>
+    </listitem>
+</orderedlist>
+<para></para>
+<tip xml:id="before_use_ct_ng"><title>使用ct-ng之前的一些说明</title>
+    <para>在开始使用crosstool-ng这个工具之前，即使用ct-ng之前，有个事情要提醒一下：</para>
+    <para>最好，或者说，一般常见的做法是：</para>
+    <para>单独为后续使用crosstool-ng制作交叉编译去，而建立一个单独的文件夹</para>
+    <para>即，执行后续的<command>ct-ng menuconfig</command>，<command>ct-ng build</command>等命令，所处在的路径</para>
+    <para>比如：我之前，除了，解压crosstool所得的文件夹<filename class="directory">crosstool-ng-1.18.0</filename>之外，去建立了一个对应的文件夹：<filename class="directory">crosstool-ng-1.18.0_build</filename></para>
+    <para>同时，为了后续crosstool-ng下载对应的各个包，也建立了对应的<filename class="directory">src</filename>和<filename class="directory">x-tools</filename>两个文件夹。</para>
+    <para>然后，此刻的目录结构就是：</para>
+    <screenco>
+        <screen>
+crosstool-ng-1.18.0<co id="co.ctng_src_folder" linkends="co.note.ctng_src_folder" />
+crosstool-ng-1.18.0_build<co id="co.ctng_build_folder" linkends="co.note.ctng_build_folder" />
+src<co id="co.download_src_folder" linkends="co.note.download_src_folder" />
+x-tools<co id="co.x_tools_folder" linkends="co.note.x_tools_folder" />
+crosstool-ng-1.18.0.tar.bz2<co id="co.ctng_tar_file" linkends="co.note.ctng_tar_file" />
+        </screen>
+        <calloutlist>
+            <callout id="co.note.ctng_src_folder" arearefs="co.ctng_src_folder" >
+                <para>crosstool-ng的源码包：<xref linkend="co.ctng_tar_file" />，解压后的文件夹</para>
+                <para>包含了crosstool-ng的相关源码</para>
+            </callout>
+            <callout id="co.note.ctng_build_folder" arearefs="co.ctng_build_folder" >
+                <para>专门为后期使用crosstool-ng去建立交叉编译器，的编译（build），而专门建立的文件夹</para>
+                <para>对应的，后续的<command>ct-ng menuconfig</command>，<command>ct-ng build</command>等命令，都是在此文件夹下执行的。</para>
+                <para></para>
+            </callout>
+            <callout id="co.note.download_src_folder" arearefs="co.download_src_folder" >
+                <para>为crosstool-ng中，后续需要下载各种软件的源码包，而准备的，</para>
+                <para>crosstool-ng中，在开始执行build之后，会去下载对应的源码包，都会存放到这个文件夹下</para>
+                <para></para>
+            </callout>
+            <callout id="co.note.x_tools_folder" arearefs="co.x_tools_folder" >
+                <para>这个文件夹，是，用crosstool-ng所生成的交叉编译器，所在的路径。</para>
+                <para>对应的配置中，会有，类似于：</para>
+                <screen>(${HOME}/develop/crosstool-ng/x-tools/${CT_TARGET}) Prefix directory</screen>
+                <para>的配置，用来指定生成的交叉编译器，存放在何处。</para>
+                <para>此时，就是去设置为此处对应的路径即可。</para>
+            </callout>
+            <callout id="co.note.ctng_tar_file" arearefs="co.ctng_tar_file" >
+                <para>很明显，这个就是之前我在折腾crosstool-ng-1.18.0时，去下载的源码包了。</para>
+                <para>对应的上面的<xref linkend="co.ctng_src_folder" />，就是此源码包解压后的路径。</para>
+                <para></para>
+            </callout>
+        </calloutlist>
+    </screenco>
+    <para>如此，后续的编译，才显得，相对更加有组织，不至于显得结构太混乱。</para>
+    <para></para>
+</tip>
+
+<sect1 xml:id="background_internal_logic"><title>关于crosstool-ng本身的一些背景知识和逻辑</title>
+    <para>在去使用和crosstool-ng之前，需要了解一些，和crosstool-ng本身的一些逻辑和背景知识。</para>
+    <para>然后才能对于后面的配置和编译，如何使用crosstool-ng，有个真正的理解。</para>
+    <para></para>
+    <para></para>
+    <sect2 xml:id="use_help_check_functions"><title>用ct-ng help查看所拥有的功能</title>
+        <para>正如Linux世界中的常见逻辑，crosstool-ng中，也可以通过help，查看到，其本身具有哪些功能：</para>
+        <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0_build
+$ ct-ng help
+This is crosstool-NG version 1.18.0
+
+Copyright (C) 2008  Yann E. MORIN <yann.morin.1998@free.fr>
+This is free software; see the source for copying conditions.
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.
+
+See below for a list of available actions, listed by category:
+
+Configuration actions:
+  menuconfig         - Update current config using a menu based program
+  oldconfig          - Update current config using a provided .config as base
+  extractconfig      - Extract to stdout the configuration items from a
+                       build.log file piped to stdin
+  defconfig          - Save current config as a mini-defconfig to ${CONFIG}
+  olddefconfig       - Update config from a mini-defconfig ${CONFIG}
+                       (default: ${CONFIG}=./defconfig)
+  saveconfig         - Save current config as a preconfigured target
+  show-tuple         - Print the tuple of the currently configured toolchain
+
+Preconfigured toolchains (#: force number of // jobs):
+  list-samples       - prints the list of all samples (for scripting)
+  show-<sample>      - show a brief overview of <sample> (list with list-samples)
+  <sample>           - preconfigure crosstool-NG with <sample> (list with list-samples)
+  build-all[.#]      - Build *all* samples (list with list-samples) and install in
+                       ${CT_PREFIX} (which you must set)
+
+Build actions (#: force number of // jobs):
+  build[.#]          - Build the currently configured toolchain
+  list-steps         - List all build steps
+
+Clean actions:
+  clean              - Remove generated files
+  distclean          - Remove generated files, configuration and build directories
+
+Distribution actions:
+  wiki-samples       - Print a DokuWiki table of samples
+  updatetools        - Update the config tools
+  tarball            - Build a tarball of the configured toolchain
+
+Environment variables (see /opt/crosstool-ng/share/doc/crosstool-ng/ct-ng.1.18.0/0 - Table of content.txt):
+  STOP=step          - Stop the build just after this step (list with list-steps)
+  RESTART=step       - Restart the build just before this step (list with list-steps)
+  CT_PREFIX=dir      - install samples in dir (see action "build-all", above).
+  V=0|1|2            - 0 => show only human-readable messages (default)
+                       1 => show only the commands being executed
+                       2 => show both
+
+Use action "menuconfig" to configure your toolchain
+Use action "build" to build your toolchain
+Use action "version" to see the version
+See "man 1 ct-ng" for some help as well
+]]>
+        </screen>
+        <para>正如此，看了help之后，才有后面的，各种功能的用法。比如：</para>
+        <para>查看当前有哪些（默认的）示例配置，可以用：</para>
+        <screen>ct-ng list-samples</screen>
+        <para>查看单个的某个示例配置的核心参数，用：</para>
+        <screen><![CDATA[ct-ng show-<sample>]]></screen>
+        <para>直接借用（使用，调用）该默认配置，用：</para>
+        <screen><![CDATA[ct-ng <sample>]]></screen>
+        <para>等等。</para>
+        <para>关于其他的更多用法，后续会详细解释的。</para>
+    </sect2>
+    <sect2 xml:id="build_seperate_steps"><title>用ct-ng list-steps查看本身的build过程分成哪几步</title>
+        <para>如上所述，用list-steps，可以查看到，当前，用crosstool-ng去build，去制作交叉编译器，具体分成哪些步骤：</para>
+        <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0_build
+$ ct-ng list-steps
+Available build steps, in order:
+  - libc_check_config
+  - companion_libs_for_build
+  - binutils_for_build
+  - companion_libs_for_host
+  - binutils_for_host
+  - cc_core_pass_1
+  - kernel_headers
+  - libc_start_files
+  - cc_core_pass_2
+  - libc
+  - cc_for_build
+  - cc_for_host
+  - libelf_for_target
+  - binutils_for_target
+  - debug
+  - test_suite
+  - finish
+Use "<step>" as action to execute only that step.
+Use "+<step>" as action to execute up to that step.
+Use "<step>+" as action to execute from that step onward.
+]]>
+        </screen>
+        <para>知道了，此处分了多少步骤，具体有哪些步骤之后</para>
+        <para>后面才有可能去实现，从之前出错的哪一步，恢复，继续编译。</para>
+    </sect2>
+
+    <sect2 xml:id="show_samples_config"><title>用ct-ng list-samples查看当前已包含哪些默认的示例配置</title>
+        <para>如<xref linkend="use_help_check_functions" />中所述，我们可以通过</para>
+        <screen>ct-ng list-samples</screen>
+        <para>查看到，当前crosstool-ng中，已经有了哪些默认的，帮我们配置好的哪些配置：</para>
+        <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0
+$ ct-ng list-samples
+Status  Sample name
+  MKDIR config.gen
+  IN    config.gen/arch.in
+  IN    config.gen/kernel.in
+  IN    config.gen/cc.in
+  IN    config.gen/binutils.in
+  IN    config.gen/libc.in
+  IN    config.gen/debug.in
+[L.X]   alphaev56-unknown-linux-gnu
+[L.X]   alphaev67-unknown-linux-gnu
+[L.X]   arm-bare_newlib_cortex_m3_nommu-eabi
+[L.X]   arm-cortex_a15-linux-gnueabi
+[L..]   arm-cortex_a8-linux-gnueabi
+[L..]   arm-davinci-linux-gnueabi
+[L..]   armeb-unknown-eabi
+[L.X]   armeb-unknown-linux-gnueabi
+[L.X]   armeb-unknown-linux-uclibcgnueabi
+[L..]   arm-unknown-eabi
+[L..]   arm-unknown-linux-gnueabi
+[L.X]   arm-unknown-linux-uclibcgnueabi
+[L.X]   armv6-rpi-linux-gnueabi
+[L.X]   avr32-unknown-none
+[L..]   bfin-unknown-linux-uclibc
+[L..]   i586-geode-linux-uclibc
+[L.X]   i586-mingw32msvc,i686-none-linux-gnu
+[L.X]   i686-nptl-linux-gnu
+[L.X]   i686-unknown-mingw32
+[L.X]   m68k-unknown-elf
+[L.X]   m68k-unknown-uclinux-uclibc
+[L.X]   mips64el-n32-linux-uclibc
+[L.X]   mips64el-n64-linux-uclibc
+[L.X]   mips-ar2315-linux-gnu
+[L..]   mipsel-sde-elf
+[L..]   mipsel-unknown-linux-gnu
+[L.X]   mips-malta-linux-gnu
+[L..]   mips-unknown-elf
+[L.X]   mips-unknown-linux-uclibc
+[L..]   powerpc-405-linux-gnu
+[L.X]   powerpc64-unknown-linux-gnu
+[L..]   powerpc-860-linux-gnu
+[L.X]   powerpc-e300c3-linux-gnu
+[L.X]   powerpc-e500v2-linux-gnuspe
+[L..]   powerpc-unknown_nofpu-linux-gnu
+[L..]   powerpc-unknown-linux-gnu
+[L..]   powerpc-unknown-linux-uclibc
+[L.X]   s390-ibm-linux-gnu
+[L.X]   s390x-ibm-linux-gnu
+[L..]   sh4-unknown-linux-gnu
+[L..]   x86_64-unknown-linux-gnu
+[L..]   x86_64-unknown-linux-uclibc
+[L.X]   x86_64-unknown-mingw32
+ L (Local)       : sample was found in current directory
+ G (Global)      : sample was installed with crosstool-NG
+ X (EXPERIMENTAL): sample may use EXPERIMENTAL features
+ B (BROKEN)      : sample is currently broken
+]]>
+        </screen>
+        <para>如此，后续就可以去使用这些默认配置了。</para>
+        <para></para>
+    </sect2>
+
+    <sect2 xml:id="see_current_crosscompiler"><title>用ct-ng show-tuple查看当前配置的是什么交叉编译器</title>
+        <para>在后续的配置（和编译）之后，可以通过show-tuple，去查看到当前配置的交叉编译器是啥样的：</para>
+        <para>比如，我之前在折腾：</para>
+        <para><link xl:href="http://www.crifan.com/reuse_latest_version_crosstool_ng_to_config_and_compile_for_xscale/">【记录】重试使用最新版本1.18.0的crosstool-ng去配置和编译xscale的交叉编译器</link></para>
+        <para>后，对应的结果是：</para>
+        <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0_build
+$ ct-ng show-tuple
+arm-xscale-linux-gnueabi
+]]>
+        </screen>
+        <para>就知道当前，配置的交叉编译器，是：arm-xscale-linux-gnueabi</para>
+        <para></para>
+    </sect2>
+
+    <sect2 xml:id="crosstool_ng_version"><title>用ct-ng version查看当前crosstool-ng的版本</title>
+        <para>类似的，可以通过version查看当前的crosstool-ng工具本身的版本：</para>
+        <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0_build
+$ ct-ng version
+This is crosstool-NG version 1.18.0
+
+Copyright (C) 2008  Yann E. MORIN <yann.morin.1998@free.fr>
+This is free software; see the source for copying conditions.
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.
+]]>
+        </screen>
+        <para>即，此处的crosstool-ng的版本是：1.18.0</para>
+    </sect2>
+
+</sect1>
+
+<sect1 xml:id="config_usage_logic"><title>crosstool-ng本身的配置的使用的基本逻辑</title>
+    <para>从之前介绍的<xref linkend="show_samples_config" />，我们可以看出</para>
+    <para>对于常见的架构，比如arm，mips，powerpc等等，都有了很多的，已经帮我验证过，可以正常编译的示例配置了</para>
+    <para>所以，我们接下来，主要就是：</para>
+    <para>搞懂自己借用哪个配置，然后调用默认配置，然后再确认一下配置，根据自己的情况去改一改，就差不多，就配置好了。</para>
+    <para>下面介绍，如何去配置crosstool-ng的主要的两种情况：</para>
+    <itemizedlist>
+        <listitem>如果已有同样（类似的）配置，那么直接拿过来用即可</listitem>
+        <listitem>如果没有需要的配置，则找到一个最为接近的配置，借用后，再去修改为自己所要的配置</listitem>
+    </itemizedlist>
+    <para>下面就来详细阐述其含义：</para>
+    <sect2 xml:id="use_sample_config"><title>使用已有的crosstool-ng的示例配置</title>
+        <para>很多时候，我们用crosstool-ng去编译我们要的交叉编译器的时候，所针对的CPU，目标运行环境，想要用的C库等等，</para>
+        <para>很可能，和之前上面看到的某个配置，是一样的。</para>
+        <para>此时，我们所要做的事情，其实就是直接拿来用即可。</para>
+        <para>比如，我们想要针对cortex-a8这款CPU，去编译一个交叉编译器，那么你就会发现，其实默认已有此配置了：</para>
+        <screen>arm-cortex_a8-linux-gnueabi</screen>
+        <para>在使用之前，也是可以先去看看，该配置的主要参数是哪些：</para>
+        <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0_build
+$ ct-ng show-arm-cortex_a8-linux-gnueabi
+[G..]   arm-cortex_a8-linux-gnueabi
+    OS             : linux-3.7.3
+    Companion libs : gmp-4.3.2 mpfr-2.4.2 ppl-0.10.2 cloog-ppl-0.15.9 libelf-0.8.13
+    binutils       : binutils-2.20.1a
+    C compiler     : gcc-4.4.6 (C,C++)
+    C library      : glibc-2.9 (threads: nptl)
+    Tools          : dmalloc-5.5.2 duma-2_5_15 gdb-6.8a ltrace-0.5.3 strace-4.5.19
+]]>
+        </screen>
+        <para>然后，你就可以直接去调用此配置了：</para>
+        <screen>ct-ng arm-cortex_a8-linux-gnueabi</screen>
+        <para>实际输出，是类似于这样的：</para>
+        <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0_build
+$ ct-ng arm-cortex_a8-linux-gnueabi
+  LN    config
+  MKDIR config.gen
+  IN    config.gen/arch.in
+  IN    config.gen/kernel.in
+  IN    config.gen/cc.in
+  IN    config.gen/binutils.in
+  IN    config.gen/libc.in
+  IN    config.gen/debug.in
+  CONF  config/config.in
+#
+# configuration saved
+#
+ 
+***********************************************************
+ 
+Initially reported by: Yann E. MORIN
+URL: http://ymorin.is-a-geek.org/
+ 
+***********************************************************
+ 
+Now configured for "arm-cortex_a8-linux-gnueabi"
+]]>
+        </screen>
+        <para>一些实际折腾的过程，可参考：</para>
+        <para><link xl:href="http://www.crifan.com/reuse_latest_version_crosstool_ng_to_config_and_compile_for_xscale/">【记录】重试使用最新版本1.18.0的crosstool-ng去配置和编译xscale的交叉编译器</link></para>
+        <para>接下来，你就可以去进入配置：</para>
+        <screen>ct-ng menuconfig</screen>
+        <para>去确认一下，是否是完全符合你的要求。</para>
+        <para>如果有什么个别的配置不满意，再去修改为你自己想要的即可。</para>
+        <para></para>
+    </sect2>
+
+    <sect2 xml:id="edit_your_config"><title>根据需要去修改你的crosstool-ng的配置</title>
+        <para>很多时候，已经的哪些示例配置，未必完全符合你的需要，这时候，你就只能是：</para>
+        <para>找个和你的情况最接近的一个示例配置，然后再去基于此配置，去修改成你所要的。</para>
+        <para>比如，我之前折腾，为TQ2440的S3C2440的CPU，其是arm920t的核</para>
+        <para>去配置crosstool-ng的时候，就发现，默认的配置中，没有完全合适的。</para>
+        <para>然后就一点点去调查，而最后搞清楚了，在已有的，arm相关的配置中，davinci，是相对来说，比较接近此处的arm920t的了。</para>
+        <para>所以，就去调用davinci的默认配置：</para>
+        <screen>ct-ng arm-davinci-linux-gnueabi</screen>
+        <para>然后再按照自己的需求，进入：</para>
+        <screen>ct-ng menuconfig</screen>
+        <para>后，去根据自己的需要，再去确认配置，和修改配置，为自己所需要的。</para>
+        <para></para>
+        <para>详细过程参见：</para>
+        <para><link xl:href="http://www.crifan.com/cygwin_crosstool_ng_do_ct_ng_menuconfig_config_for_arm920t/">【记录】Cygwin下为arm920t配置crosstool-ng</link></para>
+    </sect2>
+</sect1>
+
+<sect1 xml:id="crosstool_ng_config_para"><title>crosstool-ng的配置参数详解</title>
+    <para>如上，借用已有的配置后，接下来就是去：</para>
+    <screen>ct-ng menuconfig</screen>
+    <para>然后针对里面的配置选项，去根据自己的需要，去修改了。</para>
+    <para></para>
+    <para>由于crosstool-ng的功能太多，配置选项太多，</para>
+    <para>所以，此处，也不太可能，针对每个参数都详细解释其含义。</para>
+    <para>不过，对于一些核心参数，是我们必须要了解清楚的，</para>
+    <para>所以，下面就针对，一些核心参数，比较有用的参数，来详细解释解释：</para>
+    <para></para>
+
+    <sect2 xml:id="crosstool_ng_tool_related_config"><title>crosstool-ng工具相关的配置参数</title>
+        <para>crosstool-ng中，有不少有用的参数，是和，crosstool-ng这个工具本身，有关的</para>
+        <para>其目的在于，在为你使用此工具时，提供使用上的便利</para>
+        <para>比如设置多线程，以加快编译速度，节省编译时间，</para>
+        <para>之前编译在某步出错，然后重新重头编译又需要耗费大量的无谓的时间，而提供了从之前错误的某步中恢复，继续编译，从而节省你的时间</para>
+        <para>在编译出错时，不退出，而提供机会给你修复错误，修复后，然后可以继续编译</para>
+        <para>如此等等的参数，目的就一个：</para>
+        <para>让制作交叉编译器，这个费事费力的活，变得尽可能的省时省力</para>
+        <para>下面，就来介绍一下这些参数，如何配置，以及详细的含义和用法。</para>
+        <para></para>
+
+        <sect3 xml:id="multi_thread_save_time"><title>多线程编译以节省时间</title>
+            <para>直接给出示例配置：</para>
+            <screen>
+<![CDATA[
+Paths and misc options
+    (4) Number of parallel jobs
+]]>
+            </screen>
+            <para>其help的说明为：</para>
+            <screen>
+<![CDATA[
+  ┌────────────────────────── Number of parallel jobs ───────────────────────────┐
+  │ CT_PARALLEL_JOBS:                                                            │
+  │                                                                              │
+  │ Number of jobs make will be allowed to run concurently.                      │
+  │ Set this higher than the number of processors you have, but not too high.    │
+  │ A good rule of thumb is twice the number of processors you have.             │
+  │                                                                              │
+  │ Enter 1 to have only one job at a time.                                      │
+  │                                                                              │
+  │ Enter 0 to set automatically based on how many processors the host has.      │
+  │                                                                              │
+  │ Symbol: PARALLEL_JOBS [=4]                                                   │
+  │ Type  : integer                                                              │
+  │ Prompt: Number of parallel jobs                                              │
+  │   Defined at config/global/build-behave.in:8                                 │
+  │   Depends on: !BACKEND [=n]                                                  │
+  │   Location:                                                                  │
+  │     -> Paths and misc options                                                │
+]]>
+            </screen>
+            <para>此处，设置为4，意思是：</para>
+            <para>同时运行4个进程（去执行crosstool-ng的编译过程）</para>
+            <para>很明显，多线程去编译的话，会大大缩短整个的编译时间。</para>
+            <para>此数字的设置，当然，不能随便胡乱设置。</para>
+            <para>比较常见的做法是：</para>
+            <para>CPU内核数 x 2</para>
+            <para>比如，你的是Intel的双核的CPU，那么此值就是：</para>
+            <para>2 x 2 =4</para>
+            <para>了。</para>
+            <tip xml:id="no_need_build_n"><title>不用去ct-ng build.N</title>
+                <para>此处，设置好此参数后，后续直接去build：</para>
+                <screen>ct-ng build</screen>
+                <para>即可自动以对应的多线程去编译了。</para>
+                <para>无需后续手动再在build上参数，即无需：</para>
+                <screen>ct-ng build.4</screen>
+            </tip>
+            
+            <tip xml:id="internal_make_j_n"><title>内部是用make -jN去实现的</title>
+                <para>此处的多线程的参数</para>
+                <para>内部，是把对应的数字，传递给make，即实现：</para>
+                <screen>make -j4</screen>
+                <para>的效果，然后make就会以对应的4个线程去执行了。</para>
+                <para>关于make的-j参数，不了解的可参考：</para>
+                <para><link xl:href="http://www.crifan.com/summary_usage_about_make_linux_command/">【整理】Linux下的make命令使用心得</link></para>
+            </tip>
+        </sect3>
+
+        <sect3 xml:id="restore_from_fail_step"><title>从之前错误的那一步恢复继续编译</title>
+            <para>示例配置：</para>
+            <screen>
+<![CDATA[
+Paths and misc options
+    [*] Debug crosstool-NG
+    [*]   Save intermediate steps
+]]>
+            </screen>
+            <para>Save intermediate steps的help的说明为：</para>
+            <screen>
+<![CDATA[
+  ┌────────────────────────── Save intermediate steps ───────────────────────────┐
+  │ CT_DEBUG_CT_SAVE_STEPS:                                                      │
+  │                                                                              │
+  │ If you say 'y' here, then you will be able to restart crosstool-NG at        │
+  │ any step.                                                                    │
+  │                                                                              │
+  │ It is not currently possible to restart at any of the debug facilities.      │
+  │ They are treated as a whole.                                                 │
+  │                                                                              │
+  │ To get the full list os steps, run: ct-ng list-steps                         │
+  │                                                                              │
+  │ Symbol: DEBUG_CT_SAVE_STEPS [=y]                                             │
+  │ Type  : boolean                                                              │
+  │ Prompt: Save intermediate steps                                              │
+  │   Defined at config/global/ct-behave.in:79                                   │
+  │   Depends on: DEBUG_CT [=y]                                                  │
+  │   Location:                                                                  │
+  │     -> Paths and misc options                                                │
+  │       -> Debug crosstool-NG (DEBUG_CT [=y])                                  │
+]]>
+            </screen>
+            <para>此处，先要选上：Debug crosstool-NG</para>
+            <para>表示，使用crosstoo-ng的调试方面的功能</para>
+            <para>再去选上：Save intermediate steps</para>
+            <para>意思是：</para>
+            <para>编译完毕每一步之后，都会保存对应的状态</para>
+            <para>如此，就可以实现对应的，从之前出错的步骤恢复而继续编译的效果了。</para>
+            <para>当然，实现此效果的前提是，你参考之前的<xref linkend="build_seperate_steps" />，而搞清楚了，crosstool-ng的编译，其本身分了哪些步骤。</para>
+            <para>然后直到自己是在哪一步出的错，然后才可以实现回复出错的步骤，而继续编译。</para>
+            <para>总的逻辑是：</para>
+            <para>找到之前编译，最后成功的那一步（last successful step）。</para>
+            <para>然后去执行：</para>
+            <screen>ct-ng last_successful_step+</screen>
+            <para>就可以继续恢复继续编译了。</para>
+            <example xml:id="eg.restore_from_fail_step"><title>从出错的那一步恢复重新继续编译</title>
+                <para>比如，我之前折腾：</para>
+                <para><link xl:href="http://www.crifan.com/crosstool_ng_makefile_mixed_implicit_and_normal_rules_stop/">【已解决】crosstool-ng在Installing C library headers &amp; start files期间出错：Makefile:240: *** mixed implicit and normal rules. Stop.</link></para>
+                <para>期间，当时出错的输出信息是：</para>
+                <screen>
+<![CDATA[
+=================================================================
+[INFO ]  Installing MPC for host
+[EXTRA]    Configuring MPC
+[EXTRA]    Building MPC
+[EXTRA]    Installing MPC
+[INFO ]  Installing MPC for host: done in 182.22s (at 27:10)
+[EXTRA]  Saving state to restart at step 'binutils_for_host'...
+[INFO ]  =================================================================
+[INFO ]  Installing binutils for host
+[EXTRA]    Configuring binutils
+[ERROR]    configure: error: cannot create configure.lineno; rerun with a POSIX shell
+[ERROR]
+[ERROR]  >>
+[ERROR]  >>  Build failed in step 'Installing binutils for host'
+[ERROR]  >>        called in step '(top-level)'
+[ERROR]  >>
+[ERROR]  >>  Error happened in: CT_DoExecLog[scripts/functions@257]
+[ERROR]  >>        called from: do_binutils_backend[scripts/build/binutils/binutils.sh@205]
+[ERROR]  >>        called from: do_binutils_for_host[scripts/build/binutils/binutils.sh@92]
+[ERROR]  >>        called from: main[scripts/crosstool-NG.sh@632]
+ 
+ 
+Current command:
+  'CFLAGS=-O2 -g -pipe ' 'CXXFLAGS=-O2 -g -pipe ' 'LDFLAGS= ' '/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/binutils-2.22/configure' '--build=i686-build_pc-cygwin' '--host=i686-build_pc-cygwin' '--target=arm-xscale-linux-gnueabi' '--prefix=/home/CLi/develop/crosstool-ng/x-tools/arm-xscale-linux-gnueabi' '--disable-werror' '--enable-ld=yes' '--enable-gold=no' '--with-pkgversion=crosstool-NG 1.18.0' '--disable-multilib' '--disable-nls' '--with-float=softfp' '--with-sysroot=/home/CLi/develop/crosstool-ng/x-tools/arm-xscale-linux-gnueabi/arm-xscale-linux-gnueabi/sysroot'
+exited with error code: 1
+Please fix it up and finish by exiting the shell with one of these values:
+    1  fixed, continue with next build command
+    2  repeat this build command
+    3  abort build
+ 
+ct-ng:~/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/build/build-binutils-host-i686-build_pc-cygwin>
+]]>
+                </screen>
+                <para>此处，我们能看到的是，在当前的：</para>
+                <screen>[INFO ]  Installing binutils for host</screen>
+                <para>而出错了，而对应的，在此之前的，最后一个正确编译的阶段，是对应着有输出：</para>
+                <screen>[EXTRA]  Saving state to restart at step 'binutils_for_host'...</screen>
+                <para>的那一步，即：</para>
+                <screen>binutils_for_host</screen>
+                <para>此时，你就可以用：</para>
+                <screen>ct-ng binutils_for_host+</screen>
+                <para>而实现：</para>
+                <para>（给定，之前最后正常执行的那一步（last successful step），往后，）从上述出错的那一步，继续正常编译的效果了。</para>
+                <para>即，所谓的：restore from fail step</para>
+                <caution xml:id="not_set_last_fail_step"><title>此处不是ct-ng last_fail_step+</title>
+                    <para>此处，之前不熟悉此功能的用法，结果去用：</para>
+                    <screen>ct-ng last_fail_step+</screen>
+                    <para>的方法，即用：</para>
+                    <screen>ct-ng cc_core_pass_1+</screen>
+                    <para>想要回复错误，继续执行，结果就出现：</para>
+                    <screen>[ERROR]  The previous build did not reach the point where it could be restarted at xxx</screen>
+                    <para>之类的错误了。</para>
+                    <para>详见：</para>
+                    <para><link xl:href="http://www.crifan.com/crosstool_ng_makefile_mixed_implicit_and_normal_rules_stop/">【已解决】crosstool-ng在Installing C library headers &amp; start files期间出错：Makefile:240: *** mixed implicit and normal rules. Stop.</link></para>
+                </caution>
+                <tip xml:id="set_restart_should_same_effect"><title>RESTART=step的参数估计也可以实现同样的从错误那步恢复继续编译的效果</title>
+                    <para>从之前的<xref linkend="use_help_check_functions" />中可以看出</para>
+                    <para>估计在build的时候，指定对应的RESTART=step</para>
+                    <screen>ct-ng build RESTART=last_successful_step</screen>
+                    <para>应该也可以实现类似的效果的。</para>
+                    <para>有空的话，可以去试试。</para>
+                </tip>
+            </example>
+        </sect3>
+
+        <sect3 xml:id="error_but_not_exit"><title>出错时不立刻退出</title>
+            <para>说实话，对于上面的那个：<xref linkend="restore_from_fail_step" />的功能，已经很强大了</para>
+            <para>而crosstool-ng，工具做的就是好。</para>
+            <para>因为，除此之外，又进一步的支持这个，出错时不立刻退出，的功能。</para>
+            <para>配置如下：</para>
+            <screen>
+<![CDATA[
+Paths and misc options
+    [*] Debug crosstool-NG
+    [*]   Interactive shell on failed commands
+]]>
+            </screen>
+            <para>Interactive shell on failed commands的help的说明为：</para>
+            <screen>
+<![CDATA[
+  ┌─────────────────── Interactive shell on failed commands ────────────────────┐
+  │ CT_DEBUG_INTERACTIVE:                                                       │
+  │                                                                             │
+  │ If you say 'y' here, then an interactive shell will be spawned for          │
+  │ each failed command.                                                        │
+  │                                                                             │
+  │ This shell will have the same environment that the failed command           │
+  │ was run with, and the working directory will be set to the directory        │
+  │ the failed command was run in.                                              │
+  │                                                                             │
+  │ After you fix the issue, you can exit the interactive shell with any        │
+  │ of these exit codes:                                                        │
+  │   1  the issue was fixed, continue the build with the next command          │
+  │   2  the issue was fixed, re-run the failed command                         │
+  │   3  abort the build                                                        │
+  │                                                                             │
+  │ Note: '2' is only possible for commands run via CT_DoExecLog, though.       │
+  │                                                                             │
+  │ Symbol: DEBUG_INTERACTIVE [=y]                                              │
+  │ Type  : boolean                                                             │
+  │ Prompt: Interactive shell on failed commands                                │
+  │   Defined at config/global/ct-behave.in:121                                 │
+  │   Depends on: DEBUG_CT [=y]                                                 │
+  │   Location:                                                                 │
+  │     -> Paths and misc options                                               │
+  │       -> Debug crosstool-NG (DEBUG_CT [=y])                                 │
+]]>
+            </screen>
+            <para>此处，参数Interactive shell on failed commands的含义是：</para>
+            <para>直译为：当编译（命令）出错时，提供交互式的shell</para>
+            <para>其具体实际效果是：</para>
+            <para>正常情况下，当编译出错，会直接退出crosstool-ng的编译环境，回到当前的命令行。</para>
+            <para>而设置了此参数后，当编译失败时，不是直接退出编译</para>
+            <para>而是提供一个交互式的shell</para>
+            <para>然后你可以（另开一个终端）去修复你的问题</para>
+            <para>然后修复问题后，再通过</para>
+            <screen>exit N</screen>
+            <para>实现对应的返回N的值，达到对应的效果：</para>
+            <itemizedlist>
+                <listitem>1
+                    <para>（不重新执行，之前错误的那个命令）</para>
+                    <para>而接着直接继续编译</para>
+                    <para></para>
+                </listitem>
+                <listitem>2
+                    <para>重新执行之前错误的那个命令</para>
+                    <para>然后接着继续执行</para>
+                    <para>常用于：</para>
+                    <para>当某个.c文件编译出错了，然后你另起一个终端，去修改了该.c文件，解决了错误。</para>
+                    <para>然后就可以通过</para>
+                    <screen>exit 2</screen>
+                    <para>而使得，重新执行命令，重新编译该.c文件，而使得可以正常编译，继续编译。</para>
+                </listitem>
+                <listitem>3
+                    <para>直接退出编译</para>
+                    <para>相当于，直接按Ctrl+C，而中断编译</para>
+                </listitem>
+            </itemizedlist>
+            <example xml:id="eg.fix_error_continue_build"><title>如何在编译失败后，修复错误，然后继续接着编译</title>
+                <para>比如，我之前折腾</para>
+                <para><link xl:href="http://www.crifan.com/crosstool_xscale_ct_ng_build_process/">【记录】crosstool为xscale编译(ct-ng build)过程</link></para>
+                <para>时，遇到编译出错后，就回到当前命令行了：</para>
+                <screen>
+<![CDATA[
+=================================================================
+[INFO ]  Installing static core C compiler
+[EXTRA]    Configuring static core C compiler
+[EXTRA]    Building static core C compiler
+[EXTRA]    Installing static core C compiler
+[INFO ]  Installing static core C compiler: done in 1282.54s (at 67:22)
+[EXTRA]  Saving state to restart at step 'libc_headers'...
+[INFO ]  
+=================================================================
+[INFO ]  Installing C library headers
+[EXTRA]    Configuring C library
+[EXTRA]    Installing C library headers
+[ERROR]    make[3]: *** [/home/CLi/develop/crosstool-ng/x-tools/arm-xscale-linux-gnueabi/arm-xscale-linux-gnueabi//sys-root/usr/include/sys/uio.h] Error 1
+[ERROR]    make[2]: *** [misc/install-headers] Error 2
+[ERROR]    make[1]: *** [install-headers] Error 2
+[ERROR]    Build failed in step 'Installing C library headers'
+[ERROR]    Error happened in '/opt/crosstool-ng/lib/ct-ng-1.9.3/scripts/functions' in function 'CT_DoExecLog' (line unknown, sorry)
+[ERROR]          called from '/opt/crosstool-ng/lib/ct-ng-1.9.3/scripts/build/libc/glibc.sh' at line # 175 in function 'do_libc_headers'
+[ERROR]          called from '/opt/crosstool-ng/lib/ct-ng-1.9.3/scripts/crosstool-NG.sh' at line # 597 in function 'main'
+[ERROR]    Look at '/home/CLi/develop/crosstool-ng/x-tools/arm-xscale-linux-gnueabi/build.log' for more info on this error.
+[ERROR]  (elapsed: 76:07.10)
+[76:12] / /opt/crosstool-ng/bin/ct-ng:143: recipe for target `build' failed
+make: *** [build] Error 2
+
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.9.3_build
+$
+]]>
+                </screen>
+                <para>没有给你机会去修复错误，然后继续编译。</para>
+                <para>而你能做的，做节省时间的方式，也最多只是，参考：<xref linkend="restore_from_fail_step" />去，在解决了问题之后，去：</para>
+                <screen>ct-ng libc_headers+</screen>
+                <para>从而达到，从出错的步骤，恢复后继续编译的效果，不再重复之前的已经成功编译的那些步骤。</para>
+                <para>但是，即便是这样，对于编译最开始的部分：</para>
+                <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.9.3_build
+$ ct-ng build
+[INFO ]  Performing some trivial sanity checks
+[INFO ]  Build started 20130724.093552
+[INFO ]  Building environment variables
+[EXTRA]  Preparing working directories
+]]>
+                </screen>
+                <para>等步骤，还是需要花点时间的，还是有点重复浪费的感觉。</para>
+                <para>所以，此处，选中了上面所说的那个"Interactive shell on failed commands"选项后，</para>
+                <para>当编译出错后，会出现类似于：</para>
+                <para><link xl:href="http://www.crifan.com/ubuntu_crosstool_ng_ct_ng_build_error_scripts_unifdef_c_error_conflicting_types_for_getline/">【已解决】Ubuntu中crosstool-ng编译出错：scripts/unifdef.c:209:25: error: conflicting types for ‘getline’</link></para>
+                <para>中的这样的效果：</para>
+                <screen>
+<![CDATA[
+[INFO ]  =================================================================
+[INFO ]  Installing kernel headers
+[EXTRA]    Installing kernel headers
+[ERROR]    /home/crifan/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/linux-custom/scripts/unifdef.c:209:25: error: conflicting types for 'getline'
+[ERROR]    make[3]: *** [scripts/unifdef] Error 1
+[ERROR]    make[2]: *** [headers_install] Error 2
+[ERROR]    make[1]: *** [headers_install] Error 2
+[ERROR]   
+[ERROR]  >>
+[ERROR]  >>  Build failed in step 'Installing kernel headers'
+[ERROR]  >>        called in step '(top-level)'
+[ERROR]  >>
+[ERROR]  >>  Error happened in: CT_DoExecLog[scripts/functions@257]
+[ERROR]  >>        called from: do_kernel_install[scripts/build/kernel/linux.sh@112]
+[ERROR]  >>        called from: do_kernel_headers[scripts/build/kernel/linux.sh@91]
+[ERROR]  >>        called from: main[scripts/crosstool-NG.sh@632]
+           
+ 
+Current command:
+  'make' '-C' '/home/crifan/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/linux-custom' 'O=/home/crifan/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/build/build-kernel-headers' 'ARCH=arm' 'INSTALL_HDR_PATH=/home/crifan/develop/crosstool-ng/x-tools/arm-xscale-linux-gnueabi/arm-xscale-linux-gnueabi/sysroot/usr' 'V=0' 'headers_install'
+exited with error code: 2
+Please fix it up and finish by exiting the shell with one of these values:
+    1  fixed, continue with next build command
+    2  repeat this build command
+    3  abort build
+ 
+ct-ng:~/develop/crosstool-ng/crosstool-ng-1.18.0_build>
+]]>
+                </screen>
+                <para>即，有对应的</para>
+                <screen>Please fix it up and finish by exiting the shell with one of these values</screen>
+                <para>那些信息。</para>
+                <para>然后，当你去解决了对应的问题后：</para>
+                <para>此处，只是去修改对应的<filename>.build/src/linux-custom/scripts/unifdef.c</filename>，即可。</para>
+                <para>然后，就可以通过输入：</para>
+                <screen>exit 2</screen>
+                <para>就可以实现：</para>
+                <para>重新执行此处刚才出错的命令，然后继续重新去编译刚才出错的那个<filename>.build/src/linux-custom/scripts/unifdef.c</filename>文件，</para>
+                <para>从而实现：</para>
+                <para>当编译出错时，也不立刻退出crosstool-ng的编译，</para>
+                <para>允许你去修复对应的问题，然后修复完毕后，可以接着继续编译。</para>
+                <para>因而实现了：</para>
+                <para>避免重复的，之前的各个步骤，包括最开始的环境检查等等的时间</para>
+                <para>真正的，彻底的，最大程度上的，节省你的时间和精力。</para>
+                <para></para>
+            </example>
+            <note xml:id="not_just_number"><title>注意是exit加上数字，不是直接输入数字</title>
+                <para>此处，由于是，交互式shell（interactive shell）</para>
+                <para>所以，当你在修复问题后，想要，继续编译，</para>
+                <para>则是需要，退出当前交互式shell，回去继续编译的。</para>
+                <para>而退出shell的话，就需要用到对应的：</para>
+                <screen>exit N</screen>
+                <para>表示退出，且返回值是N</para>
+                <para>而不是：直接输入N</para>
+            </note>
+        </sect3>
+
+        <para></para>
+    </sect2>
+
+    <sect2 xml:id="crosstool_ng_core_config"><title>crosstool-ng核心配置详解</title>
+        <para>crosstool-ng中有很多配置参数。</para>
+        <para>其中一些核心参数，是交叉编码方面，比如搞清楚，和配置正确的参数。</para>
+        <para>下面就来详细解释这些参数的含义和说明如何配置。</para>
+        <para></para>
+
+        <sect3 xml:id="ctng_related_important_config"><title>crosstool-ng本身相关的重要参数</title>
+            <para>此处介绍，和crosstool-ng，为了交叉编译，作为工具本身方面的一些常见的，重要的参数的配置。</para>
+            <para></para>
+            <sect4 xml:id="download_src_directory"><title>源码包下载保存路径</title>
+                <para>常见配置如下：</para>
+                <screen>
+<![CDATA[
+Paths and misc options
+    (${HOME}/develop/crosstool-ng/src) Local tarballs directory
+]]>
+                </screen>
+                <para>Local tarballs directory的help的说明为：</para>
+                <screen>
+<![CDATA[
+  ┌───────────────────────── Local tarballs directory ──────────────────────────┐
+  │ CT_LOCAL_TARBALLS_DIR:                                                      │
+  │                                                                             │
+  │ If you have previously downloaded the tarballs, enter the PATH where        │
+  │ you stored them here.                                                       │
+  │                                                                             │
+  │ Symbol: LOCAL_TARBALLS_DIR [=${HOME}/develop/crosstool-ng/src]              │
+  │ Type  : string                                                              │
+  │ Prompt: Local tarballs directory                                            │
+  │   Defined at config/global/paths.in:5                                       │
+  │   Depends on: !BACKEND [=n]                                                 │
+  │   Location:                                                                 │
+  │     -> Paths and misc options                                               │
+]]>
+                </screen>
+                <para>即，你之前配置好的各种模块，包括C库，GCC，binutils等等所有的东西，下载下来，都放在此文件夹中。</para>
+                <para>对应的路径配置，可以参考前面介绍的：<xref linkend="co.download_src_folder" /></para>
+            </sect4>
+            <sect4 xml:id="working_directory"><title>工作路径</title>
+                <para>所有的东西，都放在其下，包括：</para>
+                <itemizedlist>
+                    <listitem>编译时所生成的arm-xscale-linux-gnueabi文件夹</listitem>
+                    <listitem>所有模块解压的源码在其下的src路径下</listitem>
+                </itemizedlist>
+                <para>一般使用默认配置，如下：</para>
+                <screen>
+<![CDATA[
+Paths and misc options
+    (${CT_TOP_DIR}/.build) Working directory
+]]>
+                </screen>
+                <para>Working directory的help的说明为：</para>
+                <screen>
+<![CDATA[
+  ┌───────────────────────────── Working directory ─────────────────────────────┐
+  │ CT_WORK_DIR:                                                                │
+  │                                                                             │
+  │ Set this to the directory where all build actions will be done.             │
+  │                                                                             │
+  │ The default is "${CT_TOP_DIR}/.build", and leaving this option              │
+  │ empty will also use the default.                                            │
+  │                                                                             │
+  │ You should not need to change that, except in one very peculiar             │
+  │ setup:                                                                      │
+  │  - your crosstool-NG source directory is on the network                     │
+  │  - you configured crosstool-NG with --local                                 │
+  │ This kind of setup is a pain, as any action involving source file           │
+  │ access would have to go through the wire. In this case, you should          │
+  │ set CT_WORK_DIR to point to a path local to your machine, to avoid          │
+  │ any network overhead.                                                       │
+  │                                                                             │
+  │ Do *NOT* change it if you don't know better.                                │
+  │                                                                             │
+  │ Symbol: WORK_DIR [=${CT_TOP_DIR}/.build]                                    │
+  │ Type  : string                                                              │
+  │ Prompt: Working directory                                                   │
+  │   Defined at config/global/paths.in:31                                      │
+  │   Depends on: !BACKEND [=n]                                                 │
+  │   Location:                                                                 │
+  │     -> Paths and misc options                                               │
+]]>
+                </screen>
+            </sect4>
+            <sect4 xml:id="prefix_target_directory"><title>目标安装路径</title>
+                <para>改为你自己的，对应的x-tools/${CT_TARGET}的路径：</para>
+                <screen>
+<![CDATA[
+Paths and misc options
+    (${HOME}/develop/crosstool-ng/x-tools/${CT_TARGET}) Prefix directory
+]]>
+                </screen>
+                <para>Prefix directory的help的说明为：</para>
+                <screen>
+<![CDATA[
+  ┌────────────────────────────── Prefix directory ──────────────────────────────┐
+  │ CT_PREFIX_DIR:                                                               │
+  │                                                                              │
+  │ This is the path the toolchain will run from.                                │
+  │                                                                              │
+  │ Symbol: PREFIX_DIR [=${HOME}/develop/crosstool-ng/x-tools/${CT_TARGET}]      │
+  │ Type  : string                                                               │
+  │ Prompt: Prefix directory                                                     │
+  │   Defined at config/global/paths.in:52                                       │
+  │   Depends on: !BACKEND [=n]                                                  │
+  │   Location:                                                                  │
+  │     -> Paths and misc options                                                │
+]]>
+                </screen>
+                <para>此处对应的x-tools路径，可参考之前的解释：<xref linkend="co.x_tools_folder" /></para>
+            </sect4>
+        </sect3>
+
+        <sect3 xml:id="crosscompile_related_core_config"><title>交叉编译相关的核心参数</title>
+            <sect4 xml:id="core_config_march_mcpu_mtune"><title>crosstool-ng中的配置参数：Architecture level, Emit assembly for CPU, Tune for CPU</title>
+                <para>crosstool-ng中的Architecture level, Emit assembly for CPU, Tune for CPU，分别对应的是gcc中的-march=xxx, -mcpu=xxx, -mtune=xxx</para>
+                <para>而这几个参数，是相对最最核心的，最最重要的配置了。</para>
+                <para></para>
+
+                <example xml:id="eg.march_mcpu_mtune"><title>举例说明Architecture level, Emit assembly for CPU, Tune for CPU如何去配置</title>
+                    <para>比如，我之前的折腾：</para>
+                    <para><link xl:href="http://www.crifan.com/crosstool_config_for_arm_xscale/">【记录】为arm的xscale配置crosstool-ng</link></para>
+                    <para>中的：</para>
+                    <para><link xl:href="http://www.crifan.com/summary_crosstool_march_mcpu_mtune_for_arm_xscale/">【整理】crosstool中的Architecture level(CT_ARCH_ARCH),Emit assembly for CPU(CT_ARCH_CPU),Tune for CPU(CT_ARCH_TUNE)的值，对于arm的xscale应该是填写什么</link></para>
+                    <para>以及后来的折腾：</para>
+                    <para><link xl:href="http://www.crifan.com/crosstool_ng_architecture_level_emit_assembly_for_cpu_tune_for_cpu_for_tq2440_s3c2440_arm920t/">【整理】crosstool-ng中的Architecture level，Emit assembly for CPU，Tune for CPU对于TQ2440的S3C2440的ARM920T填写何值</link></para>
+                    <para>而搞清楚了自己的xscale的CPU所对应的配置是：</para>
+                    <itemizedlist>
+                        <listitem>Architecture level=CT_ARCH_ARCH=-march=armv5te</listitem>
+                        <listitem>Emit assembly for CPU=CT_ARCH_CPU=-mcpu=xscale</listitem>
+                        <listitem>Tune for CPU=CT_ARCH_TUNE=-mtune=strongarm110</listitem>
+                    </itemizedlist>
+                    <para></para>
+                    <para>以及，后来的折腾：</para>
+                    <para><link xl:href="http://www.crifan.com/cygwin_crosstool_ng_do_ct_ng_menuconfig_config_for_arm920t/">【记录】Cygwin下为arm920t配置crosstool-ng</link></para>
+                    <para>中的：</para>
+                    <para><link xl:href="http://www.crifan.com/crosstool_ng_architecture_level_emit_assembly_for_cpu_tune_for_cpu_for_tq2440_s3c2440_arm920t/">【整理】crosstool-ng中的Architecture level，Emit assembly for CPU，Tune for CPU对于TQ2440的S3C2440的ARM920T填写何值</link></para>
+                    <para>去搞懂了，S3C2440的对应的配置是：</para>
+                    <itemizedlist>
+                        <listitem>Architecture level=CT_ARCH_ARCH=-march=armv4t</listitem>
+                        <listitem>Emit assembly for CPU=CT_ARCH_CPU=-mcpu=arm9tdmi</listitem>
+                        <listitem>Tune for CPU=CT_ARCH_TUNE=-mtune=arm920t</listitem>
+                    </itemizedlist>
+                    <para></para>
+                </example>
+                <para></para>
+                <note xml:id="crosscompile_core_config"><title>交叉编译时的核心参数</title>
+                    <para>其实，如上所说的这几个参数</para>
+                    <para>对应的，都是gcc中的参数，</para>
+                    <para>即对应的-march=xxx，-mcpu=xxx，-mtune=xxx</para>
+                    <para>是属于，在交叉编译领域，差不多都会遇到的，相对比较通用的，配置参数。</para>
+                    <para>所以，针对这几个参数的详细讲解，专门放在了另外一个关于交叉编译的教程里面，做了极其详尽的解释。</para>
+                    <para>先要搞懂这几个参数的详细含义，可参考对应的内容：</para>
+                    <para><link xl:href="http://www.crifan.com/files/doc/docbook/cross_compile/release/html/cross_compile.html#crosstool_ng_crosscompiler_naming_rule">crosstool-ng中交叉编译前缀的命名规则</link></para>
+                    <para></para>
+                </note>
+            </sect4>
+
+            <sect4 xml:id="core_config_mmu"><title>crosstool-ng中的配置参数：MMU</title>
+                <para>crosstool-ng中，对于MMU的配置，此处如下：</para>
+                <screen>
+<![CDATA[
+Target options
+    [*] Use the MMU
+]]>
+                </screen>
+                <para>Use the MMU的help的说明为：</para>
+                <screen>
+<![CDATA[
+  ┌──────────────────────────────── Use the MMU ─────────────────────────────────┐
+  │ CT_ARCH_USE_MMU:                                                             │
+  │                                                                              │
+  │ If your architecture has an MMU and you want to use it,                      │
+  │ say 'Y' here.                                                                │
+  │                                                                              │
+  │ OTOH, if you don't want to use the MMU, or your arch                         │
+  │ lacks an MMU, say 'N' here.                                                  │
+  │                                                                              │
+  │ Note that some architectures (eg. ARM) has variants that                     │
+  │ lacks an MMU (eg. ARM Cortex-M3), while other variants                       │
+  │ have one (eg. ARM Cortex-A8).                                                │
+  │                                                                              │
+  │ Symbol: ARCH_USE_MMU [=y]                                                    │
+  │ Type  : boolean                                                              │
+  │ Prompt: Use the MMU                                                          │
+  │   Defined at config/target.in:87                                             │
+  │   Depends on: ARCH_SUPPORTS_BOTH_MMU [=y]                                    │
+  │   Location:                                                                  │
+  │     -> Target options                                                        │
+  │   Selected by: ARCH_alpha [=n] && GEN_CHOICE_ARCH [=y] && \                  │
+  │ ARCH_alpha_AVAILABLE [=y] || ARCH_s390 [=n] && GEN_CHOICE_ARCH [=y] && \     │
+  │ ARCH_s390_AVAILABLE [=y] || ARCH_powerpc [=n] && GEN_CHOICE_ARCH [=y] && \   │
+  │ ARCH_powerpc_AVAILABLE [=y] || ARCH_sparc [=n] && GEN_CHOICE_ARCH [=y] && \  │
+  │ ARCH_sparc_AVAILABLE [=y] || ARCH_mips [=n] && GEN_CHOICE_ARCH [=y] && \     │
+  │ ARCH_mips_AVAILABLE [=y] || ARCH_avr32 [=n] && GEN_CHOICE_ARCH [=y] && \     │
+  │ ARCH_avr32_AVAILABLE [=y] || ARCH_sh [=n] && GEN_CHOICE_ARCH [=y] && \       │
+  │ ARCH_sh_AVAILABLE [=y] || ARCH_x86 [=n] && GEN_CHOICE_ARCH [=y] && \         │
+  │ ARCH_x86_AVAILABLE [=y]                                                      │
+]]>
+                </screen>
+                <para>此处，已经选上了MMU，是因为之前对于CPU部分，是在：</para>
+                <para><link xl:href="http://www.crifan.com/crosstool_config_for_arm_xscale/">【记录】为arm的xscale配置crosstool-ng</link></para>
+                <para>设置为xscale的，而xscale的CPU，全都是有MMU的。</para>
+                <para>所以，此处，crosstool-ng（根据内部已经实现好的依赖关系），已经自动帮你选上MMU了。</para>
+                <para>需要了解的是，现在多数的CPU，都是已经支持MMU的。</para>
+                <para>只有之前的很老的CPU，有的才不支持MMU。</para>
+            </sect4>
+
+            <sect4 xml:id="core_config_endianness"><title>crosstool-ng中的配置参数：大小端Endianness</title>
+                <para>crosstool-ng中，对于MMU的配置，此处如下：</para>
+                <screen>
+<![CDATA[
+Target options
+    Endianness: (Little endian)  --->
+]]>
+                </screen>
+                <para>Endianness的help的说明为：</para>
+                <screen>
+<![CDATA[
+  ┌──────────────────────────────── Endianness: ─────────────────────────────────┐
+  │ There is no help available for this option.                                  │
+  │ Prompt: Endianness:                                                          │
+  │   Defined at config/target.in:112                                            │
+  │   Depends on: ARCH_SUPPORTS_BOTH_ENDIAN [=y]                                 │
+  │   Location:                                                                  │
+  │     -> Target options                                                        │
+  │   Selected by: ARCH_SUPPORTS_BOTH_ENDIAN [=y] && m                           │
+]]>
+                </screen>
+                <para>此处，将Endianness设置为小端（Little endian）</para>
+                <para>一般，多数情况下，都是小端。</para>
+                <para>不论设置大端（Big Endian）还是小端（Little endian）</para>
+                <para>都要确保本身CPU是支持此种模式的。</para>
+                <para>比如，之前，也是经过确认，才知道，xscale，本身是，既支持大端，也支持小端的：</para>
+                <para><link xl:href="http://www.crifan.com/crosstool_config_for_arm_xscale/">【记录】为arm的xscale配置crosstool-ng</link></para>
+                <para>所以，此处设置小端，也才是确保，CPU本身是支持的。</para>
+                <para></para>
+                <para>关于大端和小端的区别的，不熟悉的可参考：</para>
+                <para><link xl:href="http://www.crifan.com/big_endian_big_endian_and_small_end_little_endian_detailed/">大端(Big Endian)与小端(Little Endian)详解</link></para>
+            </sect4>
+
+            <sect4 xml:id="core_config_fpu"><title>crosstool-ng中的配置参数：浮点处理单元FPU</title>
+                <para>crosstool-ng中的配置中，同样会涉及到，当前的CPU，是否有FPU，浮点处理单元。</para>
+                <para>一般来说，多数CPU都是没有的。</para>
+                <para>比如，我之前的折腾：</para>
+                <para><link xl:href="http://www.crifan.com/cygwin_crosstool_ng_do_ct_ng_menuconfig_config_for_arm920t/">【记录】Cygwin下为arm920t配置crosstool-ng</link></para>
+                <para>就发现，当然的S3C2440dearm920t的话，是不支持FPU的。</para>
+                <para>所以，此处，就设置为对应的，软件浮点了：</para>
+                <screen>
+<![CDATA[
+Target options
+    ()  Use specific FPU
+        Floating point: (softfp (FPU))  --->
+]]>
+                </screen>
+                <para>Use specific FPU的help的说明为：</para>
+                <screen>
+<![CDATA[
+  ┌────────────────────────────── Use specific FPU ──────────────────────────────┐
+  │ CT_ARCH_FPU:                                                                 │
+  │                                                                              │
+  │ On some targets (eg. ARM), you can specify the kind of FPU to emit           │
+  │ code for.                                                                    │
+  │                                                                              │
+  │ This is the configuration flag --with-fpu=XXX, and the runtime flag          │
+  │ -mfpu=XXX.                                                                   │
+  │                                                                              │
+  │ See below wether to actually emit FP opcodes, or to emulate them.            │
+  │                                                                              │
+  │ Pick a value from the gcc manual for your choosen gcc version and your       │
+  │ target CPU.                                                                  │
+  │                                                                              │
+  │ Leave blank if you don't know, or if your target architecture does not       │
+  │ offer this option.                                                           │
+  │                                                                              │
+  │ Symbol: ARCH_FPU [=]                                                         │
+  │ Type  : string                                                               │
+  │ Prompt: Use specific FPU                                                     │
+  │   Defined at config/target.in:274                                            │
+  │   Depends on: ARCH_SUPPORTS_WITH_FPU [=y]                                    │
+  │   Location:                                                                  │
+  │     -> Target options                                                        │
+]]>
+                </screen>
+                <para>Floating point的help的说明为：</para>
+                <screen>
+<![CDATA[
+  ┌────────────────────────────── Floating point: ───────────────────────────────┐
+  │ There is no help available for this option.                                  │
+  │ Prompt: Floating point:                                                      │
+  │   Defined at config/target.in:294                                            │
+  │   Depends on: ARCH_SUPPORTS_WITH_FLOAT [=y]                                  │
+  │   Location:                                                                  │
+  │     -> Target options                                                        │
+  │   Selected by: ARCH_SUPPORTS_WITH_FLOAT [=y] && m                            │
+]]>
+                </screen>
+                <para>可见，此处的FPU，就是对应着gcc中的参数：-mfpu=XXX</para>
+                <para></para>
+                <para>对应的，如果是你：</para>
+                <para><link xl:href="https://wiki.linaro.org/WorkingGroups/ToolChain/Using/CrosstoolNg">crosstool-NG in Linaro</link></para>
+                <para>中所举例的Cortex-A9 with NEON的CPU的话，那么此处的设置就是：</para>
+                <screen>
+<![CDATA[
+Target options
+    (neon) Use specific FPU
+        Floating point: (hardware (FPU))  --->
+]]>
+                </screen>
+                <para>了，而此时，你也可以看到，配置选择中，又多了个，关于后缀hf的选项，你也可以选择该项：</para>
+                <screen>
+<![CDATA[
+Target options
+    [*]   append 'hf' to the tuple (EXPERIMENTAL)
+]]>
+                </screen>
+                <para>append 'hf' to the tuple的help的说明为：</para>
+                <screen>
+<![CDATA[
+  ┌───────────────── append 'hf' to the tuple (EXPERIMENTAL) ─────────────────┐
+  │ CT_ARCH_ARM_TUPLE_USE_EABIHF:                                             │
+  │                                                                           │
+  │ Is you say 'y' here, then the tuple for the toolchain will end            │
+  │ up with *eabihf, instead of the usual *eabi.                              │
+  │                                                                           │
+  │ *eabihf is used to denote that the toolchain *is* using the               │
+  │ hard-float ABI, while *eabi is just an indication of using the            │
+  │ soft-float ABI.                                                           │
+  │                                                                           │
+  │ Ie. all one can say is:  *eabihf   hard-float ABI                         │
+  │                                                                           │
+  │ Saying 'n' here does *not* impact the ability of the toolchain to         │
+  │ generate hard-float instructions with the hard-float ABI. It is a         │
+  │ purely cosmetic thing, used by distros to differentiate their             │
+  │ hard-float-ABI-using ports from their soft-float-ABI-using ports.         │
+  │ (eg. Debian Wheezy and above).                                            │
+  │                                                                           │
+  │ This is an option, as not all versions of gcc/binutils do support         │
+  │ such tuple, and fail to build with *eabihf. Stock gcc version up          │
+  │ to, and including 4.7.2 have an issue or another with *eabihf.            │
+  │                                                                           │
+  │ This option is here for the future.                                       │
+  │                                                                           │
+  │ Say 'n', unless you are trying to fix gcc to properly recognise           │
+  │ the *eabihf tuples.                                                       │
+  │                                                                           │
+  │ Symbol: ARCH_ARM_TUPLE_USE_EABIHF [=y]                                    │
+  │ Type  : boolean                                                           │
+  │ Prompt: append 'hf' to the tuple (EXPERIMENTAL)                           │
+  │   Defined at config/arch/arm.in.2:64                                      │
+  │   Depends on: ARCH_arm [=y] && ARCH_FLOAT_HW [=y] && ARCH_ARM_EABI [=y]\  │
+  │  && EXPERIMENTAL [=y]                                                     │
+  │   Location:                                                               │
+  │     -> Target options                                                     │
+  │       -> Use EABI (ARCH_ARM_EABI [=y])                                    │
+]]>
+                </screen>
+                <para></para>
+                <para></para>
+            </sect4>
+
+            <sect4 xml:id="core_config_cflags"><title>crosstool-ng中的配置参数：CFLAGS参数</title>
+                <para>crosstool-ng中，支持设置对应的CFLAGS参数，以传递给底层的gcc的。</para>
+                <para>经过之前的调查：</para>
+                <para><link xl:href="http://www.crifan.com/crosstool_gcc_cflags_o/">【整理】crosstool中Target CFLAGS参数的含义和如何设置</link></para>
+                <para>结论是：</para>
+                <para>一般设置为-O，即可。</para>
+                <screen>
+<![CDATA[
+Target options
+    (-O) Target CFLAGS
+]]>
+                </screen>
+                <para>Target CFLAGS的help的说明为：</para>
+                <screen>
+<![CDATA[
+  ┌────────────────────────────── Target CFLAGS ──────────────────────────────┐
+  │ CT_TARGET_CFLAGS:                                                         │
+  │                                                                           │
+  │ Used to add specific options when compiling libraries of the toolchain,   │
+  │ that will run on the target (eg. libc.so).                                │
+  │                                                                           │
+  │ Note that the options above for ARCH, ABI, CPU, TUNE and FPU will be      │
+  │ automatically used. You don't need to specify them here.                  │
+  │                                                                           │
+  │ Leave blank if you don't know better.                                     │
+  │                                                                           │
+  │ Symbol: TARGET_CFLAGS [=-O]                                               │
+  │ Type  : string                                                            │
+  │ Prompt: Target CFLAGS                                                     │
+  │   Defined at config/target.in:341                                         │
+  │   Location:                                                               │
+  │     -> Target options                                                     │
+]]>
+                </screen>
+                <para></para>
+            </sect4>
+
+            <sect4 xml:id="core_config_linux_version"><title>crosstool-ng中的配置参数：Linux内核版本</title>
+                <para>目前我的理解是：</para>
+                <para>对于你进行嵌入式开发时，所选择的对应的Linux版本，应该和此处交叉编译器配置的Linux内核版本要一致。</para>
+                <para>比如，我之前折腾：</para>
+                <para><link xl:href="http://www.crifan.com/reuse_latest_version_crosstool_ng_to_config_and_compile_for_xscale/">【记录】重试使用最新版本1.18.0的crosstool-ng去配置和编译xscale的交叉编译器</link></para>
+                <para>时，去选择了，自定义版本的Linux内核：<filename>linux-2.6.19.1.tar.bz2</filename></para>
+                <para>所以，此处，就先去把对应的，自己的<filename>linux-2.6.19.1.tar.bz2</filename>，放到对应的路径下：</para>
+                <para>Cygwin下面的：</para>
+                <screen>/home/CLi/develop/crosstool-ng/src/linux-2.6.19.1.tar.bz2</screen>
+                <para>而当前自己的HOME路径是：</para>
+                <screen>/home/CLi</screen>
+                <para>所以就可以去设置为：</para>
+                <screen>
+<![CDATA[
+Operating System
+    Linux kernel version (custom tarball or directory)  --->
+        custom tarball or directory
+    (${HOME}/develop/crosstool-ng/src/linux-2.6.19.1.tar.bz2) Path to custom source, tarball or directory
+]]>
+                </screen>
+                <para>Path to custom source, tarball or directory的help的说明为：</para>
+                <screen>
+<![CDATA[
+  ┌─────────────────────────── Path to custom source, tarball or directory ───────────────────────────┐
+  │ CT_KERNEL_LINUX_CUSTOM_LOCATION:                                                                  │
+  │                                                                                                   │
+  │ Enter here the path to the tarball of your full kernel tree or                                    │
+  │ kernel directory                                                                                  │
+  │                                                                                                   │
+  │ Symbol: KERNEL_LINUX_CUSTOM_LOCATION [=${HOME}/develop/crosstool-ng/src/linux-2.6.19.1.tar.bz2]   │
+  │ Type  : string                                                                                    │
+  │ Prompt: Path to custom source, tarball or directory                                               │
+  │   Defined at config/kernel/linux.in:148                                                           │
+  │   Depends on: <choice> && KERNEL_LINUX_CUSTOM [=y]                                                │
+  │   Location:                                                                                       │
+  │     -> Operating System                                                                           │
+  │       -> Linux kernel version (<choice> [=y])                                                     │
+  │         -> custom tarball or directory (KERNEL_LINUX_CUSTOM [=y])                                 │
+]]>
+                </screen>
+                <para>如此，之后编译的时候，就可以找到你自己设置的Linux内核，并解压，去加载对应的头文件等内容了。</para>
+                <para></para>
+            </sect4>
+
+            <sect4 xml:id="core_config_binutils"><title>crosstool-ng中的配置参数：binutils版本</title>
+                <para>binutils，是编译交叉编译器时，一个比较重要的组件。</para>
+                <para>对应的版本的选择，一般还是按照之前使用示例配置时，选择的为准。</para>
+                <para>如果后期编译出错，实在解决不了的时候，再考虑换个其他的版本试试。</para>
+                <para>我目前的配置，供参考：</para>
+                <screen>
+<![CDATA[
+Binary utilities
+    binutils version (2.22)  --->
+]]>
+                </screen>
+                <para>binutils version的help的说明为：</para>
+                <screen>
+<![CDATA[
+  ┌─────────────────────── binutils version ────────────────────────┐
+  │ There is no help available for this option.                     │
+  │ Prompt: binutils version                                        │
+  │   Defined at config/binutils/binutils.in:5                      │
+  │   Depends on: BINUTILS_binutils [=y]                            │
+  │   Location:                                                     │
+  │     -> Binary utilities                                         │
+  │   Selected by: BINUTILS_binutils [=y] && m                      │
+]]>
+                </screen>
+                <para></para>
+            </sect4>
+
+            <sect4 xml:id="core_config_gcc"><title>crosstool-ng中的配置参数：gcc版本</title>
+                <para>crosstool-ng中的gcc的版本选择，也是属于极其重要的参数。</para>
+                <para>此处我的gcc版本的选择，还是按照之前的逻辑，选用示例配置中的gcc的版本的，此处是4.6.0版本的：</para>
+                <para>并且，对应着，此处，如果没有特殊需求，则只是选择C++的，即可。</para>
+                <para>即，剩余那些语言：Fortran，Java，ADA，Objective-C，Objective-C++等，都无需选择。</para>
+                <para></para>
+                <para>我此处的配置如下，供参考：</para>
+                <screen>
+<![CDATA[
+C compiler
+    C compiler (gcc)  --->
+    gcc version (4.6.0)  --->
+    [*] C++
+    [ ] Fortran
+    [ ] Java
+    [ ] ADA (EXPERIMENTAL)
+    [ ] Objective-C (EXPERIMENTAL)
+    [ ] Objective-C++ (EXPERIMENTAL)
+    ()  Other languages (EXPERIMENTAL)
+]]>
+                </screen>
+                <para></para>
+                <tip xml:id="linaro_version_gcc"><title>Linaro版本的gcc</title>
+                    <para>Linaro版本的gcc，crosstool-ng现在也支持了。</para>
+                    <para>所以，对应的可以看到，在之前选上：</para>
+                    <screen>
+<![CDATA[
+Paths and misc options
+    [*] Try features marked as EXPERIMENTAL
+]]>
+                    </screen>
+                    <para>之后，此处的gcc中，就可以去选上：</para>
+                    <screen>
+<![CDATA[
+C compiler
+    [*] Show Linaro versions
+]]>
+                    </screen>
+                    <para>然后就可以去"gcc version"中，找到有多个Linaro版本的gcc了：</para>
+                    <screen>
+<![CDATA[
+│ │                    ( ) linaro-4.7-2013.01                      │ │
+│ │                    ( ) 4.7.2                                   │ │
+│ │                    ( ) 4.7.1                                   │ │
+│ │                    ( ) 4.7.0                                   │ │
+│ │                    ( ) linaro-4.6-2013.01                      │ │
+│ │                    ( ) 4.6.3                                   │ │
+│ │                    ( ) 4.6.2                                   │ │
+│ │                    ( ) 4.6.1                                   │ │
+│ │                    (X) 4.6.0                                   │ │
+│ │                    ( ) linaro-4.5-2012.03                      │ │
+│ │                    ( ) 4.5.3                                   │ │
+│ │                    ( ) 4.5.2                                   │ │
+│ │                    ( ) 4.5.1                                   │ │
+│ │                    ( ) 4.5.0                                   │ │
+│ │                    ( ) linaro-4.4-2011.02-0                    │ │
+│ │                    ( ) 4.4.7                                   │ │
+│ │                    ( ) 4.4.6                                   │ │
+│ │                    ( ) 4.4.5                                   │ │
+│ │                    ( ) 4.4.4                                   │ │
+│ │                    ( ) 4.4.3                                   │ │
+│ │                    ( ) 4.4.2                                   │ │
+│ │                    ( ) 4.4.1                                   │ │
+│ │                    ( ) 4.4.0                                   │ │
+│ │                    ( ) 4.3.6                                   │ │
+│ │                    ( ) 4.3.5                                   │ │
+│ │                    ( ) 4.3.4                                   │ │
+│ │                    ( ) 4.3.3                                   │ │
+│ │                    ( ) 4.3.2                                   │ │
+│ │                    ( ) 4.3.1                                   │ │
+│ │                    ( ) 4.2.4                                   │ │
+]]>
+                    </screen>
+                    <para>然后，如果需要的话，可以去选上某个Linaro版本的gcc，比如：</para>
+                    <screen>
+<![CDATA[
+C compiler
+    gcc version (linaro-4.7-2013.01)  --->
+]]>
+                    </screen>
+                    <para></para>
+                    <para>关于Linaro不熟悉的，可参考：</para>
+                    <para><link xl:href="http://www.crifan.com/summary_linaro_intro/">【整理】Linaro简介</link></para>
+                </tip>
+            </sect4>
+
+            <sect4 xml:id="core_config_c_lib"><title>crosstool-ng中的配置参数：C库的选择</title>
+                <para>crosstool-ng中，关于C库的选择，也是个重要的问题。</para>
+                <para>常见的有三种C库：glibc，eglibc，uclibc</para>
+                <para>不了解的，可参考：<link xl:href="http://www.crifan.com/relation_between_uclibc_glibc_eglibc/">【整理】uclibc,eglibc,glibc之间的区别和联系</link></para>
+                <para>一般选择glibc或者是eglibc。</para>
+                <para>我此处，选择的是glibc，对应的版本选择，也是使用之前示例配置中的2.9</para>
+                <para>配置如下：</para>
+                <screen>
+<![CDATA[
+C-library
+    C library (glibc)  --->
+    glibc version (2.9)  --->
+]]>
+                </screen>
+                <para></para>
+            </sect4>
+
+            <sect4 xml:id="core_config_c_lib_thread_model"><title>crosstool-ng中的配置参数：线程模型的选择</title>
+                <para>线程模型主要分两种：linuxThreads和nptl</para>
+                <para>相关区别，可参考这个帖子：<link xl:href="http://www.ibm.com/developerworks/cn/linux/l-threading.html">Linux 线程模型的比较：LinuxThreads 和 NPTL</link></para>
+                <para>现在多数都选择，默认的nptl</para>
+                <para>配置如下：</para>
+                <screen>
+<![CDATA[
+C-library
+    Threading implementation to use: (nptl)  --->
+]]>
+                </screen>
+                <para></para>
+                <para></para>
+            </sect4>
+
+        </sect3>
+    </sect2>
+</sect1>
+
+</chapter>

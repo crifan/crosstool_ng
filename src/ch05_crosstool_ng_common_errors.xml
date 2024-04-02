@@ -1,0 +1,1188 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!DOCTYPE chapter
+[
+
+<!ENTITY % crl_ent PUBLIC "crl.ent" 'http://www.crifan.com/files/res/docbook/entity/crl.ent'>
+%crl_ent;
+
+]>
+
+<chapter    xml:id="crosstool_ng_common_errors"
+    xmlns="http://docbook.org/ns/docbook"
+    xmlns:xl="http://www.w3.org/1999/xlink"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:ns5="http://www.w3.org/1998/Math/MathML"
+    xmlns:ns4="http://www.w3.org/1999/xhtml"
+    xmlns:ns3="http://www.w3.org/2000/svg"
+    xmlns:ns="http://docbook.org/ns/docbook">
+<title>crosstool-ng常见问题及解决办法</title>
+<para></para>
+<para>相关旧帖：<link xl:href="http://www.crifan.com/summary_crosstool_ng_note/">【总结】crosstool-ng使用心得和注意事项</link></para>
+<para></para>
+<sect1 xml:id="crosstoool_ng_install_self_common_errors"><title>安装crosstool-ng工具本身的阶段常见问题及解决办法</title>
+    <para></para>
+    <para>安装crosstool-ng工具本身，也常会遇到一些小问题。</para>
+
+    <sect2 xml:id="install_ctng_lack_dev_tools"><title>缺少一些开发相关的工具</title>
+        <para>比如，在configure和make等时候，提示你缺少一些工具，版本等不满足要求之类的错误。</para>
+        <para>这时候，基本的逻辑都是：</para>
+        <para>搞清楚当前缺少的是哪个（版本的）工具，然后去安装上去，即可。</para>
+        <note xml:id="when_missing_in_cygwin_reinstall_all_dev"><title>当cygwin下缺失某软件包时请重新安装Cygwin且全选整个Develop那组的所有软件包</title>
+            <para>注意，如果这些问题，是发生在Cygwin下，那么，则需要你去安装对应的软件包。</para>
+            <para>其中，比较好的做法是：</para>
+            <para>在安装Cygwin的时候，对于Developmen那个分类，全部都安装。</para>
+            <para>详见：</para>
+            <para><link xl:href="http://www.crifan.com/files/doc/docbook/cygwin_intro/release/html/cygwin_intro.html">Cygwin详解</link></para>
+        </note>
+
+        <sect3 xml:id="missing_bison"><title>configure: error: missing required tool: bison</title>
+            <para>在Ubuntu下，解决办法是：</para>
+            <screen>sudo apt-get install bison</screen>
+            <para></para>
+            <para>详见：<link xl:href="http://www.crifan.com/under_ubuntu_use_crosstool_ng_build_xscale_cross_compiler_toolchain/">【记录】在Ubuntu下用crosstool-ng编译xscale的交叉工具链</link></para>
+        </sect3>
+
+        <sect3 xml:id="missing_flex"><title>configure: error: missing required tool: flex</title>
+            <para>在Ubuntu下，解决办法是：</para>
+            <screen>sudo apt-get install flex</screen>
+            <para></para>
+            <para>详见：<link xl:href="http://www.crifan.com/under_ubuntu_use_crosstool_ng_build_xscale_cross_compiler_toolchain/">【记录】在Ubuntu下用crosstool-ng编译xscale的交叉工具链</link></para>
+        </sect3>
+
+        <sect3 xml:id="missing_gperf"><title>configure: error: missing required tool: gperf</title>
+            <para>在Ubuntu下，解决办法是：</para>
+            <screen>sudo apt-get install gperf</screen>
+            <para></para>
+            <para>详见：<link xl:href="http://www.crifan.com/under_ubuntu_use_crosstool_ng_build_xscale_cross_compiler_toolchain/">【记录】在Ubuntu下用crosstool-ng编译xscale的交叉工具链</link></para>
+        </sect3>
+
+        <sect3 xml:id="missing_makeinfo"><title>configure: error: missing required tool: makeinfo</title>
+            <para>在Ubuntu下，解决办法是：</para>
+            <screen>sudo apt-get install texinfo</screen>
+            <para></para>
+            <para>详见：<link xl:href="http://www.crifan.com/ubuntu_apt_get_install_e_unable_to_locate_package/">【已解决】Ubuntu中用sudo apt-get install安装某软件，结果出错：E: Unable to locate package makeinfo</link></para>
+        </sect3>
+
+        <sect3 xml:id="missing_gnu_awk"><title>configure: error: could not find GNU awk</title>
+            <para>在Ubuntu下，解决办法是：</para>
+            <screen>sudo apt-get install gawk</screen>
+            <para></para>
+            <para>详见：<link xl:href="http://www.crifan.com/under_ubuntu_use_crosstool_ng_build_xscale_cross_compiler_toolchain/">【记录】在Ubuntu下用crosstool-ng编译xscale的交叉工具链</link></para>
+        </sect3>
+
+        <sect3 xml:id="missing_gnu_libtool_1_5_26"><title>configure: error: could not find GNU libtool >= 1.5.26</title>
+            <para>在Ubuntu下，解决办法是：</para>
+            <screen>sudo apt-get install libtool</screen>
+            <para></para>
+            <para>详见：<link xl:href="http://www.crifan.com/ubuntu_crosstool_ng_configure_error_could_not_find_gnu_libtool_large_than_1_5_26/">【已解决】Ubuntu下去配置crosstool-ng时出现：configure: error: could not find GNU libtool >= 1.5.26</link></para>
+        </sect3>
+
+        <sect3 xml:id="missing_gnu_automake_1_10"><title>configure: error: could not find GNU automake >= 1.10</title>
+            <para>在Ubuntu下，解决办法是：</para>
+            <screen>sudo apt-get install automake</screen>
+            <para></para>
+            <para>详见：<link xl:href="http://www.crifan.com/under_ubuntu_use_crosstool_ng_build_xscale_cross_compiler_toolchain/">【记录】在Ubuntu下用crosstool-ng编译xscale的交叉工具链</link></para>
+        </sect3>
+
+        <sect3 xml:id="not_find_curses_header"><title>configure: error: could not find curses header, required for the kconfig frontends</title>
+            <para>在Ubuntu下，解决办法是：</para>
+            <screen>sudo apt-get install libncurses5-dev</screen>
+            <para></para>
+            <para>详见：<link xl:href="http://www.crifan.com/under_ubuntu_use_crosstool_ng_build_xscale_cross_compiler_toolchain/">【记录】在Ubuntu下用crosstool-ng编译xscale的交叉工具链</link></para>
+        </sect3>
+
+    </sect2>
+
+    <sect2 xml:id="install_ctng_under_cygwin_erros"><title>在Cygwin下出现的一些问题</title>
+        <para>除了上述所说的，在Linux以及Cygwin下都可能会出现的一些问题之外，</para>
+        <para>在Cygwin环境下，还会出现一些，和Cygwin特定相关的一些问题：</para>
+        <para></para>
+
+        <sect3 xml:id="undefined_reference_to_libintl_gettext"><title>zconf.tab.o:zconf.tab.c:(.text+0x162a): undefined reference to ‘_libintl_gettext'</title>
+            <para>错误现象：</para>
+            <para>cygwin下make编译crosstool-ng出错：</para>
+            <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0
+$ make
+  SED    'ct-ng'
+  SED    'scripts/crosstool-NG.sh'
+  SED    'scripts/saveSample.sh'
+  SED    'scripts/showTuple.sh'
+  GEN    'config/configure.in'
+  GEN    'paths.mk'
+  GEN    'paths.sh'
+  DEP    'nconf.gui.dep'
+  DEP    'nconf.dep'
+  DEP    'lxdialog/checklist.dep'
+  DEP    'lxdialog/inputbox.dep'
+  DEP    'lxdialog/util.dep'
+  DEP    'lxdialog/textbox.dep'
+  DEP    'lxdialog/yesno.dep'
+  DEP    'lxdialog/menubox.dep'
+  DEP    'mconf.dep'
+  DEP    'conf.dep'
+  BISON  'zconf.tab.c'
+  GPERF  'zconf.hash.c'
+  LEX    'lex.zconf.c'
+  DEP    'zconf.tab.dep'
+  CC     'zconf.tab.o'
+  CC     'conf.o'
+  LD     'conf'
+zconf.tab.o:zconf.tab.c:(.text+0x162a): undefined reference to `_libintl_gettext'
+zconf.tab.o:zconf.tab.c:(.text+0x47fe): undefined reference to `_libintl_gettext'
+zconf.tab.o:zconf.tab.c:(.text+0x56ec): undefined reference to `_libintl_gettext'
+zconf.tab.o:zconf.tab.c:(.text+0x58be): undefined reference to `_libintl_gettext'
+zconf.tab.o:zconf.tab.c:(.text+0xc70b): undefined reference to `_libintl_gettext'
+zconf.tab.o:zconf.tab.c:(.text+0xc719): more undefined references to `_libintl_gettext' follow
+/usr/lib/gcc/i686-pc-cygwin/4.5.3/../../../../i686-pc-cygwin/bin/ld: zconf.tab.o: bad reloc address 0x110 in section `.data'
+/usr/lib/gcc/i686-pc-cygwin/4.5.3/../../../../i686-pc-cygwin/bin/ld: final link failed: Invalid operation
+collect2: ld returned 1 exit status
+Makefile:108: recipe for target `conf' failed
+make[2]: *** [conf] Error 1
+Makefile:160: recipe for target `build-lib-kconfig' failed
+make[1]: *** [build-lib-kconfig] Error 2
+Makefile:120: recipe for target `build' failed
+make: *** [build] Error 2
+]]>
+            </screen>
+            <para>原因：</para>
+            <para>Cygwin下虽然已经安装了intl库，但是此处make编译的时候，没有链接进去，所以报错。</para>
+            <para></para>
+            <para>解决办法：</para>
+            <para>修改对应的Makefile文件：</para>
+            <screen>
+<![CDATA[
+crosstool-ng-1.18.0\kconfig\Makefile
+]]>
+            </screen>
+            <para>去添加对应的intl库，即改为：</para>
+            <programlisting>
+<![CDATA[
+# What’s needed to build ‘conf’
+conf_SRC = conf.c
+conf_OBJ = $(patsubst %.c,%.o,$(conf_SRC))
+conf_DEP = $(patsubst %.o,%.dep,$(conf_OBJ))
+$(conf_OBJ) $(conf_DEP): CFLAGS += $(INTL_CFLAGS)
+conf: LDFLAGS += -lintl
+
+# What’s needed to build ‘mconf’
+mconf_SRC = mconf.c
+mconf_OBJ = $(patsubst %.c,%.o,$(mconf_SRC))
+mconf_DEP = $(patsubst %.c,%.dep,$(mconf_SRC))
+$(mconf_OBJ) $(mconf_DEP): CFLAGS += $(NCURSES_CFLAGS) $(INTL_CFLAGS)
+#mconf: LDFLAGS += $(NCURSES_LDFLAGS)
+mconf: LDFLAGS += -lintl $(NCURSES_LDFLAGS)
+
+# What’s needed to build ‘nconf’
+nconf_SRC = nconf.c nconf.gui.c
+nconf_OBJ = $(patsubst %.c,%.o,$(nconf_SRC))
+nconf_DEP = $(patsubst %.c,%.dep,$(nconf_SRC))
+#$(nconf_OBJ) $(nconf_DEP): CFLAGS += $(INTL_CFLAGS) -I/usr/include/ncurses
+#nconf: LDFLAGS += -lmenu -lpanel -lncurses
+$(nconf_OBJ) $(nconf_DEP): CFLAGS += -I/usr/include/ncurses/ $(INTL_CFLAGS)
+nconf: LDFLAGS += -lintl -lmenu -lpanel -lncurses
+]]>
+            </programlisting>
+            <note xml:id="also_fix_for_ncurses"><title>此处也同时添加了ncurses库，解决了undefined reference to `_wattrset'的问题</title>
+                <para>此问题的解决，是在折腾：</para>
+                <para><link xl:href="http://www.crifan.com/crosstool_ng_cygwin_zconf_tab_o_zconf_tab_c_text_0x162a_undefined_reference_to_libintl_gettext/">【已解决】cygwin中编译crosstool-ng出错：zconf.tab.o:zconf.tab.c:(.text+0x162a): undefined reference to ‘_libintl_gettext'</link></para>
+                <para>时，去参考：</para>
+                <para><link xl:href="http://sourceware.org/ml/crossgcc/2012-05/msg00012.html">Re: crosstool-NG Cygwin Build Fails</link></para>
+                <para>而找到的解决办法。</para>
+                <para>可以看出，其中，在添加intl的同时，也同时去添加了对应的ncurses那个库。</para>
+                <para>那是因为，后期，同样会出现类似的错误<xref linkend="menubox_undefined_reference_to_wattrset" />的</para>
+                <para>所以，此处，也加上对应的ncurses库，一并解决了类似的问题。</para>
+            </note>
+            <para></para>
+            <caution xml:id="not_make_ldflags_lintl_lcurses"><title>此处不要通过make时加LDFLAGS参数去添加-lintl和-lcurses</title>
+                <para>其实，上面贴出来的，修改makefile的办法，的确已经解决了此处的，缺少intl和缺少ncurses的库的两个问题了。</para>
+                <para>只是，后来，在另外一个Cygwin环境下去折腾同样的make编译crosstool-ng的时候：</para>
+                <para><link xl:href="http://www.crifan.com/cygwin_crosstool_ng_configure_make_make_install">【记录】Cygwin下配置编译和安装crosstool-ng</link></para>
+                <para>由于之前解决上面这个问题的时候：</para>
+                <para><link xl:href="http://www.crifan.com/crosstool_ng_cygwin_zconf_tab_o_zconf_tab_c_text_0x162a_undefined_reference_to_libintl_gettext-2/">【已解决】Cygwin 1.7.17下make编译crosstool-ng出错：zconf.tab.o:zconf.tab.c:(.text+0x162a): undefined reference to `_libintl_gettext'</link></para>
+                <para>用的解决办法是：</para>
+                <para>不去修改makefile，而直接给make加上LDFLAGS参数加上-lintl：</para>
+                <screen>make LDFLAGS="-lintl"</screen>
+                <para>当时也是可以解决此问题的。</para>
+                <para>并且，接着去解决了：<xref linkend="menubox_undefined_reference_to_wattrset" /></para>
+                <para>用的方法也是，继续给make的LDFLAGS添加对应的-lcurses的参数：</para>
+                <screen>make LDFLAGS="-lintl -lcurses"</screen>
+                <para>然后，后来就出现，相对来说，至少到目前为止，没有完全搞懂的问题：</para>
+                <para><link xl:href="http://www.crifan.com/crosstool_ng_cygwin_nconf_o_nconf_c_text_0x373_undefined_reference_to_free_item/">【已解决】Cygwin下make编译crosstool-ng出错：nconf.o:nconf.c:(.text+0×373): undefined reference to `_free_item’</link></para>
+                <para>觉得是属于比较诡异的问题。</para>
+                <para>而最终的解决办法是：</para>
+                <para>不要用make时给定LDFLAGS参数的方式去添加intl和curses的库</para>
+                <para>还是用上述的办法，修改对应的makefile，添加对应的intl的库，调整对应的</para>
+                <programlisting>
+<![CDATA[
+$(INTL_CFLAGS) -I/usr/include/ncurses
+]]>
+                </programlisting>
+                <para>变成：</para>
+                <programlisting>
+<![CDATA[
+-I/usr/include/ncurses/ $(INTL_CFLAGS)
+]]>
+                </programlisting>
+                <para>即可彻底解决此诡异的问题。</para>
+                <para>在该诡异问题的根本原因没有搞清楚之前，别人如果遇到类似的错误，还是参照此处，修改makefile去解决类似的问题。</para>
+                <para></para>
+            </caution>
+            <para></para>
+        </sect3>
+
+        <sect3 xml:id="menubox_undefined_reference_to_wattrset"><title>lxdialog/menubox.o:menubox.c:(.text+0x7d): undefined reference to `_wattrset'</title>
+            <para>错误现象：</para>
+            <para>cygwin下make编译crosstool-ng出错：</para>
+            <screen>
+<![CDATA[
+Administrator@PC-20130611GART /home/develop/crosstool-ng/crosstool-ng-1.18.0
+$ make LDFLAGS="-lintl"
+  GEN    'config/configure.in'
+  GEN    'paths.mk'
+  GEN    'paths.sh'
+  LD     'conf'
+  CC     'lxdialog/menubox.o'
+  CC     'lxdialog/yesno.o'
+  CC     'lxdialog/textbox.o'
+  CC     'lxdialog/util.o'
+  CC     'lxdialog/inputbox.o'
+  CC     'lxdialog/checklist.o'
+  CC     'mconf.o'
+  LD     'mconf'
+lxdialog/menubox.o:menubox.c:(.text+0x7d): undefined reference to `_wattrset'
+lxdialog/menubox.o:menubox.c:(.text+0x97): undefined reference to `_wmove'
+......
+mconf.o:mconf.c:(.text+0x13de): undefined reference to `_ncwrap_stdscr'
+mconf.o:mconf.c:(.text+0x13e6): undefined reference to `_getcurx'
+collect2: ld returned 1 exit status
+Makefile:100: recipe for target `mconf' failed
+make[2]: *** [mconf] Error 1
+Makefile:160: recipe for target `build-lib-kconfig' failed
+make[1]: *** [build-lib-kconfig] Error 2
+Makefile:120: recipe for target `build' failed
+make: *** [build] Error 2
+
+Administrator@PC-20130611GART /home/develop/crosstool-ng/crosstool-ng-1.18.0$
+]]>
+            </screen>
+            <para>原因：</para>
+            <para>Cygwin下虽然已经安装了ncurses库，但是此处make编译的时候，没有链接进去，所以报错。</para>
+            <para></para>
+            <para>解决办法：</para>
+            <para>参见：<xref linkend="undefined_reference_to_libintl_gettext" />中的<xref linkend="also_fix_for_ncurses" />，去修改makefile而解决。</para>
+            <para>注意：参见之前<xref linkend="not_make_ldflags_lintl_lcurses" />的解释，不要通过给make加LDFLAGS的方式去解决此问题，而是如上，使用修改makefile去解决此问题。</para>
+            <para></para>
+        </sect3>
+
+        <sect3 xml:id="nconf_c_error_lvalue_required_as_left_operand_of_assignment"><title>nconf.c:1521:2: error: lvalue required as left operand of assignment</title>
+            <para>错误现象：</para>
+            <para>cygwin下make编译crosstool-ng出错：</para>
+            <screen>
+<![CDATA[
+Administrator@PC-20130611GART /home/develop/crosstool-ng/crosstool-ng-1.18.0
+$ make LDFLAGS="-lintl -lcurses"
+  GEN    'config/configure.in'
+  GEN    'paths.mk'
+  GEN    'paths.sh'
+  LD     'mconf'
+  CC     'nconf.o'
+nconf.c: In function 'main':
+nconf.c:1521:2: error: lvalue required as left operand of assignment
+Makefile:95: recipe for target `nconf.o' failed
+make[2]: *** [nconf.o] Error 1
+Makefile:160: recipe for target `build-lib-kconfig' failed
+make[1]: *** [build-lib-kconfig] Error 2
+Makefile:120: recipe for target `build' failed
+make: *** [build] Error 2
+]]>
+            </screen>
+            <para>原因：</para>
+            <para>nconf.c中（不知何故）无法找到对应的宏ESCDELAY，导致此处的代码：</para>
+            <programlisting>
+<![CDATA[
+ESCDELAY = 1;
+]]>
+            </programlisting>
+            <para>变成一个未知的变量的左赋值，所以报此错误。</para>
+            <para>解决办法：</para>
+            <para>把对应的出错的文件：</para>
+            <filename>crosstool-ng-1.18.0\kconfig\nconf.c</filename>
+            <para>修改为：</para>
+            <programlisting>
+<![CDATA[
+//ESCDELAY = 1;
+set_escdelay(1);
+]]>
+            </programlisting>
+            <para>详见：</para>
+            <para><link xl:href="http://www.crifan.com/crosstool_ng_cygwin_nconf_c_error_lvalue_required_as_left_operand_of_assignment/">【已解决】Cygwin下make编译crosstool-ng出错：nconf.c:1521:2: error: lvalue required as left operand of assignment</link></para>
+            <para></para>
+        </sect3>
+
+        <sect3 xml:id="ct_ng_command_not_found"><title>bash: ct-ng: command not found</title>
+            <para>之前参考别人的教程：</para>
+            <para><link xl:href="http://hi.baidu.com/wanghaishanren/item/22a7976ad8583392c5d24984">Cygwin下用crosstool-ng 编译交叉工具链</link></para>
+            <para>去折腾crosstool-ng的时候，在Cygwin下面，遇到一个问题：</para>
+            <para>同样的去执行对应的命令：</para>
+            <screen>echo "PATH=$PATH:/new/added/some/path" >> ~/.bashrc</screen>
+            <para>但是<command>echo</command>到<filename>.bashrc</filename>中的PATH的值，却是展开的。</para>
+            <para>从而，导致<filename>.bashrc</filename>中的内容，太乱，以至于无法正常执行。</para>
+            <para>所以，经过一番折腾，才发现，原来是，在Cygwin中，<command>echo</command>的值，包含环境变量的话，是需要转义的，即写为：</para>
+            <screen>echo "PATH=\$PATH:/new/added/some/path" >> ~/.bashrc</screen>
+            <para>才可以的。</para>
+            <para></para>
+            <para><link xl:href="http://www.crifan.com/cygwin_crosstool_ng_ct_ng_help_bash_ct_ng_command_not_found/">【已解决】Cygwin中安装完crosstool-ng后，运行ct-ng help出错：bash: ct-ng: command not found</link></para>
+        </sect3>
+
+        <sect3 xml:id="can_not_edit_cygwin_file"><title>Win7下无法编辑保存Cygwin中的文件</title>
+            <para>实际上，此问题，不属于此处crosstool-ng方面的问题，只是和cygwin有关。</para>
+            <para>如果有人遇到类似的问题：</para>
+            <para>cygwin的文件，在Win7中（通过资源管理器）打开后，用编辑器打开，可以编辑，但是去保存时，无法保存。</para>
+            <para>则可以去参考Cygwin中的专门的解释：</para>
+            <para><link xl:href="http://www.crifan.com/files/doc/docbook/cygwin_intro/release/html/cygwin_intro.html#file_edit_can_not_save">Cygwin下的文件可以编辑但是无法保存</link></para>
+        </sect3>
+    </sect2>
+
+</sect1>
+
+<sect1 xml:id="crosstoool_ng_build_common_errors"><title>crosstool-ng在编译阶段常见问题及解决办法</title>
+    <para></para>
+    <para></para>
+
+    <sect2 xml:id="build_errors_common"><title>不论何种平台下编译crosstool-ng常见错误及解决办法</title>
+        <para>不论是在Cygwin还是在Linux类系统中，都常见的错误：</para>
+
+        <sect3 xml:id="unifdef_c_error_conflicting_types_for_getline"><title>scripts/unifdef.c:209:25: error: conflicting types for ‘getline'</title>
+            <para>错误现象：</para>
+            <para>cygwin下<command>ct-ng build</command>去编译crosstool-ng出现：</para>
+            <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0_build
+$ ct-ng build
+......
+[INFO ]  =================================================================
+[INFO ]  Installing kernel headers
+[EXTRA]    Installing kernel headers
+[ERROR]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/linux-custom/scripts/unifdef.c:209:25: error: conflicting types for 'getline'
+[ERROR]    make[3]: *** [scripts/unifdef] Error 1
+[ERROR]    make[2]: *** [headers_install] Error 2
+[ERROR]    make[1]: *** [headers_install] Error 2
+[ERROR]
+[ERROR]  >>
+[ERROR]  >>  Build failed in step 'Installing kernel headers'
+[ERROR]  >>        called in step '(top-level)'
+[ERROR]  >>
+[ERROR]  >>  Error happened in: CT_DoExecLog[scripts/functions@257]
+[ERROR]  >>        called from: do_kernel_install[scripts/build/kernel/linux.sh@112]
+[ERROR]  >>        called from: do_kernel_headers[scripts/build/kernel/linux.sh@91]
+[ERROR]  >>        called from: main[scripts/crosstool-NG.sh@632]
+......
+]]>
+            </screen>
+            <para>原因：</para>
+            <para>Linux源码中的<filename>scripts/unifdef.c</filename>中的函数：getline，和别处重复定义了。</para>
+            <para>此问题，算是一个，很普遍遇到的，很早之前就出现的问题了。</para>
+            <para></para>
+            <para>解决办法：</para>
+            <para>把getline随便改个别的名字，即可。比如改为get_line</para>
+            <para>具体做法：</para>
+            <para>去修改对应的文件；</para>
+            <filename>crosstool-ng-1.18.0_build\.build\src\linux-custom\scripts\unifdef.c</filename>
+            <para>改为：</para>
+            <programlisting>
+<![CDATA[
+static void             flushline(bool);
+//static Linetype         getline(void);
+static Linetype         get_line(void);
+static Linetype         ifeval(const char **);
+ 
+......
+ 
+/*
+ * The driver for the state machine.
+ */
+static void
+process(void)
+{
+    Linetype lineval;
+ 
+    for (;;) {
+        linenum++;
+        //lineval = getline();
+        lineval = get_line();
+        trans_table[ifstate[depth]][lineval]();
+        debug("process %s -> %s depth %d",
+            linetype_name[lineval],
+            ifstate_name[ifstate[depth]], depth);
+    }
+}
+ 
+/*
+ * Parse a line and determine its type. We keep the preprocessor line
+ * parser state between calls in the global variable linestate, with
+ * help from skipcomment().
+ */
+static Linetype
+//getline(void)
+get_line(void)
+{
+]]>
+            </programlisting>
+            <para>即可。</para>
+            <para>详见：<link xl:href="http://www.crifan.com/crosstool_ng_error_linux_scripts_unifdef_c_error_conflicting_types_for_getline/">【已解决】crosstool-ng在Installing kernel headers时出错：[ERROR] /xxx/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/linux-custom/scripts/unifdef.c:209:25: error: conflicting types for ‘getline’</link></para>
+        </sect3>
+
+        <sect3 xml:id="extracting_and_patching_toolchain_components"><title>Build failed in step ‘Extracting and patching toolchain components’，in function ‘CT_DoExecLog’ (line unknown, sorry)</title>
+            <para>错误现象：</para>
+            <para>cygwin下<command>ct-ng build</command>去编译crosstool-ng出现：</para>
+            <screen>
+<![CDATA[
+[ERROR]    Build failed in step 'Extracting and patching toolchain components'
+[ERROR]    Error happened in '/opt/crosstool-ng/lib/ct-ng-1.9.3/scripts/functions' in function 'CT_DoExecLog' (line unknown, sorry)
+[ERROR]          called from '/opt/crosstool-ng/lib/ct-ng-1.9.3/scripts/functions' at line # 681 in function 'CT_Extract'
+[ERROR]          called from '/opt/crosstool-ng/lib/ct-ng-1.9.3/scripts/build/debug/300-gdb.sh' at line # 65 in function 'do_debug_gdb_extract'
+[ERROR]          called from '/opt/crosstool-ng/lib/ct-ng-1.9.3/scripts/build/debug.sh' at line # 28 in function 'do_debug_extract'
+[ERROR]          called from '/opt/crosstool-ng/lib/ct-ng-1.9.3/scripts/crosstool-NG.sh' at line # 569 in function 'main'
+[ERROR]    Look at '/home/CLi/develop/crosstool-ng/x-tools/arm-xscale-linux-gnueabi/build.log' for more info on this error.
+[ERROR]  (elapsed: 10:01.80)
+[10:06] / /opt/crosstool-ng/bin/ct-ng:143: recipe for target `build' failed
+make: *** [build] Error 2
+]]>
+            </screen>
+            <para>原因：</para>
+            <para>此处遇到此问题的原因，好像是：</para>
+            <para>由于之前下载过程中，由于某种原因，比如网络不稳定等，而导致下载下来的源码包不是完整的</para>
+            <para>从而导致后续的解压和打补丁出错。</para>
+            <para>解决办法：</para>
+            <para>去确定，你当前正在处理，即正在解压和打包的是哪个软件包</para>
+            <para>然后去重新下载一个对应的，完整的无误的，该版本的软件包</para>
+            <para>放到对应的目录下即可。</para>
+            <para>比如：此处正在处理的是ncurses的5.7版本的源码包</para>
+            <para>对应的文件是：<filename>ncurses-5.7.tar.gz</filename></para>
+            <para>所以去：</para>
+            <orderedlist>
+                <listitem>
+                    <para>删除</para>
+                    <screen>crosstool-ng\crosstool-ng-1.9.3_build\targets\src</screen>
+                    <para>中的<filename>.ncurses-5.7.extracting</filename>和<filename>ncurses-5.7.tar.gz</filename></para>
+                </listitem>
+                <listitem>
+                    <para>删除</para>
+                    <screen>crosstool-ng\crosstool-ng-1.9.3_build\targets\tarballs</screen>
+                    <para>中的<filename>ncurses-5.7.tar.gz</filename></para>
+                </listitem>
+                <listitem>
+                    <para>拷贝最新的，你刚下载好的，确保是完整的<filename>ncurses-5.7.tar.bz2</filename>到：</para>
+                    <screen>crosstool-ng\crosstool-ng-1.9.3_build\targets\src</screen>
+                </listitem>
+            </orderedlist>
+            <para>如果你遇到类似问题，参考上面的步骤，去试试，应该就可以解决此类问题了。</para>
+            <para>详见：<link xl:href="http://www.crifan.com/crosstool_build_failed_in_step_extracting_and_patching_toolchain_components_in_function_ct_doexeclog_line_unknown_sorry/">【已解决】crosstool编译出错：Build failed in step ‘Extracting and patching toolchain components’，in function ‘CT_DoExecLog’ (line unknown, sorry)，at line # 681 in function ‘CT_Extract’</link></para>
+        </sect3>
+
+        <sect3 xml:id="selected_processor_does_not_support_arm_mode"><title>[libgcc/./_powisf2.o] Error 1，/tmp/cc7Xh6xp.s:21: Error: selected processor does not support ARM mode `fmsr s14,r0′</title>
+            <para>错误现象：</para>
+            <para>cygwin下<command>ct-ng build</command>去编译crosstool-ng出现：</para>
+            <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0_build
+$ ct-ng build
+......
+[INFO ]  =================================================================
+[INFO ]  Installing pass-1 core C compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+[ERROR]    make[3]: *** [libgcc/./_powisf2.o] Error 1
+[ERROR]    make[3]: *** [libgcc/./_powidf2.o] Error 1
+[ERROR]    make[2]: *** [stmp-multilib] Error 2
+[ERROR]    make[1]: *** [all-gcc] Error 2
+......
+]]>
+            </screen>
+            <para>对应build.log中的详细内容为：</para>
+            <screen>
+<![CDATA[
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/build/build-cc-core-pass-1/./gcc/xgcc -B/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/build/build-cc-core-pass-1/./gcc/ -B/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/arm-xscale-linux-gnueabi/bin/ -B/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/arm-xscale-linux-gnueabi/lib/ -isystem /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/arm-xscale-linux-gnueabi/include -isystem /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/arm-xscale-linux-gnueabi/sys-include -O2  -g -Os -DIN_GCC -DCROSS_COMPILE   -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition  -isystem ./include  -fPIC  -g   -DIN_LIBGCC2 -D__GCC_FLOAT_NOT_NEEDED  -Dinhibit_libc -I. -I. -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.2.2/gcc -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.2.2/gcc/.  -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.2.2/gcc/../include   -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.2.2/gcc/../libcpp/include  -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.2.2/gcc/../libdecnumber -I../libdecnumber -DL_powixf2 -c /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.2.2/gcc/libgcc2.c -o libgcc/./_powixf2.o
+[ALL  ]    /tmp/cc7Xh6xp.s: Assembler messages:
+[ALL  ]    /tmp/cc7Xh6xp.s:21: Error: selected processor does not support ARM mode `fmsr s14,r0'
+[ALL  ]    /tmp/cc7Xh6xp.s:27: Error: selected processor does not support ARM mode `flds s15,.L16'
+[ALL  ]    /tmp/cc7Xh6xp.s:28: Error: selected processor does not support ARM mode `fcpyseq s13,s15'
+[ALL  ]    /tmp/cc7Xh6xp.s:29: Error: selected processor does not support ARM mode `fcpysne s13,s14'
+[ALL  ]    /tmp/cc7Xh6xp.s:39: Error: selected processor does not support ARM mode `fmuls s14,s14,s14'
+[ALL  ]    /tmp/cc7Xh6xp.s:41: Error: selected processor does not support ARM mode `fmulsne s13,s13,s14'
+[ALL  ]    /tmp/cc7Xh6xp.s:49: Error: selected processor does not support ARM mode `fldslt s15,.L16'
+[ALL  ]    /tmp/cc7Xh6xp.s:50: Error: selected processor does not support ARM mode `fdivslt s13,s15,s13'
+[ALL  ]    /tmp/cc7Xh6xp.s:52: Error: selected processor does not support ARM mode `fmrs r0,s13'
+[ALL  ]    libgcc.mk:223: recipe for target `libgcc/./_powisf2.o' failed
+[ERROR]    make[3]: *** [libgcc/./_powisf2.o] Error 1
+[ALL  ]    make[3]: *** Waiting for unfinished jobs....
+[ALL  ]    /tmp/ccSq3fkb.s: Assembler messages:
+[ALL  ]    /tmp/ccSq3fkb.s:21: Error: selected processor does not support ARM mode `fmdrr d6,r0,r1'
+[ALL  ]    /tmp/ccSq3fkb.s:23: Error: selected processor does not support ARM mode `fldd d7,.L16'
+[ALL  ]    /tmp/ccSq3fkb.s:29: Error: selected processor does not support ARM mode `fcpydeq d5,d7'
+[ALL  ]    /tmp/ccSq3fkb.s:30: Error: selected processor does not support ARM mode `fcpydne d5,d6'
+[ALL  ]    /tmp/ccSq3fkb.s:40: Error: selected processor does not support ARM mode `fmuld d6,d6,d6'
+[ALL  ]    /tmp/ccSq3fkb.s:42: Error: selected processor does not support ARM mode `fmuldne d5,d5,d6'
+[ALL  ]    /tmp/ccSq3fkb.s:50: Error: selected processor does not support ARM mode `flddlt d7,.L16'
+[ALL  ]    /tmp/ccSq3fkb.s:51: Error: selected processor does not support ARM mode `fdivdlt d5,d7,d5'
+[ALL  ]    /tmp/ccSq3fkb.s:54: Error: selected processor does not support ARM mode `fmrrd r0,r1,d5'
+[ALL  ]    libgcc.mk:226: recipe for target `libgcc/./_powidf2.o' failed
+[ERROR]    make[3]: *** [libgcc/./_powidf2.o] Error 1
+[ALL  ]    make[4]: `crtend.o' is up to date.
+[ALL  ]    make[4]: `crtbeginS.o' is up to date.
+[ALL  ]    make[4]: `crtendS.o' is up to date.
+[ALL  ]    make[4]: `crtbeginT.o' is up to date.
+[ALL  ]    make[4]: Leaving directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/build/build-cc-core-pass-1/gcc'
+[ALL  ]    make[3]: Leaving directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/build/build-cc-core-pass-1/gcc'
+[ALL  ]    Makefile:1540: recipe for target `stmp-multilib' failed
+[ERROR]    make[2]: *** [stmp-multilib] Error 2
+[ALL  ]    rm gcc.pod
+[ALL  ]    make[2]: Leaving directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/build/build-cc-core-pass-1/gcc'
+[ALL  ]    Makefile:4314: recipe for target `all-gcc' failed
+[ERROR]    make[1]: *** [all-gcc] Error 2
+[ALL  ]    make[1]: Leaving directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/build/build-cc-core-pass-1'
+[ERROR]  
+[ERROR]  >>
+[ERROR]  >>  Build failed in step 'Installing pass-1 core C compiler'
+[ERROR]  >>        called in step '(top-level)'
+]]>
+            </screen>
+            <para>原因：</para>
+            <para>至今未知</para>
+            <para>感觉好像是版本不兼容之类的问题。</para>
+            <para>解决办法：</para>
+            <para>后来是把gcc从当前的4.2.2，换成了4.6.0，就可以避免此问题了。</para>
+            <para>详见：</para>
+            <para><link xl:href="http://www.crifan.com/crosstool_ng_gcc_4_2_2_libgcc_powisf2_o_error_1_tmp_cc7xh6xp_s_error_selected_processor_does_not_support_arm_mode_fmsr_s14_r0/">【未解决】crosstool-ng编译arm的xscale时，编译gcc-4.2.4时出错：[libgcc/./_powisf2.o] Error 1，/tmp/cc7Xh6xp.s:21: Error: selected processor does not support ARM mode `fmsr s14,r0′</link></para>
+        </sect3>
+
+        <sect3 xml:id="ppl_backend_h_undefined_reference_to_ppl_finalize"><title>.build/arm-xscale-linux-gnueabi/buildtools/include/cloog/ppl_backend.h:54: undefined reference to `_ppl_finalize'</title>
+            <para>错误现象：</para>
+            <para>cygwin下<command>ct-ng build</command>去编译crosstool-ng出现：</para>
+            <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0_build
+$ ct-ng build
+......
+[INFO ]  =================================================================
+[INFO ]  Installing pass-1 core C compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+[ERROR]    make[2]: *** [cc1-dummy.exe] Error 1
+[ERROR]    make[1]: *** [all-gcc] Error 2
+[ERROR]
+[ERROR]  >>
+[ERROR]  >>  Build failed in step 'Installing pass-1 core C compiler'
+[ERROR]  >>        called in step '(top-level)'
+......
+]]>
+            </screen>
+            <para>对应build.log中的详细内容为：</para>
+            <screen>
+<![CDATA[
+[ALL  ]    mv tmp-specs specs
+[ALL  ]    : > tmp-libgcc.mvars
+[ALL  ]    echo LIB1ASMFUNCS = '_udivsi3 _divsi3 _umodsi3 _modsi3 _bb_init_func _call_via_rX _interwork_call_via_rX _lshrdi3 _ashrdi3 _ashldi3 _arm_negdf2 _arm_addsubdf3 _arm_muldivdf3 _arm_cmpdf2 _arm_unorddf2 _arm_fixdfsi _arm_fixunsdfsi _arm_truncdfsf2 _arm_negsf2 _arm_addsubsf3 _arm_muldivsf3 _arm_cmpsf2 _arm_unordsf2 _arm_fixsfsi _arm_fixunssfsi _arm_floatdidf _arm_floatdisf _arm_floatundidf _arm_floatundisf _clzsi2 _clzdi2 _aeabi_lcmp _aeabi_ulcmp _aeabi_ldivmod _aeabi_uldivmod _dvmd_lnx' >> tmp-libgcc.mvars
+[ALL  ]    echo LIB1ASMSRC = 'arm/lib1funcs.asm' >> tmp-libgcc.mvars
+[ALL  ]    echo LIB2FUNCS_ST = '_eprintf __gcc_bcmp' >> tmp-libgcc.mvars
+[ALL  ]    libbackend.a(graphite.o): In function `cloog_finalize':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/include/cloog/ppl_backend.h:54: undefined reference to `_ppl_finalize'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_build_ppl_cstr':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:333: undefined reference to `_ppl_new_Constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:337: undefined reference to `_ppl_new_Constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_translate_constraint':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:365: undefined reference to `_ppl_new_Coefficient'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:366: undefined reference to `_ppl_new_Linear_Expression_with_dimension'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:370: undefined reference to `_ppl_assign_Coefficient_from_mpz_t'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:371: undefined reference to `_ppl_Linear_Expression_add_to_coefficient'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:376: undefined reference to `_ppl_assign_Coefficient_from_mpz_t'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:378: undefined reference to `_ppl_Linear_Expression_add_to_inhomogeneous'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:379: undefined reference to `_ppl_delete_Coefficient'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:385: undefined reference to `_ppl_delete_Linear_Expression'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_translate_constraint_matrix':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:455: undefined reference to `_ppl_new_C_Polyhedron_from_space_dimension'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_translate_constraint_matrix_1':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:444: undefined reference to `_ppl_Polyhedron_add_constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:445: undefined reference to `_ppl_delete_Constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_translate_oppose_constraint':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:407: undefined reference to `_ppl_new_Coefficient'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:408: undefined reference to `_ppl_new_Linear_Expression_with_dimension'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:413: undefined reference to `_ppl_assign_Coefficient_from_mpz_t'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:414: undefined reference to `_ppl_Linear_Expression_add_to_coefficient'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:420: undefined reference to `_ppl_assign_Coefficient_from_mpz_t'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:421: undefined reference to `_ppl_Linear_Expression_add_to_inhomogeneous'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:422: undefined reference to `_ppl_delete_Coefficient'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:430: undefined reference to `_ppl_delete_Linear_Expression'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_initialize':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:112: undefined reference to `_ppl_initialize'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.echo LIB2FUNCS_EXCLUDE = '' >> tmp-libgcc.mvars
+[ALL  ]    build/src/cloog-ppl-0.15.11/source/ppl/domain.c:118: undefined reference to `_ppl_restore_pre_PPL_rounding'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:124: undefined reference to `_ppl_set_error_handler'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:130: undefined reference to `_ppl_io_set_variable_output_function'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_translate_ppl_polyhedron_1':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:511: undefined reference to `_ppl_Polyhedron_get_minimized_constraints'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:512: undefined reference to `_ppl_new_Constraint_System_const_iterator'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:513: undefined reference to `_ppl_new_Constraint_System_const_iterator'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:516: undefined reference to `_ppl_Constraint_System_begin'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:517: undefined reference to `_ppl_Constraint_System_end'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:519: undefined reference to `_ppl_Constraint_System_const_iterator_increment'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:518: undefined reference to `_ppl_Constraint_System_const_iterator_equal_test'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:521: undefined reference to `_ppl_Constraint_System_const_iterator_dereference'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:522: undefined reference to `_ppl_Constraint_type'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:525: undefined reference to `_ppl_Polyhedron_space_dimension'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:540: undefined reference to `_ppl_Constraint_System_begin'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:540: undefined reference to `_ppl_Constraint_System_end'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:541: undefined reference to `_ppl_Constraint_System_const_iterator_equal_test'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:548: undefined reference to `_ppl_new_Coefficient'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:549: undefined reference to `_ppl_Constraint_System_const_iterator_dereference'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:551: undefined reference to `_ppl_Constraint_type'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:553: undefined reference to `_ppl_Constraint_type'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:557: undefined reference to `_ppl_Constraint_coefficient'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:558: undefined reference to `_ppl_Coefficient_to_mpz_t'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:566: undefined reference to `_ppl_Constraint_inhomogeneous_term'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:567: undefined reference to `_ppl_Coefficient_to_mpz_t'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:569: undefined reference to `_ppl_delete_Coefficient'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:571: undefined reference to `_ppl_Constraint_type'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:590: undefined reference to `_ppl_Constraint_type'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:542: undefined reference to `_ppl_Constraint_System_const_iterator_increment'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:552: undefined reference to `_ppl_Constraint_type'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:597: undefined reference to `_ppl_delete_Constraint_System_const_iterator'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:598: undefined reference to `_ppl_delete_Constraint_System_const_iterator'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_domain_extend':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1842: undefined reference to `_ppl_Polyhedron_add_space_dimensions_and_embed'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1843: undefined reference to `_ppl_Polyhedron_map_space_dimensions'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1845: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_domain_project':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1787: undefined reference to `_ppl_Polyhedron_remove_space_dimensions'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1789: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_domain_polyhedron_compare':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1250: undefined reference to `_ppl_Polyhedron_is_empty'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1257: undefined reference to `_ppl_Polyhedron_is_empty'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1264: undefined reference to `_ppl_new_C_Polyhedron_from_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1265: undefined reference to `_ppl_new_C_Polyhedron_from_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1276: undefined reference to `_ppl_new_Coefficient_from_mpz_t'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1277: undefined reference to `_ppl_new_Linear_Expression_with_dimension'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1278: undefined reference to `_ppl_Linear_Expression_add_to_coefficient'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1279: undefined reference to `_ppl_new_Generator'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1280: undefined reference to `_ppl_Polyhedron_add_generator'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1281: undefined reference to `_ppl_Polyhedron_add_generator'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1282: undefined reference to `_ppl_delete_Generator'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1283: undefined reference to `_ppl_delete_Linear_Expression'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1284: undefined reference to `_ppl_delete_Coefficient'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1287: undefined reference to `_ppl_new_C_Polyhedron_from_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1288: undefined reference to `_ppl_Polyhedron_intersection_assign'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1289: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1290: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1292: undefined reference to `_ppl_Polyhedron_is_empty'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1300: undefined reference to `_ppl_new_C_Polyhedron_from_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1301: undefined reference to `_ppl_new_C_Polyhedron_from_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1302: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1303: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1305: undefined reference to `_ppl_Polyhedron_intersection_assign'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1306: undefined reference to `_ppl_Polyhedron_intersection_assign'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1311: undefined reference to `_ppl_new_C_Polyhedron_from_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1317: undefined reference to `_ppl_Polyhedron_add_constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1318: undefined reference to `_ppl_delete_Constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1330: undefined reference to `_ppl_Polyhedron_is_empty'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1339: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1340: undefined reference to `_ppl_new_C_Polyhedron_from_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1341: undefined reference to `_ppl_new_C_Polyhedron_from_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1367: undefined reference to `_ppl_Polyhedron_add_constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1368: undefined reference to `_ppl_delete_Constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1374: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1375: undefined reference to `_ppl_new_C_Polyhedron_from_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1401: undefined reference to `_ppl_Polyhedron_add_constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1402: undefined reference to `_ppl_delete_Constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1408: undefined reference to `_ppl_Polyhedron_is_empty'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1419: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1420: undefined reference to `_ppl_new_C_Polyhedron_from_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1424: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1425: undefined reference to `_ppl_new_C_Polyhedron_from_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1430: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1431: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1432: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1433: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1434: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o):/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1252: more undefined references to `_ppl_delete_Polyhedron' follow
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_domain_polyhedron_compare':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1326: undefined reference to `_ppl_Polyhedron_add_constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1327: undefined reference to `_ppl_delete_Constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1410: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1411: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1412: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1413: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1414: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o):/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1332: more undefined references to `_ppl_delete_Polyhedron' follow
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_domain_convex':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:813: undefined reference to `_ppl_Polyhedron_upper_bound_assign'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:814: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:820: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_pol_from_matrix':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:641: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_domain_union':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1064: undefined reference to `_ppl_Polyhedron_contains_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1070: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1072: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1066: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1072: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1104: undefined reference to `_ppl_Polyhedron_contains_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1110: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1112: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1106: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1112: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_domain_intersection':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1164: undefined reference to `_ppl_Polyhedron_intersection_assign'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1166: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1168: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_domain_simplify':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:903: undefined reference to `_ppl_new_Pointset_Powerset_C_Polyhedron_from_space_dimension'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:909: undefined reference to `_ppl_Pointset_Powerset_C_Polyhedron_add_disjunct'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:910: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:917: undefined reference to `_ppl_new_Pointset_Powerset_C_Polyhedron_from_space_dimension'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:923: undefined reference to `_ppl_Pointset_Powerset_C_Polyhedron_add_disjunct'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:924: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:929: undefined reference to `_ppl_Pointset_Powerset_C_Polyhedron_simplify_using_context_assign'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:933: undefined reference to `_ppl_new_Pointset_Powerset_C_Polyhedron_const_iterator'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:935: undefined reference to `_ppl_new_Pointset_Powerset_C_Polyhedron_const_iterator'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:936: undefined reference to `_ppl_Pointset_Powerset_C_Polyhedron_const_iterator_begin'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:937: undefined reference to `_ppl_Pointset_Powerset_C_Polyhedron_const_iterator_end'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:942: undefined reference to `_ppl_Pointset_Powerset_C_Polyhedron_const_iterator_dereference'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:939: undefined reference to `_ppl_Pointset_Powerset_C_Polyhedron_const_iterator_increment'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:938: undefined reference to `_ppl_Pointset_Powerset_C_Polyhedron_const_iterator_equal_test'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:947: undefined reference to `_ppl_delete_Pointset_Powerset_C_Polyhedron_const_iterator'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:948: undefined reference to `_ppl_delete_Pointset_Powerset_C_Polyhedron_const_iterator'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:949: undefined reference to `_ppl_delete_Pointset_Powerset_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:950: undefined reference to `_ppl_delete_Pointset_Powerset_C_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/lib/libcloog.a(domain.o): In function `cloog_domain_difference':
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1207: undefined reference to `_ppl_Polyhedron_add_constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1208: undefined reference to `_ppl_delete_Constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1210: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1217: undefined reference to `_ppl_Polyhedron_add_constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1218: undefined reference to `_ppl_delete_Constraint'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/cloog-ppl-0.15.11/source/ppl/domain.c:1220: undefined reference to `_ppl_delete_Polyhedron'
+[ALL  ]    collect2: ld returned 1 exit status
+[ALL  ]    Makefile:1666: recipe for target `cc1-dummy.exe' failed
+[ERROR]    make[2]: *** [cc1-dummy.exe] Error 1
+[ALL  ]    make[2]: *** Waiting for unfinished jobs....
+[ALL  ]    echo LIBGCOV = '_gcov _gcov_merge_add _gcov_merge_single _gcov_merge_delta  _gcov_fork _gcov_execl _gcov_execlp _gcov_execle  _gcov_execv _gcov_execvp _gcov_execve  _gcov_interval_profiler _gcov_pow2_profiler _gcov_one_value_profiler  _gcov_indirect_call_profiler _gcov_average_profiler _gcov_ior_profiler  _gcov_merge_ior' >> tmp-libgcc.mvars
+[ALL  ]    echo LIB2ADD = '$(gcc_srcdir)/config/arm/bpabi.c $(gcc_srcdir)/config/arm/unaligned-funcs.c  $(gcc_objdir)/addsf3.c $(gcc_objdir)/divsf3.c $(gcc_objdir)/eqsf2.c $(gcc_objdir)/gesf2.c $(gcc_objdir)/lesf2.c $(gcc_objdir)/mulsf3.c $(gcc_objdir)/negsf2.c $(gcc_objdir)/subsf3.c $(gcc_objdir)/unordsf2.c $(gcc_objdir)/fixsfsi.c $(gcc_objdir)/floatsisf.c $(gcc_objdir)/floatunsisf.c $(gcc_objdir)/adddf3.c $(gcc_objdir)/divdf3.c $(gcc_objdir)/eqdf2.c $(gcc_objdir)/gedf2.c $(gcc_objdir)/ledf2.c $(gcc_objdir)/muldf3.c $(gcc_objdir)/negdf2.c $(gcc_objdir)/subdf3.c $(gcc_objdir)/unorddf2.c $(gcc_objdir)/fixdfsi.c $(gcc_objdir)/floatsidf.c $(gcc_objdir)/floatunsidf.c $(gcc_objdir)/extendsfdf2.c $(gcc_objdir)/truncdfsf2.c' >> tmp-libgcc.mvars
+[ALL  ]    echo LIB2ADD_ST = '$(gcc_srcdir)/config/arm/linux-atomic.c  ' >> tmp-libgcc.mvars
+[ALL  ]    echo LIB2ADDEH = '$(gcc_srcdir)/config/arm/unwind-arm.c $(gcc_srcdir)/config/arm/libunwind.S $(gcc_srcdir)/config/arm/pr-support.c $(gcc_srcdir)/unwind-c.c $(gcc_srcdir)/emutls.c  ' >> tmp-libgcc.mvars
+[ALL  ]    echo LIB2ADDEHSTATIC = '$(gcc_srcdir)/config/arm/unwind-arm.c $(gcc_srcdir)/config/arm/libunwind.S $(gcc_srcdir)/config/arm/pr-support.c $(gcc_srcdir)/unwind-c.c $(gcc_srcdir)/emutls.c  ' >> tmp-libgcc.mvars
+[ALL  ]    echo LIB2ADDEHSHARED = '$(gcc_srcdir)/config/arm/unwind-arm.c $(gcc_srcdir)/config/arm/libunwind.S $(gcc_srcdir)/config/arm/pr-support.c $(gcc_srcdir)/unwind-c.c $(gcc_srcdir)/emutls.c  ' >> tmp-libgcc.mvars
+[ALL  ]    echo LIB2_SIDITI_CONV_FUNCS = '' >> tmp-libgcc.mvars
+[ALL  ]    echo LIBUNWIND = '  ' >> tmp-libgcc.mvars
+[ALL  ]    echo SHLIBUNWIND_LINK = '' >> tmp-libgcc.mvars
+[ALL  ]    echo SHLIBUNWIND_INSTALL = '' >> tmp-libgcc.mvars
+[ALL  ]    echo FPBIT = '' >> tmp-libgcc.mvars
+[ALL  ]    echo FPBIT_FUNCS = '_pack_sf _unpack_sf _addsub_sf _mul_sf _div_sf  _fpcmp_parts_sf _compare_sf _eq_sf _ne_sf _gt_sf _ge_sf  _lt_sf _le_sf _unord_sf _si_to_sf _sf_to_si _negate_sf _make_sf  _sf_to_df _sf_to_tf _thenan_sf _sf_to_usi _usi_to_sf' >> tmp-libgcc.mvars
+[ALL  ]    echo LIB2_DIVMOD_FUNCS = '_divdi3 _moddi3 _udivdi3 _umoddi3 _udiv_w_sdiv _udivmoddi4' >> tmp-libgcc.mvars
+[ALL  ]    echo DPBIT = '' >> tmp-libgcc.mvars
+[ALL  ]    echo DPBIT_FUNCS = '_pack_df _unpack_df _addsub_df _mul_df _div_df  _fpcmp_parts_df _compare_df _eq_df _ne_df _gt_df _ge_df  _lt_df _le_df _unord_df _si_to_df _df_to_si _negate_df _make_df  _df_to_sf _df_to_tf _thenan_df _df_to_usi _usi_to_df' >> tmp-libgcc.mvars
+[ALL  ]    echo TPBIT = '' >> tmp-libgcc.mvars
+[ALL  ]    echo TPBIT_FUNCS = '_pack_tf _unpack_tf _addsub_tf _mul_tf _div_tf  _fpcmp_parts_tf _compare_tf _eq_tf _ne_tf _gt_tf _ge_tf  _lt_tf _le_tf _unord_tf _si_to_tf _tf_to_si _negate_tf _make_tf  _tf_to_df _tf_to_sf _thenan_tf _tf_to_usi _usi_to_tf' >> tmp-libgcc.mvars
+[ALL  ]    echo DFP_ENABLE = '' >> tmp-libgcc.mvars
+[ALL  ]    echo DFP_CFLAGS='' >> tmp-libgcc.mvars
+[ALL  ]    echo D32PBIT='' >> tmp-libgcc.mvars
+[ALL  ]    echo D32PBIT_FUNCS='_addsub_sd _div_sd _mul_sd _plus_sd _minus_sd  _eq_sd _ne_sd _lt_sd _gt_sd _le_sd _ge_sd  _sd_to_si _sd_to_di _sd_to_usi _sd_to_udi  _si_to_sd _di_to_sd _usi_to_sd _udi_to_sd  _sd_to_sf _sd_to_df _sd_to_xf _sd_to_tf  _sf_to_sd _df_to_sd _xf_to_sd _tf_to_sd  _sd_to_dd _sd_to_td _unord_sd _conv_sd' >> tmp-libgcc.mvars
+[ALL  ]    echo D64PBIT='' >> tmp-libgcc.mvars
+[ALL  ]    echo D64PBIT_FUNCS='_addsub_dd _div_dd _mul_dd _plus_dd _minus_dd  _eq_dd _ne_dd _lt_dd _gt_dd _le_dd _ge_dd  _dd_to_si _dd_to_di _dd_to_usi _dd_to_udi  _si_to_dd _di_to_dd _usi_to_dd _udi_to_dd  _dd_to_sf _dd_to_df _dd_to_xf _dd_to_tf  _sf_to_dd _df_to_dd _xf_to_dd _tf_to_dd  _dd_to_sd _dd_to_td _unord_dd _conv_dd' >> tmp-libgcc.mvars
+[ALL  ]    echo D128PBIT='' >> tmp-libgcc.mvars
+[ALL  ]    echo D128PBIT_FUNCS='_addsub_td _div_td _mul_td _plus_td _minus_td  _eq_td _ne_td _lt_td _gt_td _le_td _ge_td  _td_to_si _td_to_di _td_to_usi _td_to_udi  _si_to_td _di_to_td _usi_to_td _udi_to_td  _td_to_sf _td_to_df _td_to_xf _td_to_tf  _sf_to_td _df_to_td _xf_to_td _tf_to_td  _td_to_sd _td_to_dd _unord_td _conv_td' >> tmp-libgcc.mvars
+[ALL  ]    echo GCC_EXTRA_PARTS = 'crtbegin.o crtbeginS.o crtbeginT.o crtend.o crtendS.o' >> tmp-libgcc.mvars
+[ALL  ]    echo SHLIB_LINK = '$(GCC_FOR_TARGET) -O2  -g -Os -DIN_GCC -DCROSS_DIRECTORY_STRUCTURE  -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wcast-qual -Wold-style-definition  -isystem ./include  -fPIC -Wno-missing-prototypes  -g   -DIN_LIBGCC2 -D__GCC_FLOAT_NOT_NEEDED  -Dinhibit_libc -shared -nodefaultlibs  -Wl,--soname=@shlib_base_name@.so.1  -Wl,--version-script=@shlib_map_file@  -o @multilib_dir@/@shlib_base_name@.so.1.tmp @multilib_flags@  @shlib_objs@ @libgcc_libm@ -lc &&  rm -f @multilib_dir@/@shlib_base_name@.so &&  if [ -f @multilib_dir@/@shlib_base_name@.so.1 ]; then  mv -f @multilib_dir@/@shlib_base_name@.so.1  @multilib_dir@/@shlib_base_name@.so.1.backup;  else true; fi &&  mv @multilib_dir@/@shlib_base_name@.so.1.tmp @multilib_dir@/@shlib_base_name@.so.1 &&  (echo "/* GNU ld script";  echo "   Use the shared library, but some functions are only in";  echo "   the static library.  */";  echo "GROUP ( @shlib_base_name@.so.1 libgcc.a )"  ) > @multilib_dir@/@shlib_base_name@.so' >> tmp-libgcc.mvars
+[ALL  ]    echo SHLIB_INSTALL = '$(mkinstalldirs) $(DESTDIR)$(slibdir)@shlib_slibdir_qual@;  /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/tools/bin/install -c -m 644 @multilib_dir@/@shlib_base_name@.so.1  $(DESTDIR)$(slibdir)@shlib_slibdir_qual@/@shlib_base_name@.so.1;  rm -f $(DESTDIR)$(slibdir)@shlib_slibdir_qual@/@shlib_base_name@.so;  /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/tools/bin/install -c -m 644 @multilib_dir@/@shlib_base_name@.so  $(DESTDIR)$(slibdir)@shlib_slibdir_qual@/@shlib_base_name@.so' >> tmp-libgcc.mvars
+[ALL  ]    echo SHLIB_EXT = '.so' >> tmp-libgcc.mvars
+[ALL  ]    echo SHLIB_MKMAP = '$(gcc_srcdir)/mkmap-symver.awk  ' >> tmp-libgcc.mvars
+[ALL  ]    echo SHLIB_MKMAP_OPTS = '' >> tmp-libgcc.mvars
+[ALL  ]    echo SHLIB_MAPFILES = '$(gcc_srcdir)/libgcc-std.ver $(gcc_srcdir)/config/libgcc-glibc.ver $(gcc_srcdir)/config/libgcc-glibc.ver $(gcc_srcdir)/config/arm/libgcc-bpabi.ver  ' >> tmp-libgcc.mvars
+[ALL  ]    echo SHLIB_NM_FLAGS = '-pg' >> tmp-libgcc.mvars
+[ALL  ]    echo LIBGCC2_CFLAGS = '-O2  -g -Os -DIN_GCC -DCROSS_DIRECTORY_STRUCTURE  -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wcast-qual -Wold-style-definition  -isystem ./include  -fPIC -Wno-missing-prototypes  -g   -DIN_LIBGCC2 -D__GCC_FLOAT_NOT_NEEDED  -Dinhibit_libc' >> tmp-libgcc.mvars
+[ALL  ]    echo TARGET_LIBGCC2_CFLAGS = '-fPIC -Wno-missing-prototypes' >> tmp-libgcc.mvars
+[ALL  ]    echo LIBGCC_SYNC = '' >> tmp-libgcc.mvars
+[ALL  ]    echo LIBGCC_SYNC_CFLAGS = '' >> tmp-libgcc.mvars
+[ALL  ]    echo CRTSTUFF_CFLAGS = '-O2 -g -Os -DIN_GCC -DCROSS_DIRECTORY_STRUCTURE  -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wcast-qual -Wold-style-definition  -isystem ./include  -I. -I. -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.4.6/gcc -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.4.6/gcc/.  -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.4.6/gcc/../include   -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.4.6/gcc/../libcpp/include -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/include -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/include -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.4.6/gcc/../libdecnumber -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.4.6/gcc/../libdecnumber/dpd -I../libdecnumber   -I/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/buildtools/include -DCLOOG_PPL_BACKEND   -g0  -finhibit-size-directive -fno-inline-functions -fno-exceptions  -fno-zero-initialized-in-bss -fno-toplevel-reorder -fno-tree-vectorize  -Dinhibit_libc' >> tmp-libgcc.mvars
+[ALL  ]    echo CRTSTUFF_T_CFLAGS = '' >> tmp-libgcc.mvars
+[ALL  ]    echo CRTSTUFF_T_CFLAGS_S = ' -fPIC' >> tmp-libgcc.mvars
+[ALL  ]    mv tmp-libgcc.mvars libgcc.mvars
+[ALL  ]    rm gcc.pod
+[ALL  ]    make[2]: Leaving directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/build/build-cc-core-pass-1/gcc'
+[ALL  ]    Makefile:4872: recipe for target `all-gcc' failed
+[ERROR]    make[1]: *** [all-gcc] Error 2
+[ALL  ]    make[1]: Leaving directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/build/build-cc-core-pass-1'
+[ERROR]  
+[ERROR]  >>
+[ERROR]  >>  Build failed in step 'Installing pass-1 core C compiler'
+[ERROR]  >>        called in step '(top-level)'
+]]>
+            </screen>
+            <para>原因：</para>
+            <para>好像是之前的gcc中的cloog方面的bug</para>
+            <para>解决办法：</para>
+            <para>最后是使用 gcc 4.6.0，可以正常编译，可以避免此问题。</para>
+            <para>详见：</para>
+            <para><link xl:href="http://www.crifan.com/crosstool_ng_cygwin_gcc_cc1_dummy_exe_error_1_gcc/">【未解决】cygwin下编译xscale的crosstool-ng时，gcc出错：[cc1-dummy.exe] Error 1</link></para>
+        </sect3>
+
+        <sect3 xml:id="mixed_implicit_and_normal_rules"><title>Makefile:240: *** mixed implicit and normal rules.  Stop.</title>
+            <para>错误现象：</para>
+            <para>cygwin下<command>ct-ng build</command>去编译crosstool-ng出现：</para>
+            <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0_build
+$ ct-ng build
+......
+[INFO ]  Installing kernel headers: done in 1854.80s (at 72:22)
+[EXTRA]  Saving state to restart at step 'libc_start_files'...
+[INFO ]  =================================================================
+[INFO ]  Installing C library headers & start files
+[EXTRA]    Configuring C library
+[EXTRA]    Installing C library headers
+[ERROR]    make[2]: *** [manual/install-headers] Error 2
+[ERROR]    make[1]: *** [install-headers] Error 2
+[ERROR]
+[ERROR]  >>
+[ERROR]  >>  Build failed in step 'Installing C library headers & start files'
+[ERROR]  >>        called in step '(top-level)'
+[ERROR]  >>
+[ERROR]  >>  Error happened in: CT_DoExecLog[scripts/functions@257]
+[ERROR]  >>        called from: do_libc_backend_once[scripts/build/libc/glibc-eglibc.sh-common@380]
+[ERROR]  >>        called from: do_libc_backend[scripts/build/libc/glibc-eglibc.sh-common@143]
+[ERROR]  >>        called from: do_libc_start_files[scripts/build/libc/glibc-eglibc.sh-common@60]
+[ERROR]  >>        called from: main[scripts/crosstool-NG.sh@632]
+......
+]]>
+            </screen>
+            <para>对应build.log中的详细内容为：</para>
+            <screen>
+<![CDATA[
+[ALL  ]    make[3]: Entering directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/glibc-2.9/gnulib'
+[ALL  ]    make[3]: `install-headers' is up to date.
+[ALL  ]    make[3]: Leaving directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/glibc-2.9/gnulib'
+[ALL  ]    /usr/bin/make  subdir=wctype -C wctype ..=../ install-headers
+[ALL  ]    make[3]: Entering directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/glibc-2.9/wctype'
+[ALL  ]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/tools/bin/install -c -m 644 wctype.h /home/CLi/develop/crosstool-ng/x-tools/arm-xscale-linux-gnueabi/arm-xscale-linux-gnueabi/sysroot/usr/include/wctype.h
+[ALL  ]    make[3]: Leaving directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/glibc-2.9/wctype'
+[ALL  ]    /usr/bin/make  subdir=manual -C manual ..=../ install-headers
+[ALL  ]    make[3]: Entering directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/glibc-2.9/manual'
+[ALL  ]    Makefile:240: *** mixed implicit and normal rules.  Stop.
+[ALL  ]    make[3]: Leaving directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/glibc-2.9/manual'
+[ALL  ]    Makefile:207: recipe for target `manual/install-headers' failed
+[ERROR]    make[2]: *** [manual/install-headers] Error 2
+[ALL  ]    make[2]: Leaving directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/glibc-2.9'
+[ALL  ]    Makefile:12: recipe for target `install-headers' failed
+[ERROR]    make[1]: *** [install-headers] Error 2
+[ALL  ]    make[1]: Leaving directory `/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/arm-xscale-linux-gnueabi/build/build-libc-startfiles'
+[ERROR]  
+[ERROR]  >>
+[ERROR]  >>  Build failed in step 'Installing C library headers & start files'
+[ERROR]  >>        called in step '(top-level)'
+[ERROR]  >>
+[ERROR]  >>  Error happened in: CT_DoExecLog[scripts/functions@257]
+[ERROR]  >>        called from: do_libc_backend_once[scripts/build/libc/glibc-eglibc.sh-common@380]
+[ERROR]  >>        called from: do_libc_backend[scripts/build/libc/glibc-eglibc.sh-common@143]
+[ERROR]  >>        called from: do_libc_start_files[scripts/build/libc/glibc-eglibc.sh-common@60]
+[ERROR]  >>        called from: main[scripts/crosstool-NG.sh@632]
+]]>
+            </screen>
+            <para>原因：</para>
+            <para>make是3.82的，不识别，旧的，显示和隐式的规则混合在一起的混合规则</para>
+            <para>所以才报此错误。</para>
+            <para>解决办法：</para>
+            <para>而这种makefile中混合规则，老版本的make，即3.81版本的make，是支持的。</para>
+            <para>所以，总的来说，有两种解决办法：</para>
+            <sect4 xml:id="change_each_makefile"><title>手动修改每个Makefile中对应的混合规则->使得3.82的make可以识别</title>
+                <para>很明显此办法，的确可以解决此类问题。</para>
+                <para>比如我之前这里：</para>
+                <para><link xl:href="http://www.crifan.com/crosstool_ng_installing_kernel_headers_recipe_for_target_headers_install_failed_build_src_linux_custom/">【已解决】编译crosstool-ng在Installing kernel headers时出错：/home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/linux-custom/Makefile:1444: *** mixed implicit and normal rules. Stop.</link></para>
+                <para>就是这样手工改makefile的。</para>
+                <para>但是此办法的缺点是：</para>
+                <para>crosstool-ng项目中，涉及到这种混合规则的Makefile中的写法，有N多个</para>
+                <para>如果你要是每个都手动改，那就累死了。</para>
+                <para>并且需要你对Makefile的语法和规则，有足够深入的理解，也才能确保修改为正确的写法</para>
+                <para>所以：</para>
+                <para>此法，不适合，本身对于Makefile就不是很熟悉的，大部分的人</para>
+                <para>更好的办法是，下面要介绍的这个<xref linkend="change_make_from_3_81_to_3_82" />把此处3.82的make想办法换成3.81版本的make，就可以了。</para>
+            </sect4>
+            <sect4 xml:id="change_make_from_3_81_to_3_82"><title>把3.82的make换成3.81版本的make</title>
+                <para>此法，很明显，属于：一劳永逸的办法</para>
+                <para>把make换成3.81的，之前的makefile中，N多处的混合规则，就不用手动修改，即可识别，正常编译了。</para>
+                <para>对应的，把3.82的make，换成3.81的make，其实也有两种办法：</para>
+                <sect5 xml:id="change_system_make_to_3_81"><title>把你当前的（Linux或Cygwin等）系统环境中的3.82的make换成3.81的make</title>
+                    <para>此法，也是我之前，在Cygwin中折腾crosstool-ng时，去尝试过的：</para>
+                    <para><link xl:href="http://www.crifan.com/cygwin_make_linux_kernel_makefile_mixed_implicit_and_normal_rules_stop/">【已解决】Cygwin下配置Linux内核出错：Makefile:419: *** mixed implicit and normal rules. Stop.</link></para>
+                    <para>但是很明显，此法，代价太大：</para>
+                    <para>使得整个系统中的make，都从3.82降级到3.81了。</para>
+                    <para>总的来说，也不算好事。</para>
+                    <para>并且，像是Cygwin中，去更换某个版本的软件包的话，相对来说，还比较麻烦。</para>
+                    <para>而Linux系统，比如Ubuntu中，如果你用的源中没有3.81的make的话，还涉及到先换源</para>
+                    <para>总之，就是很麻烦。</para>
+                    <para>所以，一般来说，都还是用下面介绍的这个更好的办法：</para>
+                    <para><xref linkend="use_crosstool_ng_3_81_make" /></para>
+                </sect5>
+                <sect5 xml:id="use_crosstool_ng_3_81_make"><title>用crosstool-ng中提供的3.81的make（而不用更换系统环境中的3.82的make）</title>
+                    <para>最终，后来通过：</para>
+                    <para><link xl:href="http://www.crifan.com/crosstool_ng_makefile_mixed_implicit_and_normal_rules_stop/">【已解决】crosstool-ng在Installing C library headers &amp; start files期间出错：Makefile:240: *** mixed implicit and normal rules. Stop.</link></para>
+                    <para>而去通过更改crosstool-ng中的配置，得以实现：</para>
+                    <para>直接使用crosstool-ng中提供的那个3.81的make</para>
+                    <para>而实现：</para>
+                    <para>不仅解决了此处的问题：</para>
+                    <screen>Makefile:xxx: *** mixed implicit and normal rules. Stop.</screen>
+                    <para>而且，无需更改当前系统的3.82的make</para>
+                    <para>也无需去手动更改出错的每一个makefile了。</para>
+                    <para>对应的做法是：</para>
+                    <para><command>ct-ng menuconfig</command></para>
+                    <para>去如下配置：</para>
+                    <screen>
+<![CDATA[
+Paths and misc options  —>
+    [*] Try features marked as EXPERIMENTAL
+Companion tools  —>
+    [*] Build some companion tools
+    [*]   make
+]]>
+                    </screen>
+                    <para>Try features marked as EXPERIMENTAL对应的help帮助内容为：</para>
+                    <screen>
+<![CDATA[
+  ┌───────────────────────── Try features marked as EXPERIMENTAL ─────────────────────────┐
+  │ CT_EXPERIMENTAL:                                                                      │
+  │                                                                                       │
+  │ If you set this to Y, then you will be able to try very experimental                  │
+  │ features.                                                                             │
+  │                                                                                       │
+  │ Experimental features can be one of:                                                  │
+  │   - working, in which case you should tell me it is!                                  │
+  │   - buggy, in which case you could try patching and send me the result                │
+  │   - unfinished, in which case you could try hacking it and send me the result         │
+  │   - non-existant, in which case you could also try hacking it in and send me          │
+  │     the result                                                                        │
+  │                                                                                       │
+  │ Symbol: EXPERIMENTAL [=y]                                                             │
+  │ Type  : boolean                                                                       │
+  │ Prompt: Try features marked as EXPERIMENTAL                                           │
+  │   Defined at config/global/ct-behave.in:18                                            │
+  │   Location:                                                                           │
+  │     -> Paths and misc options                                                         │
+]]>
+                    </screen>
+                    <para>以及：</para>
+                    <para>Build some companion tools对应的help帮助内容为：</para>
+                    <screen>
+<![CDATA[
+  ┌───────────────────────────── Build some companion tools ──────────────────────────────┐
+  │ CT_COMP_TOOLS:                                                                        │
+  │                                                                                       │
+  │ Crosstool-NG relies on some external tools to be recent enough, namely:               │
+  │   make = 3.81 (in some cases)                                                         │
+  │   m4 >= 1.4.12                                                                        │
+  │   autoconf >= 2.63                                                                    │
+  │   automake >= 1.10.2                                                                  │
+  │   libtool >= 2.2.4                                                                    │
+  │                                                                                       │
+  │ If your system has older versions, we can build them for you,                         │
+  │ but you are strongly encouraged to update your system instead!                        │
+  │                                                                                       │
+  │ Symbol: COMP_TOOLS [=y]                                                               │
+  │ Type  : boolean                                                                       │
+  │ Prompt: Build some companion tools                                                    │
+  │   Defined at config/companion_tools.in:8                                              │
+  │   Depends on: EXPERIMENTAL [=y]                                                       │
+  │   Location:                                                                           │
+  │     -> Companion tools                                                                │
+]]>
+                    </screen>
+                    <para>如此，再去继续重新编译，可以看到对应的编译输出信息：</para>
+                    <screen>
+<![CDATA[
+[EXTRA]    Extracting ‘make-3.81′
+[EXTRA]    Patching ‘make-3.81′
+[EXTRA]    =================================================================
+[EXTRA]    Installing make
+[02:14] |
+]]>
+                    </screen>
+                    <para>即，去下载并编译对应的3.81的make，供后续使用了。</para>
+                    <para>至此，才算是比较完美的解决此处的问题。</para>
+                    <para></para>
+                </sect5>
+            </sect4>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para></para>
+            <para>详见：</para>
+            <para><link xl:href="http://www.crifan.com/crosstool_ng_gcc_4_2_2_libgcc_powisf2_o_error_1_tmp_cc7xh6xp_s_error_selected_processor_does_not_support_arm_mode_fmsr_s14_r0/">【未解决】crosstool-ng编译arm的xscale时，编译gcc-4.2.4时出错：[libgcc/./_powisf2.o] Error 1，/tmp/cc7Xh6xp.s:21: Error: selected processor does not support ARM mode `fmsr s14,r0′</link></para>
+        </sect3>
+
+    </sect2>
+
+    <sect2 xml:id="build_errors_under_cygwin"><title>Cygwin下编译crosstool-ng常见错误及解决办法</title>
+        <para>此处是，在Cygwin下才会出现的一些，关于编译crosstol-ng时遇到的问题和解决办法：</para>
+        <para></para>
+
+        <sect3 xml:id="cygwin_build_crosstool_ng_memory_leak"><title>Cygwin下编译crosstool-ng时导致内存泄露</title>
+            <para>我之前在：</para>
+            <para>Win7 x64 + Cygwin 1.7.24</para>
+            <para>下，去编译crosstool-ng：</para>
+            <para><link xl:href="http://www.crifan.com/reuse_latest_version_crosstool_ng_to_config_and_compile_for_xscale">【记录】重试使用最新版本1.18.0的crosstool-ng去配置和编译xscale的交叉编译器</link></para>
+            <para>结果，期间出现多次的：</para>
+            <screen>Cannot allocate memory </screen>
+            <para>详见：</para>
+            <para><link xl:href="http://www.crifan.com/crosstool_ng_installing_c_library_headers_sys_root_usr_include_sys_uio_h_error_1/">【未解决】crosstool-ng编译出错：Installing C library headers中的make[3]: xxx/sys-root/usr/include/sys/uio.h] Error 1</link></para>
+            <para><link xl:href="http://www.crifan.com/crosstool_ng_gcc_4_2_2_gcc_regrename_c_error_ifcvt_allow_modify_test_in_insn_undeclared_first_use_in_this_function/">【未解决】crosstool-ng编译出错：gcc-4.2.2/gcc/regrename.c:1646:12: error: ‘IFCVT_ALLOW_MODIFY_TEST_IN_INSN’ undeclared (first use in this function)</link></para>
+            <para><link xl:href="http://www.crifan.com/firefox_crash_and_cpu_high/">【未解决】firefox的CPU占用率太高而多次崩溃</link></para>
+            <para><link xl:href="http://www.crifan.com/crosstool_ng_cygwin_gcc_cc1_dummy_exe_Error_1_gcc/">【未解决】cygwin下编译xscale的crosstool-ng时，gcc出错：[cc1-dummy.exe] Error 1</link></para>
+            <para>最终，而推测出的：</para>
+            <para><link xl:href="http://www.crifan.com/cygwin_compile_crosstool_ng_may_memory_leak/">【未解决】用cygwin编译crosstool-ng，好像有内存泄露(memory leak)</link></para>
+            <para>但是，截止现在，其实也不完全确定：</para>
+            <para>到底是cygwin中的（比如ld）有bug</para>
+            <para>还是crosstool-ng对于此处的cygwin不太兼容？</para>
+            <para>而导致的此处的内存泄露，内存被消耗光的问题。</para>
+            <para>不过，和此对比的是：</para>
+            <para>后来又去Ubuntu 13.04中，去编译crosstool-ng：</para>
+            <para><link xl:href="http://www.crifan.com/ubuntu_crosstool_ng_cross_compile_for_xscale_arm_xscale_linux_gnueabi/">【记录】Ubuntu下用crosstool-ng为xscale建立交叉编译器arm-xscale-linux-gnueabi-gcc</link></para>
+            <para>确定，是没有出现内存占用极高，而导致内存不够的问题。</para>
+            <para>所以，此处截止目前的结论是：</para>
+            <para>此处在Win7 x64 + Cygwin 1.7.24，去编译crosstool-ng，出现了内存占用极高</para>
+            <para>而导致系统卡死，无法继续编译</para>
+            <para>应该就是：内存泄露</para>
+            <para>但是原因，到底是cygwin本身的问题，还是crosstool-ng不太兼容cygwin</para>
+            <para>至今仍未知。</para>
+            <para>已知的是：crosstool-ng在Ubuntu 13.04中，编译是很顺利的，不会出现此内存泄露的现象。</para>
+            <para></para>
+        </sect3>
+
+        <sect3 xml:id="is_not_case_sensitive"><title>Your file system in ‘xxx/targets’ is *not* case-sensitive!</title>
+            <para>错误现象：</para>
+            <para>cygwin下<command>ct-ng build</command>去编译crosstool-ng出现：</para>
+            <screen>
+<![CDATA[
+[ERROR]  Your file system in ‘/home/CLi/develop/crosstool-ng/crosstool-ng-1.9.3_build/targets’ is *not* case-sensitive! 
+]]>
+            </screen>
+            <para>原因：</para>
+            <para>windows系统默认是大小写不分的</para>
+            <para>而crosstool-ng，一般是在Linux类系统中运行的，是区分大小写的</para>
+            <para>比如两个文件文件名的字符可能相同，但是大小写不同，就是两个不同文件</para>
+            <para>而如果Windows中不区分大小写，那么就会导致文件冲突。</para>
+            <para>所以此处报错，说你的环境是不区分大小写的。</para>
+            <para>解决办法：</para>
+            <para>Windows下，修改注册表：</para>
+            <screen>
+<![CDATA[
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\obcaseinsensitive
+]]>
+            </screen>
+            <para>将值从1改为0。</para>
+            <para>详见：<link xl:href="http://www.crifan.com/crosstool_cygwin_build_error_your_file_system_not_case_sensitive/">【已解决】cygwin下crosstool去build出错：Performing some trivial sanity checks,Your file system in xxx is *not* case-sensitive!</link></para>
+            <tip xml:id="cygwin_mount_managed"><title>已managed的方式挂载cygwin好像也可以解决此问题</title>
+                <para>对于此问题，之前好像在某处看到说是</para>
+                <para>以managed的方式去mount cygwin，好像也是可以解决此问题的</para>
+                <para>目前没去深入研究，只是听说。供参考。</para>
+                <para></para>
+            </tip>
+        </sect3>
+
+    </sect2>
+
+    <sect2 xml:id="build_errors_under_linux"><title>Linux下编译crosstool-ng常见错误及解决办法</title>
+        <para>此处是，在Linux类系统下才会出现的一些，关于编译crosstol-ng时遇到的问题和解决办法：</para>
+
+        <sect3 xml:id="ifcvt_allow_modify_test_in_insn_undeclared"><title>gcc-4.2.2/gcc/regrename.c:1646:12: error: ‘IFCVT_ALLOW_MODIFY_TEST_IN_INSN’ undeclared (first use in this function)</title>
+            <para>错误现象：</para>
+            <para>cygwin下<command>ct-ng build</command>去编译crosstool-ng出现：</para>
+            <screen>
+<![CDATA[
+CLi@PC-CLI-1 ~/develop/crosstool-ng/crosstool-ng-1.18.0_build
+$ ct-ng build
+[INFO ]  Performing some trivial sanity checks
+......
+[INFO ]  =================================================================
+[INFO ]  Installing pass-1 core C compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+[ERROR]    /home/CLi/develop/crosstool-ng/crosstool-ng-1.18.0_build/.build/src/gcc-4.2.2/gcc/regrename.c:1646:12: error: 'IFCVT_ALLOW_MODIFY_TEST_IN_INSN' undeclared (first use in this function)
+[ERROR]    make[2]: *** [regrename.o] Error 1
+[ERROR]    make[1]: *** [all-gcc] Error 2
+...
+]]>
+            </screen>
+            <para>原因：</para>
+            <para>暂未清楚深层次的原因。</para>
+            <para>解决办法：</para>
+            <para>去修改对应的文件：</para>
+            <filename>crosstool-ng-1.18.0_build\.build\src\gcc-4.2.2\gcc\regrename.c</filename>
+            <para>去注释掉对应的代码，变成：</para>
+            <programlisting language="c">
+<![CDATA[
+
+      /* Added for targets (AVR32) which supports test operands to be modified
+         in cond_exec instruction. For these targets we cannot make a change to
+         the test operands if one of the test operands is an output operand This beacuse
+         changing the test operands might cause the need for inserting a new test
+         insns in the middle of a sequence of cond_exec insns and if the test operands
+         are modified these tests will fail.
+      */
+      
+      // if ( IFCVT_ALLOW_MODIFY_TEST_IN_INSN
+           // && predicated )
+        // { 
+          // int insn_skipped = 0;
+          // rtx test = COND_EXEC_TEST (PATTERN (insn));
+
+          // /* Check if the previous insn was a skipped predicated insn with the same
+             // test as this predicated insns. If so we cannot do any modification to
+             // this insn either since we cannot emit the test insn because the operands
+             // are clobbered. */
+          // if ( prev_pred_insn_skipped 
+               // && (rtx_equal_p (test, prev_pred_test) 
+                   // || rtx_equal_p (test, reversed_condition (prev_pred_test))) )
+            // { 
+              // insn_skipped = 1;
+            // }
+          // else
+            // {
+              // /* Check if the output operand is used in the test expression. */
+              // for (i = 0; i < n_ops; ++i)
+                // if ( recog_data.operand_type[i] == OP_INOUT 
+                     // && reg_mentioned_p (recog_data.operand[i], test) )
+                  // {
+                    // insn_skipped = 1;
+                    // break;
+                  // }
+              
+            // }
+          
+          // prev_pred_test = test;
+          // prev_pred_insn_skipped = insn_skipped;
+          // if ( insn_skipped )
+            // {
+              // if (insn == BB_END (bb))
+                // break;
+              // else
+                // continue;
+            // }
+        // } 
+      // else 
+        // {
+          // prev_pred_insn_skipped = 0;
+        // }
+]]>
+            </programlisting>
+            <para>即可。</para>
+            <para>详见：<link xl:href="http://www.crifan.com/crosstool_ng_gcc_4_2_2_gcc_regrename_c_error_ifcvt_allow_modify_test_in_insn_undeclared_first_use_in_this_function/">【未解决】crosstool-ng编译出错：gcc-4.2.2/gcc/regrename.c:1646:12: error: ‘IFCVT_ALLOW_MODIFY_TEST_IN_INSN’ undeclared (first use in this function)</link></para>
+        </sect3>
+
+    </sect2>
+</sect1>
+
+</chapter>
